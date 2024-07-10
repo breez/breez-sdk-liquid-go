@@ -1,3 +1,3 @@
-module github.com/breez/breez-liquid-sdk-go
+module github.com/breez/breez-sdk-liquid-go
 
 go 1.19
