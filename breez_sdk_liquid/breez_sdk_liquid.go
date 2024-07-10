@@ -1,6 +1,6 @@
-package breez_liquid_sdk
+package breez_sdk_liquid
 
-// #include <breez_liquid_sdk.h>
+// #include <breez_sdk_liquid.h>
 import "C"
 
 import (
@@ -52,7 +52,7 @@ func (cb RustBuffer) AsReader() *bytes.Reader {
 
 func (cb RustBuffer) Free() {
 	rustCall(func(status *C.RustCallStatus) bool {
-		C.ffi_breez_liquid_sdk_bindings_rustbuffer_free(cb, status)
+		C.ffi_breez_sdk_liquid_bindings_rustbuffer_free(cb, status)
 		return false
 	})
 }
@@ -77,7 +77,7 @@ func bytesToRustBuffer(b []byte) RustBuffer {
 	}
 
 	return rustCall(func(status *C.RustCallStatus) RustBuffer {
-		return C.ffi_breez_liquid_sdk_bindings_rustbuffer_from_bytes(foreign, status)
+		return C.ffi_breez_sdk_liquid_bindings_rustbuffer_from_bytes(foreign, status)
 	})
 }
 
@@ -338,82 +338,82 @@ func uniffiCheckChecksums() {
 	bindingsContractVersion := 24
 	// Get the scaffolding contract version by calling the into the dylib
 	scaffoldingContractVersion := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint32_t {
-		return C.ffi_breez_liquid_sdk_bindings_uniffi_contract_version(uniffiStatus)
+		return C.ffi_breez_sdk_liquid_bindings_uniffi_contract_version(uniffiStatus)
 	})
 	if bindingsContractVersion != int(scaffoldingContractVersion) {
 		// If this happens try cleaning and rebuilding your project
-		panic("breez_liquid_sdk: UniFFI contract version mismatch")
+		panic("breez_sdk_liquid: UniFFI contract version mismatch")
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_func_connect(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_func_connect(uniffiStatus)
 		})
 		if checksum != 5222 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_func_connect: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_connect: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_backup(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_backup(uniffiStatus)
 		})
 		if checksum != 50666 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_backup: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_backup: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_get_info(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_info(uniffiStatus)
 		})
 		if checksum != 3659 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_get_info: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_info: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_prepare_receive_payment(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_receive_payment(uniffiStatus)
 		})
 		if checksum != 45631 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_prepare_receive_payment: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_receive_payment: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_prepare_send_payment(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_send_payment(uniffiStatus)
 		})
 		if checksum != 23943 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_prepare_send_payment: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_send_payment: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_receive_payment(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_receive_payment(uniffiStatus)
 		})
 		if checksum != 59000 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_receive_payment: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_receive_payment: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_restore(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_restore(uniffiStatus)
 		})
 		if checksum != 37933 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_restore: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_restore: UniFFI API checksum mismatch")
 		}
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_send_payment(uniffiStatus)
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_send_payment(uniffiStatus)
 		})
 		if checksum != 61690 {
 			// If this happens try cleaning and rebuilding your project
-			panic("breez_liquid_sdk: uniffi_breez_liquid_sdk_bindings_checksum_method_bindingliquidsdk_send_payment: UniFFI API checksum mismatch")
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_send_payment: UniFFI API checksum mismatch")
 		}
 	}
 }
@@ -586,7 +586,7 @@ func (_self *BindingLiquidSdk) Backup() error {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeLiquidSdkError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_backup(
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_backup(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -597,7 +597,7 @@ func (_self *BindingLiquidSdk) GetInfo(req GetInfoRequest) (GetInfoResponse, err
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeLiquidSdkError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_get_info(
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_get_info(
 			_pointer, FfiConverterTypeGetInfoRequestINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -612,7 +612,7 @@ func (_self *BindingLiquidSdk) PrepareReceivePayment(req PrepareReceiveRequest) 
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_prepare_receive_payment(
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_receive_payment(
 			_pointer, FfiConverterTypePrepareReceiveRequestINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -627,7 +627,7 @@ func (_self *BindingLiquidSdk) PrepareSendPayment(req PrepareSendRequest) (Prepa
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_prepare_send_payment(
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_send_payment(
 			_pointer, FfiConverterTypePrepareSendRequestINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -642,7 +642,7 @@ func (_self *BindingLiquidSdk) ReceivePayment(req PrepareReceiveResponse) (Recei
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_receive_payment(
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_receive_payment(
 			_pointer, FfiConverterTypePrepareReceiveResponseINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -657,7 +657,7 @@ func (_self *BindingLiquidSdk) Restore(req RestoreRequest) error {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeLiquidSdkError{}, func(_uniffiStatus *C.RustCallStatus) bool {
-		C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_restore(
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_restore(
 			_pointer, FfiConverterTypeRestoreRequestINSTANCE.Lower(req), _uniffiStatus)
 		return false
 	})
@@ -668,7 +668,7 @@ func (_self *BindingLiquidSdk) SendPayment(req PrepareSendResponse) (SendPayment
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_method_bindingliquidsdk_send_payment(
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_send_payment(
 			_pointer, FfiConverterTypePrepareSendResponseINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
@@ -693,7 +693,7 @@ func (c FfiConverterBindingLiquidSdk) Lift(pointer unsafe.Pointer) *BindingLiqui
 		newFfiObject(
 			pointer,
 			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
-				C.uniffi_breez_liquid_sdk_bindings_fn_free_bindingliquidsdk(pointer, status)
+				C.uniffi_breez_sdk_liquid_bindings_fn_free_bindingliquidsdk(pointer, status)
 			}),
 	}
 	runtime.SetFinalizer(result, (*BindingLiquidSdk).Destroy)
@@ -1543,7 +1543,7 @@ func (_ FfiDestroyerOptionalString) Destroy(value *string) {
 
 func Connect(req ConnectRequest) (*BindingLiquidSdk, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeLiquidSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_breez_liquid_sdk_bindings_fn_func_connect(FfiConverterTypeConnectRequestINSTANCE.Lower(req), _uniffiStatus)
+		return C.uniffi_breez_sdk_liquid_bindings_fn_func_connect(FfiConverterTypeConnectRequestINSTANCE.Lower(req), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
 		var _uniffiDefaultValue *BindingLiquidSdk

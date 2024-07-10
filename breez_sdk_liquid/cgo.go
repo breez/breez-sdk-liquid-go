@@ -1,7 +1,7 @@
-package breez_liquid_sdk
+package breez_sdk_liquid
 
 /*
-#cgo LDFLAGS: -lbreez_liquid_sdk_bindings
+#cgo LDFLAGS: -lbreez_sdk_liquid_bindings
 #cgo android,amd64 LDFLAGS: -Wl,-rpath,${SRCDIR}/lib/android-amd64 -L${SRCDIR}/lib/android-amd64
 #cgo android,arm64 LDFLAGS: -Wl,-rpath,${SRCDIR}/lib/android-aarch64 -L${SRCDIR}/lib/android-aarch64
 #cgo android,arm LDFLAGS: -Wl,-rpath,${SRCDIR}/lib/android-aarch -L${SRCDIR}/lib/android-aarch
@@ -16,5 +16,5 @@ import "C"
 
 // See https://github.com/golang/go/issues/26366.
 import (
-	_ "github.com/breez/breez-liquid-sdk-go/breez_liquid_sdk/lib"
+	_ "github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib"
 )
