@@ -1,8 +1,27 @@
-# Breez Liquid SDK – Go Package
+# Breez SDK - *Liquid*
 
-The [Breez Liquid SDK](https://github.com/breez/breez-sdk-liquid) enables developers to integrate Liquid into their apps with a very shallow learning curve. More information can be found [here](https://github.com/breez/breez-sdk-liquid).
+## **Overview**
 
-## 👨‍🔧 Installation
+The Breez SDK provides developers with a end-to-end solution for integrating self-custodial Lightning payments into their apps and services. It eliminates the need for third-parties, simplifies the complexities of Bitcoin and Lightning, and enables seamless onboarding for billions of users to the future of peer-to-peer payments.
+
+To provide the best experience for their end-users, developers can choose between the following implementations:
+
+- [Breez SDK - *Liquid*](https://sdk-doc-liquid.breez.technology/)
+- [Breez SDK - *Greenlight*](https://sdk-doc.breez.technology/)
+
+**The Breez SDK is free for developers.**
+
+## **What Is the *Liquid* Implementation?**
+
+The *Liquid* implementation is a nodeless Lightning integration. It offers a self-custodial, end-to-end solution for integrating Lightning payments, utilizing the Liquid Network with on-chain interoperability and third-party fiat on-ramps.
+
+**Core Functions**
+
+- **Sending payments** *via protocols such as: bolt11, lnurl-pay, lightning address, btc address.*
+- **Receiving payments** *via protocols such as: bolt11, lnurl-withdraw, btc address.*
+- **Interacting with a wallet** *e.g. balance, max allow to pay, max allow to receive, on-chain balance.*
+
+## Installation
 
 To install the package:
 
@@ -12,7 +31,7 @@ $ go get github.com/breez/breez-sdk-liquid-go
 
 ### Supported platforms
 
-This package embeds the Breez Liquid SDK runtime compiled as shared library objects, and uses [`cgo`](https://golang.org/cmd/cgo/) to consume it. A set of precompiled shared library objects are provided. Thus this package works (and is tested) on the following platforms:
+This package embeds the Breez SDK - *Liquid* runtime compiled as shared library objects, and uses [`cgo`](https://golang.org/cmd/cgo/) to consume it. A set of precompiled shared library objects are provided. Thus this package works (and is tested) on the following platforms:
 
 <table>
   <thead>
@@ -76,9 +95,11 @@ This package embeds the Breez Liquid SDK runtime compiled as shared library obje
   </tbody>
 </table>
 
-## 📄 Usage
+## Usage
 
-``` go
+Head over to the [Breez SDK - Liquid documentation](https://sdk-doc-liquid.breez.technology/) to start implementing Lightning in your app.
+
+```go
 package main
 
 import (
@@ -86,13 +107,14 @@ import (
 )
 
 func main() {
-  mnemonic := "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
+    mnemonic := "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
 
-  sdk, err := breez_sdk_liquid.Connect(breez_sdk_liquid.ConnectRequest{
-	  Mnemonic: mnemonic,
-		DataDir: nil,
-		Network: breez_sdk_liquid.NetworkLiquidTestnet,
-	})
+    config := breez_sdk_liquid.DefaultConfig(breez_sdk_liquid.LiquidNetworkTestnet)
+
+    sdk, err := breez_sdk_liquid.Connect(breez_sdk_liquid.ConnectRequest{
+        Config:   config,
+        Mnemonic: mnemonic,
+    })
 }
 ```
 
@@ -140,8 +162,8 @@ Copy the binding library to the same directory as the executable file or include
 cp vendor/github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib/windows-amd64/*.dll build/windows/
 ```
 
-## 💡 Information for Maintainers and Contributors
+## Information for Maintainers and Contributors
 
-This repository is used to publish a Go package providing Go bindings to the Breez Liquid SDK's [underlying Rust implementation](https://github.com/breez/breez-sdk-liquid). The Go bindings are generated using [UniFFi Bindgen Go](https://github.com/NordSecurity/uniffi-bindgen-go).
+This repository is used to publish a Go package providing Go bindings to the Breez SDK - *Liquid*'s [underlying Rust implementation](https://github.com/breez/breez-sdk-liquid). The Go bindings are generated using [UniFFi Bindgen Go](https://github.com/NordSecurity/uniffi-bindgen-go).
 
-Any changes to the Breez Liquid SDK, the Go bindings, and the configuration of this Go package must be made via the [breez-sdk-liquid](https://github.com/breez/breez-sdk-liquid) repo.
+Any changes to Breez SDK - *Liquid*, the Go bindings, and the configuration of this Go package must be made via the [breez-sdk-liquid](https://github.com/breez/breez-sdk-liquid) repository.
