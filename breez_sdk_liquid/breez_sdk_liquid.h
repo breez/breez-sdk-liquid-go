@@ -73,18 +73,108 @@ void uniffi_breez_sdk_liquid_bindings_fn_free_bindingliquidsdk(
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_add_event_listener(
+	void* ptr,
+	uint64_t listener,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_backup(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_buy_bitcoin(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_disconnect(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_fetch_fiat_rates(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_fetch_lightning_limits(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_fetch_onchain_limits(
 	void* ptr,
 	RustCallStatus* out_status
 );
 
 RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_get_info(
 	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_list_fiat_currencies(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_list_payments(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_list_refundables(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_lnurl_auth(
+	void* ptr,
+	RustBuffer req_data,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_lnurl_pay(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_lnurl_withdraw(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_pay_onchain(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_buy_bitcoin(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_pay_onchain(
+	void* ptr,
 	RustBuffer req,
 	RustCallStatus* out_status
 );
 
 RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_receive_payment(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_refund(
 	void* ptr,
 	RustBuffer req,
 	RustCallStatus* out_status
@@ -102,6 +192,28 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_receive_p
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_recommended_fees(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_refund(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_remove_event_listener(
+	void* ptr,
+	RustBuffer id,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_rescan_onchain_swaps(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_restore(
 	void* ptr,
 	RustBuffer req,
@@ -114,8 +226,43 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_send_paym
 	RustCallStatus* out_status
 );
 
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_sync(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_init_callback_eventlistener(
+	ForeignCallback callback_stub,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_init_callback_logger(
+	ForeignCallback callback_stub,
+	RustCallStatus* out_status
+);
+
 void* uniffi_breez_sdk_liquid_bindings_fn_func_connect(
 	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_func_default_config(
+	RustBuffer network,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_func_parse(
+	RustBuffer input,
+	RustCallStatus* out_status
+);
+
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_func_parse_invoice(
+	RustBuffer input,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_func_set_logger(
+	uint64_t logger,
 	RustCallStatus* out_status
 );
 
@@ -422,7 +569,47 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_connect(
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_default_config(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_parse(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_parse_invoice(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_set_logger(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_add_event_listener(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_backup(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_buy_bitcoin(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_disconnect(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch_fiat_rates(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch_lightning_limits(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch_onchain_limits(
 	RustCallStatus* out_status
 );
 
@@ -430,7 +617,47 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_i
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_list_fiat_currencies(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_list_payments(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_list_refundables(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_lnurl_auth(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_lnurl_pay(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_lnurl_withdraw(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_pay_onchain(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_buy_bitcoin(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_pay_onchain(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_receive_payment(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_refund(
 	RustCallStatus* out_status
 );
 
@@ -442,6 +669,22 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_recei
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_recommended_fees(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_refund(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_remove_event_listener(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_rescan_onchain_swaps(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_restore(
 	RustCallStatus* out_status
 );
@@ -450,9 +693,23 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_send_
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sync(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_eventlistener_on_event(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_logger_log(
+	RustCallStatus* out_status
+);
+
 uint32_t ffi_breez_sdk_liquid_bindings_uniffi_contract_version(
 	RustCallStatus* out_status
 );
 
 
+int32_t breez_sdk_liquid_bindings_cgo_EventListener(uint64_t, int32_t, uint8_t *, int32_t, RustBuffer *);
+int32_t breez_sdk_liquid_bindings_cgo_Logger(uint64_t, int32_t, uint8_t *, int32_t, RustBuffer *);
 
