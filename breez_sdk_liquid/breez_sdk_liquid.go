@@ -421,6 +421,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_check_message(uniffiStatus)
+		})
+		if checksum != 43888 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_check_message: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_disconnect(uniffiStatus)
 		})
 		if checksum != 23272 {
@@ -601,6 +610,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_register_webhook(uniffiStatus)
+		})
+		if checksum != 48160 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_register_webhook: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_remove_event_listener(uniffiStatus)
 		})
 		if checksum != 42027 {
@@ -637,11 +655,29 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sign_message(uniffiStatus)
+		})
+		if checksum != 28732 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sign_message: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sync(uniffiStatus)
 		})
 		if checksum != 63769 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sync: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_unregister_webhook(uniffiStatus)
+		})
+		if checksum != 49665 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_unregister_webhook: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -989,6 +1025,21 @@ func (_self *BindingLiquidSdk) BuyBitcoin(req BuyBitcoinRequest) (string, error)
 	}
 }
 
+func (_self *BindingLiquidSdk) CheckMessage(req CheckMessageRequest) (CheckMessageResponse, error) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_check_message(
+			_pointer, FfiConverterTypeCheckMessageRequestINSTANCE.Lower(req), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue CheckMessageResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterTypeCheckMessageResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
 func (_self *BindingLiquidSdk) Disconnect() error {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
@@ -1285,6 +1336,17 @@ func (_self *BindingLiquidSdk) Refund(req RefundRequest) (RefundResponse, error)
 	}
 }
 
+func (_self *BindingLiquidSdk) RegisterWebhook(webhookUrl string) error {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_register_webhook(
+			_pointer, FfiConverterStringINSTANCE.Lower(webhookUrl), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+
 func (_self *BindingLiquidSdk) RemoveEventListener(id string) error {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
@@ -1333,11 +1395,37 @@ func (_self *BindingLiquidSdk) SendPayment(req SendPaymentRequest) (SendPaymentR
 	}
 }
 
+func (_self *BindingLiquidSdk) SignMessage(req SignMessageRequest) (SignMessageResponse, error) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_sign_message(
+			_pointer, FfiConverterTypeSignMessageRequestINSTANCE.Lower(req), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue SignMessageResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterTypeSignMessageResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
 func (_self *BindingLiquidSdk) Sync() error {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
 	_, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) bool {
 		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_sync(
+			_pointer, _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+
+func (_self *BindingLiquidSdk) UnregisterWebhook() error {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_unregister_webhook(
 			_pointer, _uniffiStatus)
 		return false
 	})
@@ -1553,6 +1641,86 @@ func (c FfiConverterTypeBuyBitcoinRequest) Write(writer io.Writer, value BuyBitc
 type FfiDestroyerTypeBuyBitcoinRequest struct{}
 
 func (_ FfiDestroyerTypeBuyBitcoinRequest) Destroy(value BuyBitcoinRequest) {
+	value.Destroy()
+}
+
+type CheckMessageRequest struct {
+	Message   string
+	Pubkey    string
+	Signature string
+}
+
+func (r *CheckMessageRequest) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Message)
+	FfiDestroyerString{}.Destroy(r.Pubkey)
+	FfiDestroyerString{}.Destroy(r.Signature)
+}
+
+type FfiConverterTypeCheckMessageRequest struct{}
+
+var FfiConverterTypeCheckMessageRequestINSTANCE = FfiConverterTypeCheckMessageRequest{}
+
+func (c FfiConverterTypeCheckMessageRequest) Lift(rb RustBufferI) CheckMessageRequest {
+	return LiftFromRustBuffer[CheckMessageRequest](c, rb)
+}
+
+func (c FfiConverterTypeCheckMessageRequest) Read(reader io.Reader) CheckMessageRequest {
+	return CheckMessageRequest{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeCheckMessageRequest) Lower(value CheckMessageRequest) RustBuffer {
+	return LowerIntoRustBuffer[CheckMessageRequest](c, value)
+}
+
+func (c FfiConverterTypeCheckMessageRequest) Write(writer io.Writer, value CheckMessageRequest) {
+	FfiConverterStringINSTANCE.Write(writer, value.Message)
+	FfiConverterStringINSTANCE.Write(writer, value.Pubkey)
+	FfiConverterStringINSTANCE.Write(writer, value.Signature)
+}
+
+type FfiDestroyerTypeCheckMessageRequest struct{}
+
+func (_ FfiDestroyerTypeCheckMessageRequest) Destroy(value CheckMessageRequest) {
+	value.Destroy()
+}
+
+type CheckMessageResponse struct {
+	IsValid bool
+}
+
+func (r *CheckMessageResponse) Destroy() {
+	FfiDestroyerBool{}.Destroy(r.IsValid)
+}
+
+type FfiConverterTypeCheckMessageResponse struct{}
+
+var FfiConverterTypeCheckMessageResponseINSTANCE = FfiConverterTypeCheckMessageResponse{}
+
+func (c FfiConverterTypeCheckMessageResponse) Lift(rb RustBufferI) CheckMessageResponse {
+	return LiftFromRustBuffer[CheckMessageResponse](c, rb)
+}
+
+func (c FfiConverterTypeCheckMessageResponse) Read(reader io.Reader) CheckMessageResponse {
+	return CheckMessageResponse{
+		FfiConverterBoolINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeCheckMessageResponse) Lower(value CheckMessageResponse) RustBuffer {
+	return LowerIntoRustBuffer[CheckMessageResponse](c, value)
+}
+
+func (c FfiConverterTypeCheckMessageResponse) Write(writer io.Writer, value CheckMessageResponse) {
+	FfiConverterBoolINSTANCE.Write(writer, value.IsValid)
+}
+
+type FfiDestroyerTypeCheckMessageResponse struct{}
+
+func (_ FfiDestroyerTypeCheckMessageResponse) Destroy(value CheckMessageResponse) {
 	value.Destroy()
 }
 
@@ -3262,13 +3430,15 @@ func (_ FfiDestroyerTypeRate) Destroy(value Rate) {
 }
 
 type ReceivePaymentRequest struct {
-	PrepareResponse PrepareReceiveResponse
-	Description     *string
+	PrepareResponse    PrepareReceiveResponse
+	Description        *string
+	UseDescriptionHash *bool
 }
 
 func (r *ReceivePaymentRequest) Destroy() {
 	FfiDestroyerTypePrepareReceiveResponse{}.Destroy(r.PrepareResponse)
 	FfiDestroyerOptionalString{}.Destroy(r.Description)
+	FfiDestroyerOptionalBool{}.Destroy(r.UseDescriptionHash)
 }
 
 type FfiConverterTypeReceivePaymentRequest struct{}
@@ -3283,6 +3453,7 @@ func (c FfiConverterTypeReceivePaymentRequest) Read(reader io.Reader) ReceivePay
 	return ReceivePaymentRequest{
 		FfiConverterTypePrepareReceiveResponseINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
 	}
 }
 
@@ -3293,6 +3464,7 @@ func (c FfiConverterTypeReceivePaymentRequest) Lower(value ReceivePaymentRequest
 func (c FfiConverterTypeReceivePaymentRequest) Write(writer io.Writer, value ReceivePaymentRequest) {
 	FfiConverterTypePrepareReceiveResponseINSTANCE.Write(writer, value.PrepareResponse)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Description)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.UseDescriptionHash)
 }
 
 type FfiDestroyerTypeReceivePaymentRequest struct{}
@@ -3714,6 +3886,78 @@ func (c FfiConverterTypeSendPaymentResponse) Write(writer io.Writer, value SendP
 type FfiDestroyerTypeSendPaymentResponse struct{}
 
 func (_ FfiDestroyerTypeSendPaymentResponse) Destroy(value SendPaymentResponse) {
+	value.Destroy()
+}
+
+type SignMessageRequest struct {
+	Message string
+}
+
+func (r *SignMessageRequest) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Message)
+}
+
+type FfiConverterTypeSignMessageRequest struct{}
+
+var FfiConverterTypeSignMessageRequestINSTANCE = FfiConverterTypeSignMessageRequest{}
+
+func (c FfiConverterTypeSignMessageRequest) Lift(rb RustBufferI) SignMessageRequest {
+	return LiftFromRustBuffer[SignMessageRequest](c, rb)
+}
+
+func (c FfiConverterTypeSignMessageRequest) Read(reader io.Reader) SignMessageRequest {
+	return SignMessageRequest{
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeSignMessageRequest) Lower(value SignMessageRequest) RustBuffer {
+	return LowerIntoRustBuffer[SignMessageRequest](c, value)
+}
+
+func (c FfiConverterTypeSignMessageRequest) Write(writer io.Writer, value SignMessageRequest) {
+	FfiConverterStringINSTANCE.Write(writer, value.Message)
+}
+
+type FfiDestroyerTypeSignMessageRequest struct{}
+
+func (_ FfiDestroyerTypeSignMessageRequest) Destroy(value SignMessageRequest) {
+	value.Destroy()
+}
+
+type SignMessageResponse struct {
+	Signature string
+}
+
+func (r *SignMessageResponse) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Signature)
+}
+
+type FfiConverterTypeSignMessageResponse struct{}
+
+var FfiConverterTypeSignMessageResponseINSTANCE = FfiConverterTypeSignMessageResponse{}
+
+func (c FfiConverterTypeSignMessageResponse) Lift(rb RustBufferI) SignMessageResponse {
+	return LiftFromRustBuffer[SignMessageResponse](c, rb)
+}
+
+func (c FfiConverterTypeSignMessageResponse) Read(reader io.Reader) SignMessageResponse {
+	return SignMessageResponse{
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeSignMessageResponse) Lower(value SignMessageResponse) RustBuffer {
+	return LowerIntoRustBuffer[SignMessageResponse](c, value)
+}
+
+func (c FfiConverterTypeSignMessageResponse) Write(writer io.Writer, value SignMessageResponse) {
+	FfiConverterStringINSTANCE.Write(writer, value.Signature)
+}
+
+type FfiDestroyerTypeSignMessageResponse struct{}
+
+func (_ FfiDestroyerTypeSignMessageResponse) Destroy(value SignMessageResponse) {
 	value.Destroy()
 }
 
@@ -5360,6 +5604,7 @@ var ErrPaymentErrorAmountMissing = fmt.Errorf("PaymentErrorAmountMissing")
 var ErrPaymentErrorGeneric = fmt.Errorf("PaymentErrorGeneric")
 var ErrPaymentErrorInvalidOrExpiredFees = fmt.Errorf("PaymentErrorInvalidOrExpiredFees")
 var ErrPaymentErrorInsufficientFunds = fmt.Errorf("PaymentErrorInsufficientFunds")
+var ErrPaymentErrorInvalidDescription = fmt.Errorf("PaymentErrorInvalidDescription")
 var ErrPaymentErrorInvalidInvoice = fmt.Errorf("PaymentErrorInvalidInvoice")
 var ErrPaymentErrorInvalidNetwork = fmt.Errorf("PaymentErrorInvalidNetwork")
 var ErrPaymentErrorInvalidPreimage = fmt.Errorf("PaymentErrorInvalidPreimage")
@@ -5516,6 +5761,24 @@ func (err PaymentErrorInsufficientFunds) Error() string {
 
 func (self PaymentErrorInsufficientFunds) Is(target error) bool {
 	return target == ErrPaymentErrorInsufficientFunds
+}
+
+type PaymentErrorInvalidDescription struct {
+	message string
+}
+
+func NewPaymentErrorInvalidDescription() *PaymentError {
+	return &PaymentError{
+		err: &PaymentErrorInvalidDescription{},
+	}
+}
+
+func (err PaymentErrorInvalidDescription) Error() string {
+	return fmt.Sprintf("InvalidDescription: %s", err.message)
+}
+
+func (self PaymentErrorInvalidDescription) Is(target error) bool {
+	return target == ErrPaymentErrorInvalidDescription
 }
 
 type PaymentErrorInvalidInvoice struct {
@@ -5768,28 +6031,30 @@ func (c FfiConverterTypePaymentError) Read(reader io.Reader) error {
 	case 8:
 		return &PaymentError{&PaymentErrorInsufficientFunds{message}}
 	case 9:
-		return &PaymentError{&PaymentErrorInvalidInvoice{message}}
+		return &PaymentError{&PaymentErrorInvalidDescription{message}}
 	case 10:
-		return &PaymentError{&PaymentErrorInvalidNetwork{message}}
+		return &PaymentError{&PaymentErrorInvalidInvoice{message}}
 	case 11:
-		return &PaymentError{&PaymentErrorInvalidPreimage{message}}
+		return &PaymentError{&PaymentErrorInvalidNetwork{message}}
 	case 12:
-		return &PaymentError{&PaymentErrorLwkError{message}}
+		return &PaymentError{&PaymentErrorInvalidPreimage{message}}
 	case 13:
-		return &PaymentError{&PaymentErrorPairsNotFound{message}}
+		return &PaymentError{&PaymentErrorLwkError{message}}
 	case 14:
-		return &PaymentError{&PaymentErrorPaymentTimeout{message}}
+		return &PaymentError{&PaymentErrorPairsNotFound{message}}
 	case 15:
-		return &PaymentError{&PaymentErrorPersistError{message}}
+		return &PaymentError{&PaymentErrorPaymentTimeout{message}}
 	case 16:
-		return &PaymentError{&PaymentErrorReceiveError{message}}
+		return &PaymentError{&PaymentErrorPersistError{message}}
 	case 17:
-		return &PaymentError{&PaymentErrorRefunded{message}}
+		return &PaymentError{&PaymentErrorReceiveError{message}}
 	case 18:
-		return &PaymentError{&PaymentErrorSelfTransferNotSupported{message}}
+		return &PaymentError{&PaymentErrorRefunded{message}}
 	case 19:
-		return &PaymentError{&PaymentErrorSendError{message}}
+		return &PaymentError{&PaymentErrorSelfTransferNotSupported{message}}
 	case 20:
+		return &PaymentError{&PaymentErrorSendError{message}}
+	case 21:
 		return &PaymentError{&PaymentErrorSignerError{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypePaymentError.Read()", errorID))
@@ -5815,30 +6080,32 @@ func (c FfiConverterTypePaymentError) Write(writer io.Writer, value *PaymentErro
 		writeInt32(writer, 7)
 	case *PaymentErrorInsufficientFunds:
 		writeInt32(writer, 8)
-	case *PaymentErrorInvalidInvoice:
+	case *PaymentErrorInvalidDescription:
 		writeInt32(writer, 9)
-	case *PaymentErrorInvalidNetwork:
+	case *PaymentErrorInvalidInvoice:
 		writeInt32(writer, 10)
-	case *PaymentErrorInvalidPreimage:
+	case *PaymentErrorInvalidNetwork:
 		writeInt32(writer, 11)
-	case *PaymentErrorLwkError:
+	case *PaymentErrorInvalidPreimage:
 		writeInt32(writer, 12)
-	case *PaymentErrorPairsNotFound:
+	case *PaymentErrorLwkError:
 		writeInt32(writer, 13)
-	case *PaymentErrorPaymentTimeout:
+	case *PaymentErrorPairsNotFound:
 		writeInt32(writer, 14)
-	case *PaymentErrorPersistError:
+	case *PaymentErrorPaymentTimeout:
 		writeInt32(writer, 15)
-	case *PaymentErrorReceiveError:
+	case *PaymentErrorPersistError:
 		writeInt32(writer, 16)
-	case *PaymentErrorRefunded:
+	case *PaymentErrorReceiveError:
 		writeInt32(writer, 17)
-	case *PaymentErrorSelfTransferNotSupported:
+	case *PaymentErrorRefunded:
 		writeInt32(writer, 18)
-	case *PaymentErrorSendError:
+	case *PaymentErrorSelfTransferNotSupported:
 		writeInt32(writer, 19)
-	case *PaymentErrorSignerError:
+	case *PaymentErrorSendError:
 		writeInt32(writer, 20)
+	case *PaymentErrorSignerError:
+		writeInt32(writer, 21)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypePaymentError.Write", value))

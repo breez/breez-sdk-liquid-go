@@ -91,6 +91,12 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_buy_bitco
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_check_message(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_disconnect(
 	void* ptr,
 	RustCallStatus* out_status
@@ -203,6 +209,12 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_refund(
 	RustCallStatus* out_status
 );
 
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_register_webhook(
+	void* ptr,
+	RustBuffer webhook_url,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_remove_event_listener(
 	void* ptr,
 	RustBuffer id,
@@ -226,7 +238,18 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_send_paym
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_sign_message(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_sync(
+	void* ptr,
+	RustCallStatus* out_status
+);
+
+void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_unregister_webhook(
 	void* ptr,
 	RustCallStatus* out_status
 );
@@ -597,6 +620,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_buy_b
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_check_message(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_disconnect(
 	RustCallStatus* out_status
 );
@@ -677,6 +704,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_refun
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_register_webhook(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_remove_event_listener(
 	RustCallStatus* out_status
 );
@@ -693,7 +724,15 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_send_
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sign_message(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_sync(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_unregister_webhook(
 	RustCallStatus* out_status
 );
 
