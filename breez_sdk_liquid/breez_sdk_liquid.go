@@ -2911,9 +2911,9 @@ type Payment struct {
 	FeesSat     uint64
 	PaymentType PaymentType
 	Status      PaymentState
+	Details     PaymentDetails
 	Destination *string
 	TxId        *string
-	Details     *PaymentDetails
 }
 
 func (r *Payment) Destroy() {
@@ -2922,9 +2922,9 @@ func (r *Payment) Destroy() {
 	FfiDestroyerUint64{}.Destroy(r.FeesSat)
 	FfiDestroyerTypePaymentType{}.Destroy(r.PaymentType)
 	FfiDestroyerTypePaymentState{}.Destroy(r.Status)
+	FfiDestroyerTypePaymentDetails{}.Destroy(r.Details)
 	FfiDestroyerOptionalString{}.Destroy(r.Destination)
 	FfiDestroyerOptionalString{}.Destroy(r.TxId)
-	FfiDestroyerOptionalTypePaymentDetails{}.Destroy(r.Details)
 }
 
 type FfiConverterTypePayment struct{}
@@ -2942,9 +2942,9 @@ func (c FfiConverterTypePayment) Read(reader io.Reader) Payment {
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterTypePaymentTypeINSTANCE.Read(reader),
 		FfiConverterTypePaymentStateINSTANCE.Read(reader),
+		FfiConverterTypePaymentDetailsINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
-		FfiConverterOptionalTypePaymentDetailsINSTANCE.Read(reader),
 	}
 }
 
@@ -2958,9 +2958,9 @@ func (c FfiConverterTypePayment) Write(writer io.Writer, value Payment) {
 	FfiConverterUint64INSTANCE.Write(writer, value.FeesSat)
 	FfiConverterTypePaymentTypeINSTANCE.Write(writer, value.PaymentType)
 	FfiConverterTypePaymentStateINSTANCE.Write(writer, value.Status)
+	FfiConverterTypePaymentDetailsINSTANCE.Write(writer, value.Details)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Destination)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.TxId)
-	FfiConverterOptionalTypePaymentDetailsINSTANCE.Write(writer, value.Details)
 }
 
 type FfiDestroyerTypePayment struct{}
@@ -3138,13 +3138,13 @@ func (_ FfiDestroyerTypePreparePayOnchainResponse) Destroy(value PreparePayOncha
 }
 
 type PrepareReceiveRequest struct {
-	PayerAmountSat *uint64
 	PaymentMethod  PaymentMethod
+	PayerAmountSat *uint64
 }
 
 func (r *PrepareReceiveRequest) Destroy() {
-	FfiDestroyerOptionalUint64{}.Destroy(r.PayerAmountSat)
 	FfiDestroyerTypePaymentMethod{}.Destroy(r.PaymentMethod)
+	FfiDestroyerOptionalUint64{}.Destroy(r.PayerAmountSat)
 }
 
 type FfiConverterTypePrepareReceiveRequest struct{}
@@ -3157,8 +3157,8 @@ func (c FfiConverterTypePrepareReceiveRequest) Lift(rb RustBufferI) PrepareRecei
 
 func (c FfiConverterTypePrepareReceiveRequest) Read(reader io.Reader) PrepareReceiveRequest {
 	return PrepareReceiveRequest{
-		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterTypePaymentMethodINSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
 	}
 }
 
@@ -3167,8 +3167,8 @@ func (c FfiConverterTypePrepareReceiveRequest) Lower(value PrepareReceiveRequest
 }
 
 func (c FfiConverterTypePrepareReceiveRequest) Write(writer io.Writer, value PrepareReceiveRequest) {
-	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PayerAmountSat)
 	FfiConverterTypePaymentMethodINSTANCE.Write(writer, value.PaymentMethod)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PayerAmountSat)
 }
 
 type FfiDestroyerTypePrepareReceiveRequest struct{}
@@ -3759,7 +3759,7 @@ func (_ FfiDestroyerTypeRouteHint) Destroy(value RouteHint) {
 
 type RouteHintHop struct {
 	SrcNodeId                  string
-	ShortChannelId             uint64
+	ShortChannelId             string
 	FeesBaseMsat               uint32
 	FeesProportionalMillionths uint32
 	CltvExpiryDelta            uint64
@@ -3769,7 +3769,7 @@ type RouteHintHop struct {
 
 func (r *RouteHintHop) Destroy() {
 	FfiDestroyerString{}.Destroy(r.SrcNodeId)
-	FfiDestroyerUint64{}.Destroy(r.ShortChannelId)
+	FfiDestroyerString{}.Destroy(r.ShortChannelId)
 	FfiDestroyerUint32{}.Destroy(r.FeesBaseMsat)
 	FfiDestroyerUint32{}.Destroy(r.FeesProportionalMillionths)
 	FfiDestroyerUint64{}.Destroy(r.CltvExpiryDelta)
@@ -3788,7 +3788,7 @@ func (c FfiConverterTypeRouteHintHop) Lift(rb RustBufferI) RouteHintHop {
 func (c FfiConverterTypeRouteHintHop) Read(reader io.Reader) RouteHintHop {
 	return RouteHintHop{
 		FfiConverterStringINSTANCE.Read(reader),
-		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterUint32INSTANCE.Read(reader),
 		FfiConverterUint32INSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
@@ -3803,7 +3803,7 @@ func (c FfiConverterTypeRouteHintHop) Lower(value RouteHintHop) RustBuffer {
 
 func (c FfiConverterTypeRouteHintHop) Write(writer io.Writer, value RouteHintHop) {
 	FfiConverterStringINSTANCE.Write(writer, value.SrcNodeId)
-	FfiConverterUint64INSTANCE.Write(writer, value.ShortChannelId)
+	FfiConverterStringINSTANCE.Write(writer, value.ShortChannelId)
 	FfiConverterUint32INSTANCE.Write(writer, value.FeesBaseMsat)
 	FfiConverterUint32INSTANCE.Write(writer, value.FeesProportionalMillionths)
 	FfiConverterUint64INSTANCE.Write(writer, value.CltvExpiryDelta)
@@ -7064,43 +7064,6 @@ type FfiDestroyerOptionalTypeSymbol struct{}
 func (_ FfiDestroyerOptionalTypeSymbol) Destroy(value *Symbol) {
 	if value != nil {
 		FfiDestroyerTypeSymbol{}.Destroy(*value)
-	}
-}
-
-type FfiConverterOptionalTypePaymentDetails struct{}
-
-var FfiConverterOptionalTypePaymentDetailsINSTANCE = FfiConverterOptionalTypePaymentDetails{}
-
-func (c FfiConverterOptionalTypePaymentDetails) Lift(rb RustBufferI) *PaymentDetails {
-	return LiftFromRustBuffer[*PaymentDetails](c, rb)
-}
-
-func (_ FfiConverterOptionalTypePaymentDetails) Read(reader io.Reader) *PaymentDetails {
-	if readInt8(reader) == 0 {
-		return nil
-	}
-	temp := FfiConverterTypePaymentDetailsINSTANCE.Read(reader)
-	return &temp
-}
-
-func (c FfiConverterOptionalTypePaymentDetails) Lower(value *PaymentDetails) RustBuffer {
-	return LowerIntoRustBuffer[*PaymentDetails](c, value)
-}
-
-func (_ FfiConverterOptionalTypePaymentDetails) Write(writer io.Writer, value *PaymentDetails) {
-	if value == nil {
-		writeInt8(writer, 0)
-	} else {
-		writeInt8(writer, 1)
-		FfiConverterTypePaymentDetailsINSTANCE.Write(writer, *value)
-	}
-}
-
-type FfiDestroyerOptionalTypePaymentDetails struct{}
-
-func (_ FfiDestroyerOptionalTypePaymentDetails) Destroy(value *PaymentDetails) {
-	if value != nil {
-		FfiDestroyerTypePaymentDetails{}.Destroy(*value)
 	}
 }
 
