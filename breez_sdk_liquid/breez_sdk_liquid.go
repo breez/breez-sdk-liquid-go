@@ -3054,12 +3054,12 @@ func (_ FfiDestroyerTypePrepareBuyBitcoinResponse) Destroy(value PrepareBuyBitco
 }
 
 type PreparePayOnchainRequest struct {
-	ReceiverAmountSat uint64
-	SatPerVbyte       *uint32
+	Amount      PayOnchainAmount
+	SatPerVbyte *uint32
 }
 
 func (r *PreparePayOnchainRequest) Destroy() {
-	FfiDestroyerUint64{}.Destroy(r.ReceiverAmountSat)
+	FfiDestroyerTypePayOnchainAmount{}.Destroy(r.Amount)
 	FfiDestroyerOptionalUint32{}.Destroy(r.SatPerVbyte)
 }
 
@@ -3073,7 +3073,7 @@ func (c FfiConverterTypePreparePayOnchainRequest) Lift(rb RustBufferI) PreparePa
 
 func (c FfiConverterTypePreparePayOnchainRequest) Read(reader io.Reader) PreparePayOnchainRequest {
 	return PreparePayOnchainRequest{
-		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterTypePayOnchainAmountINSTANCE.Read(reader),
 		FfiConverterOptionalUint32INSTANCE.Read(reader),
 	}
 }
@@ -3083,7 +3083,7 @@ func (c FfiConverterTypePreparePayOnchainRequest) Lower(value PreparePayOnchainR
 }
 
 func (c FfiConverterTypePreparePayOnchainRequest) Write(writer io.Writer, value PreparePayOnchainRequest) {
-	FfiConverterUint64INSTANCE.Write(writer, value.ReceiverAmountSat)
+	FfiConverterTypePayOnchainAmountINSTANCE.Write(writer, value.Amount)
 	FfiConverterOptionalUint32INSTANCE.Write(writer, value.SatPerVbyte)
 }
 
@@ -5464,6 +5464,67 @@ func (FfiConverterTypeNetwork) Write(writer io.Writer, value Network) {
 type FfiDestroyerTypeNetwork struct{}
 
 func (_ FfiDestroyerTypeNetwork) Destroy(value Network) {
+}
+
+type PayOnchainAmount interface {
+	Destroy()
+}
+type PayOnchainAmountReceiver struct {
+	AmountSat uint64
+}
+
+func (e PayOnchainAmountReceiver) Destroy() {
+	FfiDestroyerUint64{}.Destroy(e.AmountSat)
+}
+
+type PayOnchainAmountDrain struct {
+}
+
+func (e PayOnchainAmountDrain) Destroy() {
+}
+
+type FfiConverterTypePayOnchainAmount struct{}
+
+var FfiConverterTypePayOnchainAmountINSTANCE = FfiConverterTypePayOnchainAmount{}
+
+func (c FfiConverterTypePayOnchainAmount) Lift(rb RustBufferI) PayOnchainAmount {
+	return LiftFromRustBuffer[PayOnchainAmount](c, rb)
+}
+
+func (c FfiConverterTypePayOnchainAmount) Lower(value PayOnchainAmount) RustBuffer {
+	return LowerIntoRustBuffer[PayOnchainAmount](c, value)
+}
+func (FfiConverterTypePayOnchainAmount) Read(reader io.Reader) PayOnchainAmount {
+	id := readInt32(reader)
+	switch id {
+	case 1:
+		return PayOnchainAmountReceiver{
+			FfiConverterUint64INSTANCE.Read(reader),
+		}
+	case 2:
+		return PayOnchainAmountDrain{}
+	default:
+		panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypePayOnchainAmount.Read()", id))
+	}
+}
+
+func (FfiConverterTypePayOnchainAmount) Write(writer io.Writer, value PayOnchainAmount) {
+	switch variant_value := value.(type) {
+	case PayOnchainAmountReceiver:
+		writeInt32(writer, 1)
+		FfiConverterUint64INSTANCE.Write(writer, variant_value.AmountSat)
+	case PayOnchainAmountDrain:
+		writeInt32(writer, 2)
+	default:
+		_ = variant_value
+		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypePayOnchainAmount.Write", value))
+	}
+}
+
+type FfiDestroyerTypePayOnchainAmount struct{}
+
+func (_ FfiDestroyerTypePayOnchainAmount) Destroy(value PayOnchainAmount) {
+	value.Destroy()
 }
 
 type PaymentDetails interface {
