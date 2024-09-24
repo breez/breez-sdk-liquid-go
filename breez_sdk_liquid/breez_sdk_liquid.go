@@ -1733,6 +1733,7 @@ type Config struct {
 	PaymentTimeoutSec      uint64
 	ZeroConfMinFeeRateMsat uint32
 	ZeroConfMaxAmountSat   *uint64
+	BreezApiKey            *string
 }
 
 func (r *Config) Destroy() {
@@ -1744,6 +1745,7 @@ func (r *Config) Destroy() {
 	FfiDestroyerUint64{}.Destroy(r.PaymentTimeoutSec)
 	FfiDestroyerUint32{}.Destroy(r.ZeroConfMinFeeRateMsat)
 	FfiDestroyerOptionalUint64{}.Destroy(r.ZeroConfMaxAmountSat)
+	FfiDestroyerOptionalString{}.Destroy(r.BreezApiKey)
 }
 
 type FfiConverterTypeConfig struct{}
@@ -1764,6 +1766,7 @@ func (c FfiConverterTypeConfig) Read(reader io.Reader) Config {
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterUint32INSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 	}
 }
 
@@ -1780,6 +1783,7 @@ func (c FfiConverterTypeConfig) Write(writer io.Writer, value Config) {
 	FfiConverterUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
 	FfiConverterUint32INSTANCE.Write(writer, value.ZeroConfMinFeeRateMsat)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ZeroConfMaxAmountSat)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.BreezApiKey)
 }
 
 type FfiDestroyerTypeConfig struct{}
@@ -3054,13 +3058,13 @@ func (_ FfiDestroyerTypePrepareBuyBitcoinResponse) Destroy(value PrepareBuyBitco
 }
 
 type PreparePayOnchainRequest struct {
-	Amount      PayOnchainAmount
-	SatPerVbyte *uint32
+	Amount              PayOnchainAmount
+	FeeRateMsatPerVbyte *uint32
 }
 
 func (r *PreparePayOnchainRequest) Destroy() {
 	FfiDestroyerTypePayOnchainAmount{}.Destroy(r.Amount)
-	FfiDestroyerOptionalUint32{}.Destroy(r.SatPerVbyte)
+	FfiDestroyerOptionalUint32{}.Destroy(r.FeeRateMsatPerVbyte)
 }
 
 type FfiConverterTypePreparePayOnchainRequest struct{}
@@ -3084,7 +3088,7 @@ func (c FfiConverterTypePreparePayOnchainRequest) Lower(value PreparePayOnchainR
 
 func (c FfiConverterTypePreparePayOnchainRequest) Write(writer io.Writer, value PreparePayOnchainRequest) {
 	FfiConverterTypePayOnchainAmountINSTANCE.Write(writer, value.Amount)
-	FfiConverterOptionalUint32INSTANCE.Write(writer, value.SatPerVbyte)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.FeeRateMsatPerVbyte)
 }
 
 type FfiDestroyerTypePreparePayOnchainRequest struct{}
@@ -3222,15 +3226,15 @@ func (_ FfiDestroyerTypePrepareReceiveResponse) Destroy(value PrepareReceiveResp
 }
 
 type PrepareRefundRequest struct {
-	SwapAddress   string
-	RefundAddress string
-	SatPerVbyte   uint32
+	SwapAddress         string
+	RefundAddress       string
+	FeeRateMsatPerVbyte uint32
 }
 
 func (r *PrepareRefundRequest) Destroy() {
 	FfiDestroyerString{}.Destroy(r.SwapAddress)
 	FfiDestroyerString{}.Destroy(r.RefundAddress)
-	FfiDestroyerUint32{}.Destroy(r.SatPerVbyte)
+	FfiDestroyerUint32{}.Destroy(r.FeeRateMsatPerVbyte)
 }
 
 type FfiConverterTypePrepareRefundRequest struct{}
@@ -3256,7 +3260,7 @@ func (c FfiConverterTypePrepareRefundRequest) Lower(value PrepareRefundRequest) 
 func (c FfiConverterTypePrepareRefundRequest) Write(writer io.Writer, value PrepareRefundRequest) {
 	FfiConverterStringINSTANCE.Write(writer, value.SwapAddress)
 	FfiConverterStringINSTANCE.Write(writer, value.RefundAddress)
-	FfiConverterUint32INSTANCE.Write(writer, value.SatPerVbyte)
+	FfiConverterUint32INSTANCE.Write(writer, value.FeeRateMsatPerVbyte)
 }
 
 type FfiDestroyerTypePrepareRefundRequest struct{}
@@ -3562,15 +3566,15 @@ func (_ FfiDestroyerTypeRecommendedFees) Destroy(value RecommendedFees) {
 }
 
 type RefundRequest struct {
-	SwapAddress   string
-	RefundAddress string
-	SatPerVbyte   uint32
+	SwapAddress         string
+	RefundAddress       string
+	FeeRateMsatPerVbyte uint32
 }
 
 func (r *RefundRequest) Destroy() {
 	FfiDestroyerString{}.Destroy(r.SwapAddress)
 	FfiDestroyerString{}.Destroy(r.RefundAddress)
-	FfiDestroyerUint32{}.Destroy(r.SatPerVbyte)
+	FfiDestroyerUint32{}.Destroy(r.FeeRateMsatPerVbyte)
 }
 
 type FfiConverterTypeRefundRequest struct{}
@@ -3596,7 +3600,7 @@ func (c FfiConverterTypeRefundRequest) Lower(value RefundRequest) RustBuffer {
 func (c FfiConverterTypeRefundRequest) Write(writer io.Writer, value RefundRequest) {
 	FfiConverterStringINSTANCE.Write(writer, value.SwapAddress)
 	FfiConverterStringINSTANCE.Write(writer, value.RefundAddress)
-	FfiConverterUint32INSTANCE.Write(writer, value.SatPerVbyte)
+	FfiConverterUint32INSTANCE.Write(writer, value.FeeRateMsatPerVbyte)
 }
 
 type FfiDestroyerTypeRefundRequest struct{}
