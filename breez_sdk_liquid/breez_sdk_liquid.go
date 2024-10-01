@@ -333,7 +333,6 @@ func init() {
 
 	(&FfiConverterCallbackInterfaceEventListener{}).register()
 	(&FfiConverterCallbackInterfaceLogger{}).register()
-	(&FfiConverterCallbackInterfaceSigner{}).register()
 	uniffiCheckChecksums()
 }
 
@@ -355,15 +354,6 @@ func uniffiCheckChecksums() {
 		if checksum != 31419 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_connect: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_func_connect_with_signer(uniffiStatus)
-		})
-		if checksum != 56336 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_connect_with_signer: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -706,60 +696,6 @@ func uniffiCheckChecksums() {
 		if checksum != 54784 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_logger_log: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_xpub(uniffiStatus)
-		})
-		if checksum != 39767 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_xpub: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_derive_xpub(uniffiStatus)
-		})
-		if checksum != 59515 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_derive_xpub: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa(uniffiStatus)
-		})
-		if checksum != 21427 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa_recoverable(uniffiStatus)
-		})
-		if checksum != 9552 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa_recoverable: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_slip77_master_blinding_key(uniffiStatus)
-		})
-		if checksum != 56356 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_slip77_master_blinding_key: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256(uniffiStatus)
-		})
-		if checksum != 52627 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256: UniFFI API checksum mismatch")
 		}
 	}
 }
@@ -1893,42 +1829,6 @@ func (c FfiConverterTypeConnectRequest) Write(writer io.Writer, value ConnectReq
 type FfiDestroyerTypeConnectRequest struct{}
 
 func (_ FfiDestroyerTypeConnectRequest) Destroy(value ConnectRequest) {
-	value.Destroy()
-}
-
-type ConnectWithSignerRequest struct {
-	Config Config
-}
-
-func (r *ConnectWithSignerRequest) Destroy() {
-	FfiDestroyerTypeConfig{}.Destroy(r.Config)
-}
-
-type FfiConverterTypeConnectWithSignerRequest struct{}
-
-var FfiConverterTypeConnectWithSignerRequestINSTANCE = FfiConverterTypeConnectWithSignerRequest{}
-
-func (c FfiConverterTypeConnectWithSignerRequest) Lift(rb RustBufferI) ConnectWithSignerRequest {
-	return LiftFromRustBuffer[ConnectWithSignerRequest](c, rb)
-}
-
-func (c FfiConverterTypeConnectWithSignerRequest) Read(reader io.Reader) ConnectWithSignerRequest {
-	return ConnectWithSignerRequest{
-		FfiConverterTypeConfigINSTANCE.Read(reader),
-	}
-}
-
-func (c FfiConverterTypeConnectWithSignerRequest) Lower(value ConnectWithSignerRequest) RustBuffer {
-	return LowerIntoRustBuffer[ConnectWithSignerRequest](c, value)
-}
-
-func (c FfiConverterTypeConnectWithSignerRequest) Write(writer io.Writer, value ConnectWithSignerRequest) {
-	FfiConverterTypeConfigINSTANCE.Write(writer, value.Config)
-}
-
-type FfiDestroyerTypeConnectWithSignerRequest struct{}
-
-func (_ FfiDestroyerTypeConnectWithSignerRequest) Destroy(value ConnectWithSignerRequest) {
 	value.Destroy()
 }
 
@@ -6720,85 +6620,6 @@ func (_ FfiDestroyerTypeSendDestination) Destroy(value SendDestination) {
 	value.Destroy()
 }
 
-type SignerError struct {
-	err error
-}
-
-func (err SignerError) Error() string {
-	return fmt.Sprintf("SignerError: %s", err.err.Error())
-}
-
-func (err SignerError) Unwrap() error {
-	return err.err
-}
-
-// Err* are used for checking error type with `errors.Is`
-var ErrSignerErrorGeneric = fmt.Errorf("SignerErrorGeneric")
-
-// Variant structs
-type SignerErrorGeneric struct {
-	Err string
-}
-
-func NewSignerErrorGeneric(
-	err string,
-) *SignerError {
-	return &SignerError{
-		err: &SignerErrorGeneric{
-			Err: err,
-		},
-	}
-}
-
-func (err SignerErrorGeneric) Error() string {
-	return fmt.Sprint("Generic",
-		": ",
-
-		"Err=",
-		err.Err,
-	)
-}
-
-func (self SignerErrorGeneric) Is(target error) bool {
-	return target == ErrSignerErrorGeneric
-}
-
-type FfiConverterTypeSignerError struct{}
-
-var FfiConverterTypeSignerErrorINSTANCE = FfiConverterTypeSignerError{}
-
-func (c FfiConverterTypeSignerError) Lift(eb RustBufferI) error {
-	return LiftFromRustBuffer[error](c, eb)
-}
-
-func (c FfiConverterTypeSignerError) Lower(value *SignerError) RustBuffer {
-	return LowerIntoRustBuffer[*SignerError](c, value)
-}
-
-func (c FfiConverterTypeSignerError) Read(reader io.Reader) error {
-	errorID := readUint32(reader)
-
-	switch errorID {
-	case 1:
-		return &SignerError{&SignerErrorGeneric{
-			Err: FfiConverterStringINSTANCE.Read(reader),
-		}}
-	default:
-		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypeSignerError.Read()", errorID))
-	}
-}
-
-func (c FfiConverterTypeSignerError) Write(writer io.Writer, value *SignerError) {
-	switch variantValue := value.err.(type) {
-	case *SignerErrorGeneric:
-		writeInt32(writer, 1)
-		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
-	default:
-		_ = variantValue
-		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypeSignerError.Write", value))
-	}
-}
-
 type SuccessActionProcessed interface {
 	Destroy()
 }
@@ -7087,191 +6908,6 @@ func (c *FfiConverterCallbackInterfaceLogger) register() {
 type FfiDestroyerCallbackInterfaceLogger struct{}
 
 func (FfiDestroyerCallbackInterfaceLogger) Destroy(value Logger) {
-}
-
-type Signer interface {
-	Xpub() ([]uint8, *SignerError)
-
-	DeriveXpub(derivationPath string) ([]uint8, *SignerError)
-
-	SignEcdsa(msg []uint8, derivationPath string) ([]uint8, *SignerError)
-
-	SignEcdsaRecoverable(msg []uint8) ([]uint8, *SignerError)
-
-	Slip77MasterBlindingKey() ([]uint8, *SignerError)
-
-	HmacSha256(msg []uint8, derivationPath string) ([]uint8, *SignerError)
-}
-
-// foreignCallbackCallbackInterfaceSigner cannot be callable be a compiled function at a same time
-type foreignCallbackCallbackInterfaceSigner struct{}
-
-//export breez_sdk_liquid_bindings_cgo_Signer
-func breez_sdk_liquid_bindings_cgo_Signer(handle C.uint64_t, method C.int32_t, argsPtr *C.uint8_t, argsLen C.int32_t, outBuf *C.RustBuffer) C.int32_t {
-	cb := FfiConverterCallbackInterfaceSignerINSTANCE.Lift(uint64(handle))
-	switch method {
-	case 0:
-		// 0 means Rust is done with the callback, and the callback
-		// can be dropped by the foreign language.
-		*outBuf = FfiConverterCallbackInterfaceSignerINSTANCE.drop(uint64(handle))
-		// See docs of ForeignCallback in `uniffi/src/ffi/foreigncallbacks.rs`
-		return C.int32_t(uniffiIdxCallbackFree)
-
-	case 1:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeXpub(cb, args, outBuf)
-		return C.int32_t(result)
-	case 2:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeDeriveXpub(cb, args, outBuf)
-		return C.int32_t(result)
-	case 3:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSignEcdsa(cb, args, outBuf)
-		return C.int32_t(result)
-	case 4:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSignEcdsaRecoverable(cb, args, outBuf)
-		return C.int32_t(result)
-	case 5:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSlip77MasterBlindingKey(cb, args, outBuf)
-		return C.int32_t(result)
-	case 6:
-		var result uniffiCallbackResult
-		args := unsafe.Slice((*byte)(argsPtr), argsLen)
-		result = foreignCallbackCallbackInterfaceSigner{}.InvokeHmacSha256(cb, args, outBuf)
-		return C.int32_t(result)
-
-	default:
-		// This should never happen, because an out of bounds method index won't
-		// ever be used. Once we can catch errors, we should return an InternalException.
-		// https://github.com/mozilla/uniffi-rs/issues/351
-		return C.int32_t(uniffiCallbackUnexpectedResultError)
-	}
-}
-
-func (foreignCallbackCallbackInterfaceSigner) InvokeXpub(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	result, err := callback.Xpub()
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-func (foreignCallbackCallbackInterfaceSigner) InvokeDeriveXpub(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	reader := bytes.NewReader(args)
-	result, err := callback.DeriveXpub(FfiConverterStringINSTANCE.Read(reader))
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-func (foreignCallbackCallbackInterfaceSigner) InvokeSignEcdsa(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	reader := bytes.NewReader(args)
-	result, err := callback.SignEcdsa(FfiConverterSequenceUint8INSTANCE.Read(reader), FfiConverterStringINSTANCE.Read(reader))
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-func (foreignCallbackCallbackInterfaceSigner) InvokeSignEcdsaRecoverable(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	reader := bytes.NewReader(args)
-	result, err := callback.SignEcdsaRecoverable(FfiConverterSequenceUint8INSTANCE.Read(reader))
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-func (foreignCallbackCallbackInterfaceSigner) InvokeSlip77MasterBlindingKey(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	result, err := callback.Slip77MasterBlindingKey()
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-func (foreignCallbackCallbackInterfaceSigner) InvokeHmacSha256(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
-	reader := bytes.NewReader(args)
-	result, err := callback.HmacSha256(FfiConverterSequenceUint8INSTANCE.Read(reader), FfiConverterStringINSTANCE.Read(reader))
-
-	if err != nil {
-		// The only way to bypass an unexpected error is to bypass pointer to an empty
-		// instance of the error
-		if err.err == nil {
-			return uniffiCallbackUnexpectedResultError
-		}
-		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
-		return uniffiCallbackResultError
-	}
-	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
-	return uniffiCallbackResultSuccess
-}
-
-type FfiConverterCallbackInterfaceSigner struct {
-	FfiConverterCallbackInterface[Signer]
-}
-
-var FfiConverterCallbackInterfaceSignerINSTANCE = &FfiConverterCallbackInterfaceSigner{
-	FfiConverterCallbackInterface: FfiConverterCallbackInterface[Signer]{
-		handleMap: newConcurrentHandleMap[Signer](),
-	},
-}
-
-// This is a static function because only 1 instance is supported for registering
-func (c *FfiConverterCallbackInterfaceSigner) register() {
-	rustCall(func(status *C.RustCallStatus) int32 {
-		C.uniffi_breez_sdk_liquid_bindings_fn_init_callback_signer(C.ForeignCallback(C.breez_sdk_liquid_bindings_cgo_Signer), status)
-		return 0
-	})
-}
-
-type FfiDestroyerCallbackInterfaceSigner struct{}
-
-func (FfiDestroyerCallbackInterfaceSigner) Destroy(value Signer) {
 }
 
 type FfiConverterOptionalUint32 struct{}
@@ -8003,18 +7639,6 @@ func (FfiDestroyerSequenceTypePaymentType) Destroy(sequence []PaymentType) {
 func Connect(req ConnectRequest) (*BindingLiquidSdk, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_breez_sdk_liquid_bindings_fn_func_connect(FfiConverterTypeConnectRequestINSTANCE.Lower(req), _uniffiStatus)
-	})
-	if _uniffiErr != nil {
-		var _uniffiDefaultValue *BindingLiquidSdk
-		return _uniffiDefaultValue, _uniffiErr
-	} else {
-		return FfiConverterBindingLiquidSdkINSTANCE.Lift(_uniffiRV), _uniffiErr
-	}
-}
-
-func ConnectWithSigner(req ConnectWithSignerRequest, signer Signer) (*BindingLiquidSdk, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
-		return C.uniffi_breez_sdk_liquid_bindings_fn_func_connect_with_signer(FfiConverterTypeConnectWithSignerRequestINSTANCE.Lower(req), FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
 		var _uniffiDefaultValue *BindingLiquidSdk
