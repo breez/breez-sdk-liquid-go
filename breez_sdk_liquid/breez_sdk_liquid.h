@@ -122,6 +122,12 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_get_info(
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_get_payment(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
 RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_list_fiat_currencies(
 	void* ptr,
 	RustCallStatus* out_status
@@ -271,6 +277,7 @@ void* uniffi_breez_sdk_liquid_bindings_fn_func_connect(
 
 RustBuffer uniffi_breez_sdk_liquid_bindings_fn_func_default_config(
 	RustBuffer network,
+	RustBuffer breez_api_key,
 	RustCallStatus* out_status
 );
 
@@ -641,6 +648,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch
 );
 
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_info(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_payment(
 	RustCallStatus* out_status
 );
 
