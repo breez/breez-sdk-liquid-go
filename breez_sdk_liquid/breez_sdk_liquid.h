@@ -174,6 +174,12 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_b
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_lnurl_pay(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
 RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_pay_onchain(
 	void* ptr,
 	RustBuffer req,
@@ -270,8 +276,19 @@ void uniffi_breez_sdk_liquid_bindings_fn_init_callback_logger(
 	RustCallStatus* out_status
 );
 
+void uniffi_breez_sdk_liquid_bindings_fn_init_callback_signer(
+	ForeignCallback callback_stub,
+	RustCallStatus* out_status
+);
+
 void* uniffi_breez_sdk_liquid_bindings_fn_func_connect(
 	RustBuffer req,
+	RustCallStatus* out_status
+);
+
+void* uniffi_breez_sdk_liquid_bindings_fn_func_connect_with_signer(
+	RustBuffer req,
+	uint64_t signer,
 	RustCallStatus* out_status
 );
 
@@ -599,6 +616,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_connect(
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_connect_with_signer(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_func_default_config(
 	RustCallStatus* out_status
 );
@@ -687,6 +708,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepa
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_lnurl_pay(
+	RustCallStatus* out_status
+);
+
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_pay_onchain(
 	RustCallStatus* out_status
 );
@@ -755,6 +780,30 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_logger_log(
 	RustCallStatus* out_status
 );
 
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_xpub(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_derive_xpub(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa_recoverable(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_slip77_master_blinding_key(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256(
+	RustCallStatus* out_status
+);
+
 uint32_t ffi_breez_sdk_liquid_bindings_uniffi_contract_version(
 	RustCallStatus* out_status
 );
@@ -762,4 +811,5 @@ uint32_t ffi_breez_sdk_liquid_bindings_uniffi_contract_version(
 
 int32_t breez_sdk_liquid_bindings_cgo_EventListener(uint64_t, int32_t, uint8_t *, int32_t, RustBuffer *);
 int32_t breez_sdk_liquid_bindings_cgo_Logger(uint64_t, int32_t, uint8_t *, int32_t, RustBuffer *);
+int32_t breez_sdk_liquid_bindings_cgo_Signer(uint64_t, int32_t, uint8_t *, int32_t, RustBuffer *);
 

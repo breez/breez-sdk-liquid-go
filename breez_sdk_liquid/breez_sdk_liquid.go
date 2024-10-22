@@ -333,6 +333,7 @@ func init() {
 
 	(&FfiConverterCallbackInterfaceEventListener{}).register()
 	(&FfiConverterCallbackInterfaceLogger{}).register()
+	(&FfiConverterCallbackInterfaceSigner{}).register()
 	uniffiCheckChecksums()
 }
 
@@ -354,6 +355,15 @@ func uniffiCheckChecksums() {
 		if checksum != 31419 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_connect: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_func_connect_with_signer(uniffiStatus)
+		})
+		if checksum != 56336 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_connect_with_signer: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -556,6 +566,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_lnurl_pay(uniffiStatus)
+		})
+		if checksum != 62389 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_lnurl_pay: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_prepare_pay_onchain(uniffiStatus)
 		})
 		if checksum != 45645 {
@@ -705,6 +724,60 @@ func uniffiCheckChecksums() {
 		if checksum != 54784 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_logger_log: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_xpub(uniffiStatus)
+		})
+		if checksum != 39767 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_xpub: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_derive_xpub(uniffiStatus)
+		})
+		if checksum != 59515 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_derive_xpub: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa(uniffiStatus)
+		})
+		if checksum != 21427 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa_recoverable(uniffiStatus)
+		})
+		if checksum != 9552 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_sign_ecdsa_recoverable: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_slip77_master_blinding_key(uniffiStatus)
+		})
+		if checksum != 56356 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_slip77_master_blinding_key: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256(uniffiStatus)
+		})
+		if checksum != 52627 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256: UniFFI API checksum mismatch")
 		}
 	}
 }
@@ -1255,6 +1328,21 @@ func (_self *BindingLiquidSdk) PrepareBuyBitcoin(req PrepareBuyBitcoinRequest) (
 	}
 }
 
+func (_self *BindingLiquidSdk) PrepareLnurlPay(req PrepareLnUrlPayRequest) (PrepareLnUrlPayResponse, error) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeLnUrlPayError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_prepare_lnurl_pay(
+			_pointer, FfiConverterTypePrepareLnUrlPayRequestINSTANCE.Lower(req), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue PrepareLnUrlPayResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterTypePrepareLnUrlPayResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
 func (_self *BindingLiquidSdk) PreparePayOnchain(req PreparePayOnchainRequest) (PreparePayOnchainResponse, error) {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
@@ -1497,6 +1585,50 @@ func (c FfiConverterBindingLiquidSdk) Write(writer io.Writer, value *BindingLiqu
 type FfiDestroyerBindingLiquidSdk struct{}
 
 func (_ FfiDestroyerBindingLiquidSdk) Destroy(value *BindingLiquidSdk) {
+	value.Destroy()
+}
+
+type AesSuccessActionData struct {
+	Description string
+	Ciphertext  string
+	Iv          string
+}
+
+func (r *AesSuccessActionData) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Description)
+	FfiDestroyerString{}.Destroy(r.Ciphertext)
+	FfiDestroyerString{}.Destroy(r.Iv)
+}
+
+type FfiConverterTypeAesSuccessActionData struct{}
+
+var FfiConverterTypeAesSuccessActionDataINSTANCE = FfiConverterTypeAesSuccessActionData{}
+
+func (c FfiConverterTypeAesSuccessActionData) Lift(rb RustBufferI) AesSuccessActionData {
+	return LiftFromRustBuffer[AesSuccessActionData](c, rb)
+}
+
+func (c FfiConverterTypeAesSuccessActionData) Read(reader io.Reader) AesSuccessActionData {
+	return AesSuccessActionData{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAesSuccessActionData) Lower(value AesSuccessActionData) RustBuffer {
+	return LowerIntoRustBuffer[AesSuccessActionData](c, value)
+}
+
+func (c FfiConverterTypeAesSuccessActionData) Write(writer io.Writer, value AesSuccessActionData) {
+	FfiConverterStringINSTANCE.Write(writer, value.Description)
+	FfiConverterStringINSTANCE.Write(writer, value.Ciphertext)
+	FfiConverterStringINSTANCE.Write(writer, value.Iv)
+}
+
+type FfiDestroyerTypeAesSuccessActionData struct{}
+
+func (_ FfiDestroyerTypeAesSuccessActionData) Destroy(value AesSuccessActionData) {
 	value.Destroy()
 }
 
@@ -1856,6 +1988,42 @@ func (_ FfiDestroyerTypeConnectRequest) Destroy(value ConnectRequest) {
 	value.Destroy()
 }
 
+type ConnectWithSignerRequest struct {
+	Config Config
+}
+
+func (r *ConnectWithSignerRequest) Destroy() {
+	FfiDestroyerTypeConfig{}.Destroy(r.Config)
+}
+
+type FfiConverterTypeConnectWithSignerRequest struct{}
+
+var FfiConverterTypeConnectWithSignerRequestINSTANCE = FfiConverterTypeConnectWithSignerRequest{}
+
+func (c FfiConverterTypeConnectWithSignerRequest) Lift(rb RustBufferI) ConnectWithSignerRequest {
+	return LiftFromRustBuffer[ConnectWithSignerRequest](c, rb)
+}
+
+func (c FfiConverterTypeConnectWithSignerRequest) Read(reader io.Reader) ConnectWithSignerRequest {
+	return ConnectWithSignerRequest{
+		FfiConverterTypeConfigINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeConnectWithSignerRequest) Lower(value ConnectWithSignerRequest) RustBuffer {
+	return LowerIntoRustBuffer[ConnectWithSignerRequest](c, value)
+}
+
+func (c FfiConverterTypeConnectWithSignerRequest) Write(writer io.Writer, value ConnectWithSignerRequest) {
+	FfiConverterTypeConfigINSTANCE.Write(writer, value.Config)
+}
+
+type FfiDestroyerTypeConnectWithSignerRequest struct{}
+
+func (_ FfiDestroyerTypeConnectWithSignerRequest) Destroy(value ConnectWithSignerRequest) {
+	value.Destroy()
+}
+
 type CurrencyInfo struct {
 	Name            string
 	FractionSize    uint32
@@ -1960,6 +2128,7 @@ type GetInfoResponse struct {
 	BalanceSat        uint64
 	PendingSendSat    uint64
 	PendingReceiveSat uint64
+	Fingerprint       string
 	Pubkey            string
 }
 
@@ -1967,6 +2136,7 @@ func (r *GetInfoResponse) Destroy() {
 	FfiDestroyerUint64{}.Destroy(r.BalanceSat)
 	FfiDestroyerUint64{}.Destroy(r.PendingSendSat)
 	FfiDestroyerUint64{}.Destroy(r.PendingReceiveSat)
+	FfiDestroyerString{}.Destroy(r.Fingerprint)
 	FfiDestroyerString{}.Destroy(r.Pubkey)
 }
 
@@ -1984,6 +2154,7 @@ func (c FfiConverterTypeGetInfoResponse) Read(reader io.Reader) GetInfoResponse 
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
 	}
 }
 
@@ -1995,6 +2166,7 @@ func (c FfiConverterTypeGetInfoResponse) Write(writer io.Writer, value GetInfoRe
 	FfiConverterUint64INSTANCE.Write(writer, value.BalanceSat)
 	FfiConverterUint64INSTANCE.Write(writer, value.PendingSendSat)
 	FfiConverterUint64INSTANCE.Write(writer, value.PendingReceiveSat)
+	FfiConverterStringINSTANCE.Write(writer, value.Fingerprint)
 	FfiConverterStringINSTANCE.Write(writer, value.Pubkey)
 }
 
@@ -2406,19 +2578,11 @@ func (_ FfiDestroyerTypeLnUrlPayErrorData) Destroy(value LnUrlPayErrorData) {
 }
 
 type LnUrlPayRequest struct {
-	Data                     LnUrlPayRequestData
-	AmountMsat               uint64
-	Comment                  *string
-	PaymentLabel             *string
-	ValidateSuccessActionUrl *bool
+	PrepareResponse PrepareLnUrlPayResponse
 }
 
 func (r *LnUrlPayRequest) Destroy() {
-	FfiDestroyerTypeLnUrlPayRequestData{}.Destroy(r.Data)
-	FfiDestroyerUint64{}.Destroy(r.AmountMsat)
-	FfiDestroyerOptionalString{}.Destroy(r.Comment)
-	FfiDestroyerOptionalString{}.Destroy(r.PaymentLabel)
-	FfiDestroyerOptionalBool{}.Destroy(r.ValidateSuccessActionUrl)
+	FfiDestroyerTypePrepareLnUrlPayResponse{}.Destroy(r.PrepareResponse)
 }
 
 type FfiConverterTypeLnUrlPayRequest struct{}
@@ -2431,11 +2595,7 @@ func (c FfiConverterTypeLnUrlPayRequest) Lift(rb RustBufferI) LnUrlPayRequest {
 
 func (c FfiConverterTypeLnUrlPayRequest) Read(reader io.Reader) LnUrlPayRequest {
 	return LnUrlPayRequest{
-		FfiConverterTypeLnUrlPayRequestDataINSTANCE.Read(reader),
-		FfiConverterUint64INSTANCE.Read(reader),
-		FfiConverterOptionalStringINSTANCE.Read(reader),
-		FfiConverterOptionalStringINSTANCE.Read(reader),
-		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterTypePrepareLnUrlPayResponseINSTANCE.Read(reader),
 	}
 }
 
@@ -2444,11 +2604,7 @@ func (c FfiConverterTypeLnUrlPayRequest) Lower(value LnUrlPayRequest) RustBuffer
 }
 
 func (c FfiConverterTypeLnUrlPayRequest) Write(writer io.Writer, value LnUrlPayRequest) {
-	FfiConverterTypeLnUrlPayRequestDataINSTANCE.Write(writer, value.Data)
-	FfiConverterUint64INSTANCE.Write(writer, value.AmountMsat)
-	FfiConverterOptionalStringINSTANCE.Write(writer, value.Comment)
-	FfiConverterOptionalStringINSTANCE.Write(writer, value.PaymentLabel)
-	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ValidateSuccessActionUrl)
+	FfiConverterTypePrepareLnUrlPayResponseINSTANCE.Write(writer, value.PrepareResponse)
 }
 
 type FfiDestroyerTypeLnUrlPayRequest struct{}
@@ -3082,6 +3238,98 @@ func (c FfiConverterTypePrepareBuyBitcoinResponse) Write(writer io.Writer, value
 type FfiDestroyerTypePrepareBuyBitcoinResponse struct{}
 
 func (_ FfiDestroyerTypePrepareBuyBitcoinResponse) Destroy(value PrepareBuyBitcoinResponse) {
+	value.Destroy()
+}
+
+type PrepareLnUrlPayRequest struct {
+	Data                     LnUrlPayRequestData
+	AmountMsat               uint64
+	Comment                  *string
+	ValidateSuccessActionUrl *bool
+}
+
+func (r *PrepareLnUrlPayRequest) Destroy() {
+	FfiDestroyerTypeLnUrlPayRequestData{}.Destroy(r.Data)
+	FfiDestroyerUint64{}.Destroy(r.AmountMsat)
+	FfiDestroyerOptionalString{}.Destroy(r.Comment)
+	FfiDestroyerOptionalBool{}.Destroy(r.ValidateSuccessActionUrl)
+}
+
+type FfiConverterTypePrepareLnUrlPayRequest struct{}
+
+var FfiConverterTypePrepareLnUrlPayRequestINSTANCE = FfiConverterTypePrepareLnUrlPayRequest{}
+
+func (c FfiConverterTypePrepareLnUrlPayRequest) Lift(rb RustBufferI) PrepareLnUrlPayRequest {
+	return LiftFromRustBuffer[PrepareLnUrlPayRequest](c, rb)
+}
+
+func (c FfiConverterTypePrepareLnUrlPayRequest) Read(reader io.Reader) PrepareLnUrlPayRequest {
+	return PrepareLnUrlPayRequest{
+		FfiConverterTypeLnUrlPayRequestDataINSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePrepareLnUrlPayRequest) Lower(value PrepareLnUrlPayRequest) RustBuffer {
+	return LowerIntoRustBuffer[PrepareLnUrlPayRequest](c, value)
+}
+
+func (c FfiConverterTypePrepareLnUrlPayRequest) Write(writer io.Writer, value PrepareLnUrlPayRequest) {
+	FfiConverterTypeLnUrlPayRequestDataINSTANCE.Write(writer, value.Data)
+	FfiConverterUint64INSTANCE.Write(writer, value.AmountMsat)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Comment)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ValidateSuccessActionUrl)
+}
+
+type FfiDestroyerTypePrepareLnUrlPayRequest struct{}
+
+func (_ FfiDestroyerTypePrepareLnUrlPayRequest) Destroy(value PrepareLnUrlPayRequest) {
+	value.Destroy()
+}
+
+type PrepareLnUrlPayResponse struct {
+	Destination   SendDestination
+	FeesSat       uint64
+	SuccessAction *SuccessAction
+}
+
+func (r *PrepareLnUrlPayResponse) Destroy() {
+	FfiDestroyerTypeSendDestination{}.Destroy(r.Destination)
+	FfiDestroyerUint64{}.Destroy(r.FeesSat)
+	FfiDestroyerOptionalTypeSuccessAction{}.Destroy(r.SuccessAction)
+}
+
+type FfiConverterTypePrepareLnUrlPayResponse struct{}
+
+var FfiConverterTypePrepareLnUrlPayResponseINSTANCE = FfiConverterTypePrepareLnUrlPayResponse{}
+
+func (c FfiConverterTypePrepareLnUrlPayResponse) Lift(rb RustBufferI) PrepareLnUrlPayResponse {
+	return LiftFromRustBuffer[PrepareLnUrlPayResponse](c, rb)
+}
+
+func (c FfiConverterTypePrepareLnUrlPayResponse) Read(reader io.Reader) PrepareLnUrlPayResponse {
+	return PrepareLnUrlPayResponse{
+		FfiConverterTypeSendDestinationINSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalTypeSuccessActionINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypePrepareLnUrlPayResponse) Lower(value PrepareLnUrlPayResponse) RustBuffer {
+	return LowerIntoRustBuffer[PrepareLnUrlPayResponse](c, value)
+}
+
+func (c FfiConverterTypePrepareLnUrlPayResponse) Write(writer io.Writer, value PrepareLnUrlPayResponse) {
+	FfiConverterTypeSendDestinationINSTANCE.Write(writer, value.Destination)
+	FfiConverterUint64INSTANCE.Write(writer, value.FeesSat)
+	FfiConverterOptionalTypeSuccessActionINSTANCE.Write(writer, value.SuccessAction)
+}
+
+type FfiDestroyerTypePrepareLnUrlPayResponse struct{}
+
+func (_ FfiDestroyerTypePrepareLnUrlPayResponse) Destroy(value PrepareLnUrlPayResponse) {
 	value.Destroy()
 }
 
@@ -6769,6 +7017,166 @@ func (_ FfiDestroyerTypeSendDestination) Destroy(value SendDestination) {
 	value.Destroy()
 }
 
+type SignerError struct {
+	err error
+}
+
+func (err SignerError) Error() string {
+	return fmt.Sprintf("SignerError: %s", err.err.Error())
+}
+
+func (err SignerError) Unwrap() error {
+	return err.err
+}
+
+// Err* are used for checking error type with `errors.Is`
+var ErrSignerErrorGeneric = fmt.Errorf("SignerErrorGeneric")
+
+// Variant structs
+type SignerErrorGeneric struct {
+	Err string
+}
+
+func NewSignerErrorGeneric(
+	err string,
+) *SignerError {
+	return &SignerError{
+		err: &SignerErrorGeneric{
+			Err: err,
+		},
+	}
+}
+
+func (err SignerErrorGeneric) Error() string {
+	return fmt.Sprint("Generic",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self SignerErrorGeneric) Is(target error) bool {
+	return target == ErrSignerErrorGeneric
+}
+
+type FfiConverterTypeSignerError struct{}
+
+var FfiConverterTypeSignerErrorINSTANCE = FfiConverterTypeSignerError{}
+
+func (c FfiConverterTypeSignerError) Lift(eb RustBufferI) error {
+	return LiftFromRustBuffer[error](c, eb)
+}
+
+func (c FfiConverterTypeSignerError) Lower(value *SignerError) RustBuffer {
+	return LowerIntoRustBuffer[*SignerError](c, value)
+}
+
+func (c FfiConverterTypeSignerError) Read(reader io.Reader) error {
+	errorID := readUint32(reader)
+
+	switch errorID {
+	case 1:
+		return &SignerError{&SignerErrorGeneric{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	default:
+		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypeSignerError.Read()", errorID))
+	}
+}
+
+func (c FfiConverterTypeSignerError) Write(writer io.Writer, value *SignerError) {
+	switch variantValue := value.err.(type) {
+	case *SignerErrorGeneric:
+		writeInt32(writer, 1)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	default:
+		_ = variantValue
+		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypeSignerError.Write", value))
+	}
+}
+
+type SuccessAction interface {
+	Destroy()
+}
+type SuccessActionAes struct {
+	Data AesSuccessActionData
+}
+
+func (e SuccessActionAes) Destroy() {
+	FfiDestroyerTypeAesSuccessActionData{}.Destroy(e.Data)
+}
+
+type SuccessActionMessage struct {
+	Data MessageSuccessActionData
+}
+
+func (e SuccessActionMessage) Destroy() {
+	FfiDestroyerTypeMessageSuccessActionData{}.Destroy(e.Data)
+}
+
+type SuccessActionUrl struct {
+	Data UrlSuccessActionData
+}
+
+func (e SuccessActionUrl) Destroy() {
+	FfiDestroyerTypeUrlSuccessActionData{}.Destroy(e.Data)
+}
+
+type FfiConverterTypeSuccessAction struct{}
+
+var FfiConverterTypeSuccessActionINSTANCE = FfiConverterTypeSuccessAction{}
+
+func (c FfiConverterTypeSuccessAction) Lift(rb RustBufferI) SuccessAction {
+	return LiftFromRustBuffer[SuccessAction](c, rb)
+}
+
+func (c FfiConverterTypeSuccessAction) Lower(value SuccessAction) RustBuffer {
+	return LowerIntoRustBuffer[SuccessAction](c, value)
+}
+func (FfiConverterTypeSuccessAction) Read(reader io.Reader) SuccessAction {
+	id := readInt32(reader)
+	switch id {
+	case 1:
+		return SuccessActionAes{
+			FfiConverterTypeAesSuccessActionDataINSTANCE.Read(reader),
+		}
+	case 2:
+		return SuccessActionMessage{
+			FfiConverterTypeMessageSuccessActionDataINSTANCE.Read(reader),
+		}
+	case 3:
+		return SuccessActionUrl{
+			FfiConverterTypeUrlSuccessActionDataINSTANCE.Read(reader),
+		}
+	default:
+		panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSuccessAction.Read()", id))
+	}
+}
+
+func (FfiConverterTypeSuccessAction) Write(writer io.Writer, value SuccessAction) {
+	switch variant_value := value.(type) {
+	case SuccessActionAes:
+		writeInt32(writer, 1)
+		FfiConverterTypeAesSuccessActionDataINSTANCE.Write(writer, variant_value.Data)
+	case SuccessActionMessage:
+		writeInt32(writer, 2)
+		FfiConverterTypeMessageSuccessActionDataINSTANCE.Write(writer, variant_value.Data)
+	case SuccessActionUrl:
+		writeInt32(writer, 3)
+		FfiConverterTypeUrlSuccessActionDataINSTANCE.Write(writer, variant_value.Data)
+	default:
+		_ = variant_value
+		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSuccessAction.Write", value))
+	}
+}
+
+type FfiDestroyerTypeSuccessAction struct{}
+
+func (_ FfiDestroyerTypeSuccessAction) Destroy(value SuccessAction) {
+	value.Destroy()
+}
+
 type SuccessActionProcessed interface {
 	Destroy()
 }
@@ -7057,6 +7465,191 @@ func (c *FfiConverterCallbackInterfaceLogger) register() {
 type FfiDestroyerCallbackInterfaceLogger struct{}
 
 func (FfiDestroyerCallbackInterfaceLogger) Destroy(value Logger) {
+}
+
+type Signer interface {
+	Xpub() ([]uint8, *SignerError)
+
+	DeriveXpub(derivationPath string) ([]uint8, *SignerError)
+
+	SignEcdsa(msg []uint8, derivationPath string) ([]uint8, *SignerError)
+
+	SignEcdsaRecoverable(msg []uint8) ([]uint8, *SignerError)
+
+	Slip77MasterBlindingKey() ([]uint8, *SignerError)
+
+	HmacSha256(msg []uint8, derivationPath string) ([]uint8, *SignerError)
+}
+
+// foreignCallbackCallbackInterfaceSigner cannot be callable be a compiled function at a same time
+type foreignCallbackCallbackInterfaceSigner struct{}
+
+//export breez_sdk_liquid_bindings_cgo_Signer
+func breez_sdk_liquid_bindings_cgo_Signer(handle C.uint64_t, method C.int32_t, argsPtr *C.uint8_t, argsLen C.int32_t, outBuf *C.RustBuffer) C.int32_t {
+	cb := FfiConverterCallbackInterfaceSignerINSTANCE.Lift(uint64(handle))
+	switch method {
+	case 0:
+		// 0 means Rust is done with the callback, and the callback
+		// can be dropped by the foreign language.
+		*outBuf = FfiConverterCallbackInterfaceSignerINSTANCE.drop(uint64(handle))
+		// See docs of ForeignCallback in `uniffi/src/ffi/foreigncallbacks.rs`
+		return C.int32_t(uniffiIdxCallbackFree)
+
+	case 1:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeXpub(cb, args, outBuf)
+		return C.int32_t(result)
+	case 2:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeDeriveXpub(cb, args, outBuf)
+		return C.int32_t(result)
+	case 3:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSignEcdsa(cb, args, outBuf)
+		return C.int32_t(result)
+	case 4:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSignEcdsaRecoverable(cb, args, outBuf)
+		return C.int32_t(result)
+	case 5:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeSlip77MasterBlindingKey(cb, args, outBuf)
+		return C.int32_t(result)
+	case 6:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeHmacSha256(cb, args, outBuf)
+		return C.int32_t(result)
+
+	default:
+		// This should never happen, because an out of bounds method index won't
+		// ever be used. Once we can catch errors, we should return an InternalException.
+		// https://github.com/mozilla/uniffi-rs/issues/351
+		return C.int32_t(uniffiCallbackUnexpectedResultError)
+	}
+}
+
+func (foreignCallbackCallbackInterfaceSigner) InvokeXpub(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	result, err := callback.Xpub()
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeDeriveXpub(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.DeriveXpub(FfiConverterStringINSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeSignEcdsa(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.SignEcdsa(FfiConverterSequenceUint8INSTANCE.Read(reader), FfiConverterStringINSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeSignEcdsaRecoverable(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.SignEcdsaRecoverable(FfiConverterSequenceUint8INSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeSlip77MasterBlindingKey(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	result, err := callback.Slip77MasterBlindingKey()
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeHmacSha256(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.HmacSha256(FfiConverterSequenceUint8INSTANCE.Read(reader), FfiConverterStringINSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+
+type FfiConverterCallbackInterfaceSigner struct {
+	FfiConverterCallbackInterface[Signer]
+}
+
+var FfiConverterCallbackInterfaceSignerINSTANCE = &FfiConverterCallbackInterfaceSigner{
+	FfiConverterCallbackInterface: FfiConverterCallbackInterface[Signer]{
+		handleMap: newConcurrentHandleMap[Signer](),
+	},
+}
+
+// This is a static function because only 1 instance is supported for registering
+func (c *FfiConverterCallbackInterfaceSigner) register() {
+	rustCall(func(status *C.RustCallStatus) int32 {
+		C.uniffi_breez_sdk_liquid_bindings_fn_init_callback_signer(C.ForeignCallback(C.breez_sdk_liquid_bindings_cgo_Signer), status)
+		return 0
+	})
+}
+
+type FfiDestroyerCallbackInterfaceSigner struct{}
+
+func (FfiDestroyerCallbackInterfaceSigner) Destroy(value Signer) {
 }
 
 type FfiConverterOptionalUint32 struct{}
@@ -7352,6 +7945,43 @@ type FfiDestroyerOptionalTypeListPaymentDetails struct{}
 func (_ FfiDestroyerOptionalTypeListPaymentDetails) Destroy(value *ListPaymentDetails) {
 	if value != nil {
 		FfiDestroyerTypeListPaymentDetails{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalTypeSuccessAction struct{}
+
+var FfiConverterOptionalTypeSuccessActionINSTANCE = FfiConverterOptionalTypeSuccessAction{}
+
+func (c FfiConverterOptionalTypeSuccessAction) Lift(rb RustBufferI) *SuccessAction {
+	return LiftFromRustBuffer[*SuccessAction](c, rb)
+}
+
+func (_ FfiConverterOptionalTypeSuccessAction) Read(reader io.Reader) *SuccessAction {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterTypeSuccessActionINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalTypeSuccessAction) Lower(value *SuccessAction) RustBuffer {
+	return LowerIntoRustBuffer[*SuccessAction](c, value)
+}
+
+func (_ FfiConverterOptionalTypeSuccessAction) Write(writer io.Writer, value *SuccessAction) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterTypeSuccessActionINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalTypeSuccessAction struct{}
+
+func (_ FfiDestroyerOptionalTypeSuccessAction) Destroy(value *SuccessAction) {
+	if value != nil {
+		FfiDestroyerTypeSuccessAction{}.Destroy(*value)
 	}
 }
 
@@ -7862,6 +8492,18 @@ func (FfiDestroyerSequenceTypePaymentType) Destroy(sequence []PaymentType) {
 func Connect(req ConnectRequest) (*BindingLiquidSdk, error) {
 	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
 		return C.uniffi_breez_sdk_liquid_bindings_fn_func_connect(FfiConverterTypeConnectRequestINSTANCE.Lower(req), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *BindingLiquidSdk
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterBindingLiquidSdkINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func ConnectWithSigner(req ConnectWithSignerRequest, signer Signer) (*BindingLiquidSdk, error) {
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_func_connect_with_signer(FfiConverterTypeConnectWithSignerRequestINSTANCE.Lower(req), FfiConverterCallbackInterfaceSignerINSTANCE.Lower(signer), _uniffiStatus)
 	})
 	if _uniffiErr != nil {
 		var _uniffiDefaultValue *BindingLiquidSdk
