@@ -44,7 +44,7 @@ This package embeds the Breez SDK - *Liquid* runtime compiled as shared library 
   </thead>
   <tbody>
     <tr>
-      <td rowspan="4">Android</td>
+      <td rowspan="2">Android</td>
       <td><code>amd64</code></td>
       <td><code>x86_64-linux-android</code></td>
       <td>✅</td>
@@ -52,16 +52,6 @@ This package embeds the Breez SDK - *Liquid* runtime compiled as shared library 
     <tr>
       <td><code>aarch64</code></td>
       <td><code>aarch64-linux-android</code></td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td><code>aarch</code></td>
-      <td><code>armv7-linux-androideabi</code></td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td><code>386</code></td>
-      <td><code>i686-linux-android</code></td>
       <td>✅</td>
     </tr>
     <tr>
