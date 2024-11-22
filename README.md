@@ -116,8 +116,6 @@ For some platforms the provided binding libraries need to be copied into a locat
 
 Copy the binding libraries into the jniLibs directory of your app
 ```bash
-cp vendor/github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib/android-386/*.so android/app/src/main/jniLibs/x86/
-cp vendor/github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib/android-aarch/*.so android/app/src/main/jniLibs/armeabi-v7a/
 cp vendor/github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib/android-aarch64/*.so android/app/src/main/jniLibs/arm64-v8a/
 cp vendor/github.com/breez/breez-sdk-liquid-go/breez_sdk_liquid/lib/android-amd64/*.so android/app/src/main/jniLibs/x86_64/
 ```
@@ -129,12 +127,6 @@ So they are in the following structure
             └── main
                 └── jniLibs
                     ├── arm64-v8a
-                        ├── libbreez_sdk_liquid_bindings.so
-                        └── libc++_shared.so
-                    ├── armeabi-v7a
-                        ├── libbreez_sdk_liquid_bindings.so
-                        └── libc++_shared.so
-                    ├── x86
                         ├── libbreez_sdk_liquid_bindings.so
                         └── libc++_shared.so
                     └── x86_64
