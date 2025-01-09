@@ -377,15 +377,6 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
-			return C.uniffi_breez_sdk_liquid_bindings_checksum_func_parse(uniffiStatus)
-		})
-		if checksum != 60565 {
-			// If this happens try cleaning and rebuilding your project
-			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_parse: UniFFI API checksum mismatch")
-		}
-	}
-	{
-		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_func_parse_invoice(uniffiStatus)
 		})
 		if checksum != 1802 {
@@ -400,6 +391,15 @@ func uniffiCheckChecksums() {
 		if checksum != 16687 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_func_set_logger: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_accept_payment_proposed_fees(uniffiStatus)
+		})
+		if checksum != 8720 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_accept_payment_proposed_fees: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -476,6 +476,15 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch_payment_proposed_fees(uniffiStatus)
+		})
+		if checksum != 23582 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_fetch_payment_proposed_fees: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_get_info(uniffiStatus)
 		})
 		if checksum != 57337 {
@@ -544,6 +553,15 @@ func uniffiCheckChecksums() {
 		if checksum != 45238 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_lnurl_withdraw: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_parse(uniffiStatus)
+		})
+		if checksum != 65160 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_parse: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -778,6 +796,24 @@ func uniffiCheckChecksums() {
 		if checksum != 52627 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_hmac_sha256: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_ecies_encrypt(uniffiStatus)
+		})
+		if checksum != 8960 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_ecies_encrypt: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_signer_ecies_decrypt(uniffiStatus)
+		})
+		if checksum != 32966 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_signer_ecies_decrypt: UniFFI API checksum mismatch")
 		}
 	}
 }
@@ -1066,6 +1102,17 @@ type BindingLiquidSdk struct {
 	ffiObject FfiObject
 }
 
+func (_self *BindingLiquidSdk) AcceptPaymentProposedFees(req AcceptPaymentProposedFeesRequest) error {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_accept_payment_proposed_fees(
+			_pointer, FfiConverterTypeAcceptPaymentProposedFeesRequestINSTANCE.Lower(req), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+
 func (_self *BindingLiquidSdk) AddEventListener(listener EventListener) (string, error) {
 	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
 	defer _self.ffiObject.decrementPointer()
@@ -1175,6 +1222,21 @@ func (_self *BindingLiquidSdk) FetchOnchainLimits() (OnchainPaymentLimitsRespons
 		return _uniffiDefaultValue, _uniffiErr
 	} else {
 		return FfiConverterTypeOnchainPaymentLimitsResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingLiquidSdk) FetchPaymentProposedFees(req FetchPaymentProposedFeesRequest) (FetchPaymentProposedFeesResponse, error) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypeSdkError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_fetch_payment_proposed_fees(
+			_pointer, FfiConverterTypeFetchPaymentProposedFeesRequestINSTANCE.Lower(req), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue FetchPaymentProposedFeesResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterTypeFetchPaymentProposedFeesResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
 	}
 }
 
@@ -1295,6 +1357,21 @@ func (_self *BindingLiquidSdk) LnurlWithdraw(req LnUrlWithdrawRequest) (LnUrlWit
 		return _uniffiDefaultValue, _uniffiErr
 	} else {
 		return FfiConverterTypeLnUrlWithdrawResultINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingLiquidSdk) Parse(input string) (InputType, error) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_parse(
+			_pointer, FfiConverterStringINSTANCE.Lower(input), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue InputType
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterTypeInputTypeINSTANCE.Lift(_uniffiRV), _uniffiErr
 	}
 }
 
@@ -1588,6 +1665,42 @@ func (_ FfiDestroyerBindingLiquidSdk) Destroy(value *BindingLiquidSdk) {
 	value.Destroy()
 }
 
+type AcceptPaymentProposedFeesRequest struct {
+	Response FetchPaymentProposedFeesResponse
+}
+
+func (r *AcceptPaymentProposedFeesRequest) Destroy() {
+	FfiDestroyerTypeFetchPaymentProposedFeesResponse{}.Destroy(r.Response)
+}
+
+type FfiConverterTypeAcceptPaymentProposedFeesRequest struct{}
+
+var FfiConverterTypeAcceptPaymentProposedFeesRequestINSTANCE = FfiConverterTypeAcceptPaymentProposedFeesRequest{}
+
+func (c FfiConverterTypeAcceptPaymentProposedFeesRequest) Lift(rb RustBufferI) AcceptPaymentProposedFeesRequest {
+	return LiftFromRustBuffer[AcceptPaymentProposedFeesRequest](c, rb)
+}
+
+func (c FfiConverterTypeAcceptPaymentProposedFeesRequest) Read(reader io.Reader) AcceptPaymentProposedFeesRequest {
+	return AcceptPaymentProposedFeesRequest{
+		FfiConverterTypeFetchPaymentProposedFeesResponseINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeAcceptPaymentProposedFeesRequest) Lower(value AcceptPaymentProposedFeesRequest) RustBuffer {
+	return LowerIntoRustBuffer[AcceptPaymentProposedFeesRequest](c, value)
+}
+
+func (c FfiConverterTypeAcceptPaymentProposedFeesRequest) Write(writer io.Writer, value AcceptPaymentProposedFeesRequest) {
+	FfiConverterTypeFetchPaymentProposedFeesResponseINSTANCE.Write(writer, value.Response)
+}
+
+type FfiDestroyerTypeAcceptPaymentProposedFeesRequest struct{}
+
+func (_ FfiDestroyerTypeAcceptPaymentProposedFeesRequest) Destroy(value AcceptPaymentProposedFeesRequest) {
+	value.Destroy()
+}
+
 type AesSuccessActionData struct {
 	Description string
 	Ciphertext  string
@@ -1760,6 +1873,46 @@ func (_ FfiDestroyerTypeBitcoinAddressData) Destroy(value BitcoinAddressData) {
 	value.Destroy()
 }
 
+type BlockchainInfo struct {
+	LiquidTip  uint32
+	BitcoinTip uint32
+}
+
+func (r *BlockchainInfo) Destroy() {
+	FfiDestroyerUint32{}.Destroy(r.LiquidTip)
+	FfiDestroyerUint32{}.Destroy(r.BitcoinTip)
+}
+
+type FfiConverterTypeBlockchainInfo struct{}
+
+var FfiConverterTypeBlockchainInfoINSTANCE = FfiConverterTypeBlockchainInfo{}
+
+func (c FfiConverterTypeBlockchainInfo) Lift(rb RustBufferI) BlockchainInfo {
+	return LiftFromRustBuffer[BlockchainInfo](c, rb)
+}
+
+func (c FfiConverterTypeBlockchainInfo) Read(reader io.Reader) BlockchainInfo {
+	return BlockchainInfo{
+		FfiConverterUint32INSTANCE.Read(reader),
+		FfiConverterUint32INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeBlockchainInfo) Lower(value BlockchainInfo) RustBuffer {
+	return LowerIntoRustBuffer[BlockchainInfo](c, value)
+}
+
+func (c FfiConverterTypeBlockchainInfo) Write(writer io.Writer, value BlockchainInfo) {
+	FfiConverterUint32INSTANCE.Write(writer, value.LiquidTip)
+	FfiConverterUint32INSTANCE.Write(writer, value.BitcoinTip)
+}
+
+type FfiDestroyerTypeBlockchainInfo struct{}
+
+func (_ FfiDestroyerTypeBlockchainInfo) Destroy(value BlockchainInfo) {
+	value.Destroy()
+}
+
 type BuyBitcoinRequest struct {
 	PrepareResponse PrepareBuyBitcoinResponse
 	RedirectUrl     *string
@@ -1881,16 +2034,20 @@ func (_ FfiDestroyerTypeCheckMessageResponse) Destroy(value CheckMessageResponse
 }
 
 type Config struct {
-	LiquidElectrumUrl      string
-	BitcoinElectrumUrl     string
-	MempoolspaceUrl        string
-	WorkingDir             string
-	Network                LiquidNetwork
-	PaymentTimeoutSec      uint64
-	ZeroConfMinFeeRateMsat uint32
-	BreezApiKey            *string
-	CacheDir               *string
-	ZeroConfMaxAmountSat   *uint64
+	LiquidElectrumUrl               string
+	BitcoinElectrumUrl              string
+	MempoolspaceUrl                 string
+	WorkingDir                      string
+	Network                         LiquidNetwork
+	PaymentTimeoutSec               uint64
+	ZeroConfMinFeeRateMsat          uint32
+	SyncServiceUrl                  string
+	BreezApiKey                     *string
+	CacheDir                        *string
+	ZeroConfMaxAmountSat            *uint64
+	UseDefaultExternalInputParsers  bool
+	ExternalInputParsers            *[]ExternalInputParser
+	OnchainFeeRateLeewaySatPerVbyte *uint32
 }
 
 func (r *Config) Destroy() {
@@ -1901,9 +2058,13 @@ func (r *Config) Destroy() {
 	FfiDestroyerTypeLiquidNetwork{}.Destroy(r.Network)
 	FfiDestroyerUint64{}.Destroy(r.PaymentTimeoutSec)
 	FfiDestroyerUint32{}.Destroy(r.ZeroConfMinFeeRateMsat)
+	FfiDestroyerString{}.Destroy(r.SyncServiceUrl)
 	FfiDestroyerOptionalString{}.Destroy(r.BreezApiKey)
 	FfiDestroyerOptionalString{}.Destroy(r.CacheDir)
 	FfiDestroyerOptionalUint64{}.Destroy(r.ZeroConfMaxAmountSat)
+	FfiDestroyerBool{}.Destroy(r.UseDefaultExternalInputParsers)
+	FfiDestroyerOptionalSequenceTypeExternalInputParser{}.Destroy(r.ExternalInputParsers)
+	FfiDestroyerOptionalUint32{}.Destroy(r.OnchainFeeRateLeewaySatPerVbyte)
 }
 
 type FfiConverterTypeConfig struct{}
@@ -1923,9 +2084,13 @@ func (c FfiConverterTypeConfig) Read(reader io.Reader) Config {
 		FfiConverterTypeLiquidNetworkINSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterUint32INSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterBoolINSTANCE.Read(reader),
+		FfiConverterOptionalSequenceTypeExternalInputParserINSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
 	}
 }
 
@@ -1941,9 +2106,13 @@ func (c FfiConverterTypeConfig) Write(writer io.Writer, value Config) {
 	FfiConverterTypeLiquidNetworkINSTANCE.Write(writer, value.Network)
 	FfiConverterUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
 	FfiConverterUint32INSTANCE.Write(writer, value.ZeroConfMinFeeRateMsat)
+	FfiConverterStringINSTANCE.Write(writer, value.SyncServiceUrl)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.BreezApiKey)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.CacheDir)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ZeroConfMaxAmountSat)
+	FfiConverterBoolINSTANCE.Write(writer, value.UseDefaultExternalInputParsers)
+	FfiConverterOptionalSequenceTypeExternalInputParserINSTANCE.Write(writer, value.ExternalInputParsers)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.OnchainFeeRateLeewaySatPerVbyte)
 }
 
 type FfiDestroyerTypeConfig struct{}
@@ -2088,6 +2257,134 @@ func (_ FfiDestroyerTypeCurrencyInfo) Destroy(value CurrencyInfo) {
 	value.Destroy()
 }
 
+type ExternalInputParser struct {
+	ProviderId string
+	InputRegex string
+	ParserUrl  string
+}
+
+func (r *ExternalInputParser) Destroy() {
+	FfiDestroyerString{}.Destroy(r.ProviderId)
+	FfiDestroyerString{}.Destroy(r.InputRegex)
+	FfiDestroyerString{}.Destroy(r.ParserUrl)
+}
+
+type FfiConverterTypeExternalInputParser struct{}
+
+var FfiConverterTypeExternalInputParserINSTANCE = FfiConverterTypeExternalInputParser{}
+
+func (c FfiConverterTypeExternalInputParser) Lift(rb RustBufferI) ExternalInputParser {
+	return LiftFromRustBuffer[ExternalInputParser](c, rb)
+}
+
+func (c FfiConverterTypeExternalInputParser) Read(reader io.Reader) ExternalInputParser {
+	return ExternalInputParser{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeExternalInputParser) Lower(value ExternalInputParser) RustBuffer {
+	return LowerIntoRustBuffer[ExternalInputParser](c, value)
+}
+
+func (c FfiConverterTypeExternalInputParser) Write(writer io.Writer, value ExternalInputParser) {
+	FfiConverterStringINSTANCE.Write(writer, value.ProviderId)
+	FfiConverterStringINSTANCE.Write(writer, value.InputRegex)
+	FfiConverterStringINSTANCE.Write(writer, value.ParserUrl)
+}
+
+type FfiDestroyerTypeExternalInputParser struct{}
+
+func (_ FfiDestroyerTypeExternalInputParser) Destroy(value ExternalInputParser) {
+	value.Destroy()
+}
+
+type FetchPaymentProposedFeesRequest struct {
+	SwapId string
+}
+
+func (r *FetchPaymentProposedFeesRequest) Destroy() {
+	FfiDestroyerString{}.Destroy(r.SwapId)
+}
+
+type FfiConverterTypeFetchPaymentProposedFeesRequest struct{}
+
+var FfiConverterTypeFetchPaymentProposedFeesRequestINSTANCE = FfiConverterTypeFetchPaymentProposedFeesRequest{}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesRequest) Lift(rb RustBufferI) FetchPaymentProposedFeesRequest {
+	return LiftFromRustBuffer[FetchPaymentProposedFeesRequest](c, rb)
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesRequest) Read(reader io.Reader) FetchPaymentProposedFeesRequest {
+	return FetchPaymentProposedFeesRequest{
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesRequest) Lower(value FetchPaymentProposedFeesRequest) RustBuffer {
+	return LowerIntoRustBuffer[FetchPaymentProposedFeesRequest](c, value)
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesRequest) Write(writer io.Writer, value FetchPaymentProposedFeesRequest) {
+	FfiConverterStringINSTANCE.Write(writer, value.SwapId)
+}
+
+type FfiDestroyerTypeFetchPaymentProposedFeesRequest struct{}
+
+func (_ FfiDestroyerTypeFetchPaymentProposedFeesRequest) Destroy(value FetchPaymentProposedFeesRequest) {
+	value.Destroy()
+}
+
+type FetchPaymentProposedFeesResponse struct {
+	SwapId            string
+	FeesSat           uint64
+	PayerAmountSat    uint64
+	ReceiverAmountSat uint64
+}
+
+func (r *FetchPaymentProposedFeesResponse) Destroy() {
+	FfiDestroyerString{}.Destroy(r.SwapId)
+	FfiDestroyerUint64{}.Destroy(r.FeesSat)
+	FfiDestroyerUint64{}.Destroy(r.PayerAmountSat)
+	FfiDestroyerUint64{}.Destroy(r.ReceiverAmountSat)
+}
+
+type FfiConverterTypeFetchPaymentProposedFeesResponse struct{}
+
+var FfiConverterTypeFetchPaymentProposedFeesResponseINSTANCE = FfiConverterTypeFetchPaymentProposedFeesResponse{}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesResponse) Lift(rb RustBufferI) FetchPaymentProposedFeesResponse {
+	return LiftFromRustBuffer[FetchPaymentProposedFeesResponse](c, rb)
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesResponse) Read(reader io.Reader) FetchPaymentProposedFeesResponse {
+	return FetchPaymentProposedFeesResponse{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesResponse) Lower(value FetchPaymentProposedFeesResponse) RustBuffer {
+	return LowerIntoRustBuffer[FetchPaymentProposedFeesResponse](c, value)
+}
+
+func (c FfiConverterTypeFetchPaymentProposedFeesResponse) Write(writer io.Writer, value FetchPaymentProposedFeesResponse) {
+	FfiConverterStringINSTANCE.Write(writer, value.SwapId)
+	FfiConverterUint64INSTANCE.Write(writer, value.FeesSat)
+	FfiConverterUint64INSTANCE.Write(writer, value.PayerAmountSat)
+	FfiConverterUint64INSTANCE.Write(writer, value.ReceiverAmountSat)
+}
+
+type FfiDestroyerTypeFetchPaymentProposedFeesResponse struct{}
+
+func (_ FfiDestroyerTypeFetchPaymentProposedFeesResponse) Destroy(value FetchPaymentProposedFeesResponse) {
+	value.Destroy()
+}
+
 type FiatCurrency struct {
 	Id   string
 	Info CurrencyInfo
@@ -2129,19 +2426,13 @@ func (_ FfiDestroyerTypeFiatCurrency) Destroy(value FiatCurrency) {
 }
 
 type GetInfoResponse struct {
-	BalanceSat        uint64
-	PendingSendSat    uint64
-	PendingReceiveSat uint64
-	Fingerprint       string
-	Pubkey            string
+	WalletInfo     WalletInfo
+	BlockchainInfo BlockchainInfo
 }
 
 func (r *GetInfoResponse) Destroy() {
-	FfiDestroyerUint64{}.Destroy(r.BalanceSat)
-	FfiDestroyerUint64{}.Destroy(r.PendingSendSat)
-	FfiDestroyerUint64{}.Destroy(r.PendingReceiveSat)
-	FfiDestroyerString{}.Destroy(r.Fingerprint)
-	FfiDestroyerString{}.Destroy(r.Pubkey)
+	FfiDestroyerTypeWalletInfo{}.Destroy(r.WalletInfo)
+	FfiDestroyerTypeBlockchainInfo{}.Destroy(r.BlockchainInfo)
 }
 
 type FfiConverterTypeGetInfoResponse struct{}
@@ -2154,11 +2445,8 @@ func (c FfiConverterTypeGetInfoResponse) Lift(rb RustBufferI) GetInfoResponse {
 
 func (c FfiConverterTypeGetInfoResponse) Read(reader io.Reader) GetInfoResponse {
 	return GetInfoResponse{
-		FfiConverterUint64INSTANCE.Read(reader),
-		FfiConverterUint64INSTANCE.Read(reader),
-		FfiConverterUint64INSTANCE.Read(reader),
-		FfiConverterStringINSTANCE.Read(reader),
-		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterTypeWalletInfoINSTANCE.Read(reader),
+		FfiConverterTypeBlockchainInfoINSTANCE.Read(reader),
 	}
 }
 
@@ -2167,11 +2455,8 @@ func (c FfiConverterTypeGetInfoResponse) Lower(value GetInfoResponse) RustBuffer
 }
 
 func (c FfiConverterTypeGetInfoResponse) Write(writer io.Writer, value GetInfoResponse) {
-	FfiConverterUint64INSTANCE.Write(writer, value.BalanceSat)
-	FfiConverterUint64INSTANCE.Write(writer, value.PendingSendSat)
-	FfiConverterUint64INSTANCE.Write(writer, value.PendingReceiveSat)
-	FfiConverterStringINSTANCE.Write(writer, value.Fingerprint)
-	FfiConverterStringINSTANCE.Write(writer, value.Pubkey)
+	FfiConverterTypeWalletInfoINSTANCE.Write(writer, value.WalletInfo)
+	FfiConverterTypeBlockchainInfoINSTANCE.Write(writer, value.BlockchainInfo)
 }
 
 type FfiDestroyerTypeGetInfoResponse struct{}
@@ -2467,6 +2752,7 @@ func (_ FfiDestroyerTypeLiquidAddressData) Destroy(value LiquidAddressData) {
 
 type ListPaymentsRequest struct {
 	Filters       *[]PaymentType
+	States        *[]PaymentState
 	FromTimestamp *int64
 	ToTimestamp   *int64
 	Offset        *uint32
@@ -2476,6 +2762,7 @@ type ListPaymentsRequest struct {
 
 func (r *ListPaymentsRequest) Destroy() {
 	FfiDestroyerOptionalSequenceTypePaymentType{}.Destroy(r.Filters)
+	FfiDestroyerOptionalSequenceTypePaymentState{}.Destroy(r.States)
 	FfiDestroyerOptionalInt64{}.Destroy(r.FromTimestamp)
 	FfiDestroyerOptionalInt64{}.Destroy(r.ToTimestamp)
 	FfiDestroyerOptionalUint32{}.Destroy(r.Offset)
@@ -2494,6 +2781,7 @@ func (c FfiConverterTypeListPaymentsRequest) Lift(rb RustBufferI) ListPaymentsRe
 func (c FfiConverterTypeListPaymentsRequest) Read(reader io.Reader) ListPaymentsRequest {
 	return ListPaymentsRequest{
 		FfiConverterOptionalSequenceTypePaymentTypeINSTANCE.Read(reader),
+		FfiConverterOptionalSequenceTypePaymentStateINSTANCE.Read(reader),
 		FfiConverterOptionalInt64INSTANCE.Read(reader),
 		FfiConverterOptionalInt64INSTANCE.Read(reader),
 		FfiConverterOptionalUint32INSTANCE.Read(reader),
@@ -2508,6 +2796,7 @@ func (c FfiConverterTypeListPaymentsRequest) Lower(value ListPaymentsRequest) Ru
 
 func (c FfiConverterTypeListPaymentsRequest) Write(writer io.Writer, value ListPaymentsRequest) {
 	FfiConverterOptionalSequenceTypePaymentTypeINSTANCE.Write(writer, value.Filters)
+	FfiConverterOptionalSequenceTypePaymentStateINSTANCE.Write(writer, value.States)
 	FfiConverterOptionalInt64INSTANCE.Write(writer, value.FromTimestamp)
 	FfiConverterOptionalInt64INSTANCE.Write(writer, value.ToTimestamp)
 	FfiConverterOptionalUint32INSTANCE.Write(writer, value.Offset)
@@ -2638,6 +2927,66 @@ func (c FfiConverterTypeLnUrlErrorData) Write(writer io.Writer, value LnUrlError
 type FfiDestroyerTypeLnUrlErrorData struct{}
 
 func (_ FfiDestroyerTypeLnUrlErrorData) Destroy(value LnUrlErrorData) {
+	value.Destroy()
+}
+
+type LnUrlInfo struct {
+	LnAddress                        *string
+	LnurlPayComment                  *string
+	LnurlPayDomain                   *string
+	LnurlPayMetadata                 *string
+	LnurlPaySuccessAction            *SuccessActionProcessed
+	LnurlPayUnprocessedSuccessAction *SuccessAction
+	LnurlWithdrawEndpoint            *string
+}
+
+func (r *LnUrlInfo) Destroy() {
+	FfiDestroyerOptionalString{}.Destroy(r.LnAddress)
+	FfiDestroyerOptionalString{}.Destroy(r.LnurlPayComment)
+	FfiDestroyerOptionalString{}.Destroy(r.LnurlPayDomain)
+	FfiDestroyerOptionalString{}.Destroy(r.LnurlPayMetadata)
+	FfiDestroyerOptionalTypeSuccessActionProcessed{}.Destroy(r.LnurlPaySuccessAction)
+	FfiDestroyerOptionalTypeSuccessAction{}.Destroy(r.LnurlPayUnprocessedSuccessAction)
+	FfiDestroyerOptionalString{}.Destroy(r.LnurlWithdrawEndpoint)
+}
+
+type FfiConverterTypeLnUrlInfo struct{}
+
+var FfiConverterTypeLnUrlInfoINSTANCE = FfiConverterTypeLnUrlInfo{}
+
+func (c FfiConverterTypeLnUrlInfo) Lift(rb RustBufferI) LnUrlInfo {
+	return LiftFromRustBuffer[LnUrlInfo](c, rb)
+}
+
+func (c FfiConverterTypeLnUrlInfo) Read(reader io.Reader) LnUrlInfo {
+	return LnUrlInfo{
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalTypeSuccessActionProcessedINSTANCE.Read(reader),
+		FfiConverterOptionalTypeSuccessActionINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeLnUrlInfo) Lower(value LnUrlInfo) RustBuffer {
+	return LowerIntoRustBuffer[LnUrlInfo](c, value)
+}
+
+func (c FfiConverterTypeLnUrlInfo) Write(writer io.Writer, value LnUrlInfo) {
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.LnAddress)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.LnurlPayComment)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.LnurlPayDomain)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.LnurlPayMetadata)
+	FfiConverterOptionalTypeSuccessActionProcessedINSTANCE.Write(writer, value.LnurlPaySuccessAction)
+	FfiConverterOptionalTypeSuccessActionINSTANCE.Write(writer, value.LnurlPayUnprocessedSuccessAction)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.LnurlWithdrawEndpoint)
+}
+
+type FfiDestroyerTypeLnUrlInfo struct{}
+
+func (_ FfiDestroyerTypeLnUrlInfo) Destroy(value LnUrlInfo) {
 	value.Destroy()
 }
 
@@ -3198,14 +3547,16 @@ func (_ FfiDestroyerTypePayOnchainRequest) Destroy(value PayOnchainRequest) {
 }
 
 type Payment struct {
-	Timestamp   uint32
-	AmountSat   uint64
-	FeesSat     uint64
-	PaymentType PaymentType
-	Status      PaymentState
-	Details     PaymentDetails
-	Destination *string
-	TxId        *string
+	Timestamp      uint32
+	AmountSat      uint64
+	FeesSat        uint64
+	PaymentType    PaymentType
+	Status         PaymentState
+	Details        PaymentDetails
+	SwapperFeesSat *uint64
+	Destination    *string
+	TxId           *string
+	UnblindingData *string
 }
 
 func (r *Payment) Destroy() {
@@ -3215,8 +3566,10 @@ func (r *Payment) Destroy() {
 	FfiDestroyerTypePaymentType{}.Destroy(r.PaymentType)
 	FfiDestroyerTypePaymentState{}.Destroy(r.Status)
 	FfiDestroyerTypePaymentDetails{}.Destroy(r.Details)
+	FfiDestroyerOptionalUint64{}.Destroy(r.SwapperFeesSat)
 	FfiDestroyerOptionalString{}.Destroy(r.Destination)
 	FfiDestroyerOptionalString{}.Destroy(r.TxId)
+	FfiDestroyerOptionalString{}.Destroy(r.UnblindingData)
 }
 
 type FfiConverterTypePayment struct{}
@@ -3235,6 +3588,8 @@ func (c FfiConverterTypePayment) Read(reader io.Reader) Payment {
 		FfiConverterTypePaymentTypeINSTANCE.Read(reader),
 		FfiConverterTypePaymentStateINSTANCE.Read(reader),
 		FfiConverterTypePaymentDetailsINSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 	}
@@ -3251,8 +3606,10 @@ func (c FfiConverterTypePayment) Write(writer io.Writer, value Payment) {
 	FfiConverterTypePaymentTypeINSTANCE.Write(writer, value.PaymentType)
 	FfiConverterTypePaymentStateINSTANCE.Write(writer, value.Status)
 	FfiConverterTypePaymentDetailsINSTANCE.Write(writer, value.Details)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.SwapperFeesSat)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Destination)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.TxId)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.UnblindingData)
 }
 
 type FfiDestroyerTypePayment struct{}
@@ -3396,12 +3753,16 @@ func (_ FfiDestroyerTypePrepareLnUrlPayRequest) Destroy(value PrepareLnUrlPayReq
 type PrepareLnUrlPayResponse struct {
 	Destination   SendDestination
 	FeesSat       uint64
+	Data          LnUrlPayRequestData
+	Comment       *string
 	SuccessAction *SuccessAction
 }
 
 func (r *PrepareLnUrlPayResponse) Destroy() {
 	FfiDestroyerTypeSendDestination{}.Destroy(r.Destination)
 	FfiDestroyerUint64{}.Destroy(r.FeesSat)
+	FfiDestroyerTypeLnUrlPayRequestData{}.Destroy(r.Data)
+	FfiDestroyerOptionalString{}.Destroy(r.Comment)
 	FfiDestroyerOptionalTypeSuccessAction{}.Destroy(r.SuccessAction)
 }
 
@@ -3417,6 +3778,8 @@ func (c FfiConverterTypePrepareLnUrlPayResponse) Read(reader io.Reader) PrepareL
 	return PrepareLnUrlPayResponse{
 		FfiConverterTypeSendDestinationINSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterTypeLnUrlPayRequestDataINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalTypeSuccessActionINSTANCE.Read(reader),
 	}
 }
@@ -3428,6 +3791,8 @@ func (c FfiConverterTypePrepareLnUrlPayResponse) Lower(value PrepareLnUrlPayResp
 func (c FfiConverterTypePrepareLnUrlPayResponse) Write(writer io.Writer, value PrepareLnUrlPayResponse) {
 	FfiConverterTypeSendDestinationINSTANCE.Write(writer, value.Destination)
 	FfiConverterUint64INSTANCE.Write(writer, value.FeesSat)
+	FfiConverterTypeLnUrlPayRequestDataINSTANCE.Write(writer, value.Data)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Comment)
 	FfiConverterOptionalTypeSuccessActionINSTANCE.Write(writer, value.SuccessAction)
 }
 
@@ -3562,15 +3927,21 @@ func (_ FfiDestroyerTypePrepareReceiveRequest) Destroy(value PrepareReceiveReque
 }
 
 type PrepareReceiveResponse struct {
-	PayerAmountSat *uint64
-	PaymentMethod  PaymentMethod
-	FeesSat        uint64
+	PaymentMethod     PaymentMethod
+	FeesSat           uint64
+	PayerAmountSat    *uint64
+	MinPayerAmountSat *uint64
+	MaxPayerAmountSat *uint64
+	SwapperFeerate    *float64
 }
 
 func (r *PrepareReceiveResponse) Destroy() {
-	FfiDestroyerOptionalUint64{}.Destroy(r.PayerAmountSat)
 	FfiDestroyerTypePaymentMethod{}.Destroy(r.PaymentMethod)
 	FfiDestroyerUint64{}.Destroy(r.FeesSat)
+	FfiDestroyerOptionalUint64{}.Destroy(r.PayerAmountSat)
+	FfiDestroyerOptionalUint64{}.Destroy(r.MinPayerAmountSat)
+	FfiDestroyerOptionalUint64{}.Destroy(r.MaxPayerAmountSat)
+	FfiDestroyerOptionalFloat64{}.Destroy(r.SwapperFeerate)
 }
 
 type FfiConverterTypePrepareReceiveResponse struct{}
@@ -3583,9 +3954,12 @@ func (c FfiConverterTypePrepareReceiveResponse) Lift(rb RustBufferI) PrepareRece
 
 func (c FfiConverterTypePrepareReceiveResponse) Read(reader io.Reader) PrepareReceiveResponse {
 	return PrepareReceiveResponse{
-		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterTypePaymentMethodINSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalFloat64INSTANCE.Read(reader),
 	}
 }
 
@@ -3594,9 +3968,12 @@ func (c FfiConverterTypePrepareReceiveResponse) Lower(value PrepareReceiveRespon
 }
 
 func (c FfiConverterTypePrepareReceiveResponse) Write(writer io.Writer, value PrepareReceiveResponse) {
-	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PayerAmountSat)
 	FfiConverterTypePaymentMethodINSTANCE.Write(writer, value.PaymentMethod)
 	FfiConverterUint64INSTANCE.Write(writer, value.FeesSat)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PayerAmountSat)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.MinPayerAmountSat)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.MaxPayerAmountSat)
+	FfiConverterOptionalFloat64INSTANCE.Write(writer, value.SwapperFeerate)
 }
 
 type FfiDestroyerTypePrepareReceiveResponse struct{}
@@ -4434,6 +4811,58 @@ func (c FfiConverterTypeUrlSuccessActionData) Write(writer io.Writer, value UrlS
 type FfiDestroyerTypeUrlSuccessActionData struct{}
 
 func (_ FfiDestroyerTypeUrlSuccessActionData) Destroy(value UrlSuccessActionData) {
+	value.Destroy()
+}
+
+type WalletInfo struct {
+	BalanceSat        uint64
+	PendingSendSat    uint64
+	PendingReceiveSat uint64
+	Fingerprint       string
+	Pubkey            string
+}
+
+func (r *WalletInfo) Destroy() {
+	FfiDestroyerUint64{}.Destroy(r.BalanceSat)
+	FfiDestroyerUint64{}.Destroy(r.PendingSendSat)
+	FfiDestroyerUint64{}.Destroy(r.PendingReceiveSat)
+	FfiDestroyerString{}.Destroy(r.Fingerprint)
+	FfiDestroyerString{}.Destroy(r.Pubkey)
+}
+
+type FfiConverterTypeWalletInfo struct{}
+
+var FfiConverterTypeWalletInfoINSTANCE = FfiConverterTypeWalletInfo{}
+
+func (c FfiConverterTypeWalletInfo) Lift(rb RustBufferI) WalletInfo {
+	return LiftFromRustBuffer[WalletInfo](c, rb)
+}
+
+func (c FfiConverterTypeWalletInfo) Read(reader io.Reader) WalletInfo {
+	return WalletInfo{
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterTypeWalletInfo) Lower(value WalletInfo) RustBuffer {
+	return LowerIntoRustBuffer[WalletInfo](c, value)
+}
+
+func (c FfiConverterTypeWalletInfo) Write(writer io.Writer, value WalletInfo) {
+	FfiConverterUint64INSTANCE.Write(writer, value.BalanceSat)
+	FfiConverterUint64INSTANCE.Write(writer, value.PendingSendSat)
+	FfiConverterUint64INSTANCE.Write(writer, value.PendingReceiveSat)
+	FfiConverterStringINSTANCE.Write(writer, value.Fingerprint)
+	FfiConverterStringINSTANCE.Write(writer, value.Pubkey)
+}
+
+type FfiDestroyerTypeWalletInfo struct{}
+
+func (_ FfiDestroyerTypeWalletInfo) Destroy(value WalletInfo) {
 	value.Destroy()
 }
 
@@ -6117,23 +6546,27 @@ type PaymentDetails interface {
 	Destroy()
 }
 type PaymentDetailsLightning struct {
-	SwapId            string
-	Description       string
-	Preimage          *string
-	Bolt11            *string
-	Bolt12Offer       *string
-	PaymentHash       *string
-	RefundTxId        *string
-	RefundTxAmountSat *uint64
+	SwapId                      string
+	Description                 string
+	LiquidExpirationBlockheight uint32
+	Preimage                    *string
+	Bolt11                      *string
+	Bolt12Offer                 *string
+	PaymentHash                 *string
+	LnurlInfo                   *LnUrlInfo
+	RefundTxId                  *string
+	RefundTxAmountSat           *uint64
 }
 
 func (e PaymentDetailsLightning) Destroy() {
 	FfiDestroyerString{}.Destroy(e.SwapId)
 	FfiDestroyerString{}.Destroy(e.Description)
+	FfiDestroyerUint32{}.Destroy(e.LiquidExpirationBlockheight)
 	FfiDestroyerOptionalString{}.Destroy(e.Preimage)
 	FfiDestroyerOptionalString{}.Destroy(e.Bolt11)
 	FfiDestroyerOptionalString{}.Destroy(e.Bolt12Offer)
 	FfiDestroyerOptionalString{}.Destroy(e.PaymentHash)
+	FfiDestroyerOptionalTypeLnUrlInfo{}.Destroy(e.LnurlInfo)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
 }
@@ -6149,15 +6582,19 @@ func (e PaymentDetailsLiquid) Destroy() {
 }
 
 type PaymentDetailsBitcoin struct {
-	SwapId            string
-	Description       string
-	RefundTxId        *string
-	RefundTxAmountSat *uint64
+	SwapId                       string
+	Description                  string
+	BitcoinExpirationBlockheight *uint32
+	LiquidExpirationBlockheight  *uint32
+	RefundTxId                   *string
+	RefundTxAmountSat            *uint64
 }
 
 func (e PaymentDetailsBitcoin) Destroy() {
 	FfiDestroyerString{}.Destroy(e.SwapId)
 	FfiDestroyerString{}.Destroy(e.Description)
+	FfiDestroyerOptionalUint32{}.Destroy(e.BitcoinExpirationBlockheight)
+	FfiDestroyerOptionalUint32{}.Destroy(e.LiquidExpirationBlockheight)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
 }
@@ -6180,10 +6617,12 @@ func (FfiConverterTypePaymentDetails) Read(reader io.Reader) PaymentDetails {
 		return PaymentDetailsLightning{
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterStringINSTANCE.Read(reader),
+			FfiConverterUint32INSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
+			FfiConverterOptionalTypeLnUrlInfoINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
 		}
@@ -6196,6 +6635,8 @@ func (FfiConverterTypePaymentDetails) Read(reader io.Reader) PaymentDetails {
 		return PaymentDetailsBitcoin{
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterStringINSTANCE.Read(reader),
+			FfiConverterOptionalUint32INSTANCE.Read(reader),
+			FfiConverterOptionalUint32INSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
 		}
@@ -6210,10 +6651,12 @@ func (FfiConverterTypePaymentDetails) Write(writer io.Writer, value PaymentDetai
 		writeInt32(writer, 1)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.SwapId)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.Description)
+		FfiConverterUint32INSTANCE.Write(writer, variant_value.LiquidExpirationBlockheight)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Preimage)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bolt11)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bolt12Offer)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.PaymentHash)
+		FfiConverterOptionalTypeLnUrlInfoINSTANCE.Write(writer, variant_value.LnurlInfo)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
 	case PaymentDetailsLiquid:
@@ -6224,6 +6667,8 @@ func (FfiConverterTypePaymentDetails) Write(writer io.Writer, value PaymentDetai
 		writeInt32(writer, 3)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.SwapId)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.Description)
+		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.BitcoinExpirationBlockheight)
+		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.LiquidExpirationBlockheight)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
 	default:
@@ -6803,13 +7248,14 @@ func (_ FfiDestroyerTypePaymentMethod) Destroy(value PaymentMethod) {
 type PaymentState uint
 
 const (
-	PaymentStateCreated       PaymentState = 1
-	PaymentStatePending       PaymentState = 2
-	PaymentStateComplete      PaymentState = 3
-	PaymentStateFailed        PaymentState = 4
-	PaymentStateTimedOut      PaymentState = 5
-	PaymentStateRefundable    PaymentState = 6
-	PaymentStateRefundPending PaymentState = 7
+	PaymentStateCreated              PaymentState = 1
+	PaymentStatePending              PaymentState = 2
+	PaymentStateComplete             PaymentState = 3
+	PaymentStateFailed               PaymentState = 4
+	PaymentStateTimedOut             PaymentState = 5
+	PaymentStateRefundable           PaymentState = 6
+	PaymentStateRefundPending        PaymentState = 7
+	PaymentStateWaitingFeeAcceptance PaymentState = 8
 )
 
 type FfiConverterTypePaymentState struct{}
@@ -7059,6 +7505,14 @@ func (e SdkEventPaymentWaitingConfirmation) Destroy() {
 	FfiDestroyerTypePayment{}.Destroy(e.Details)
 }
 
+type SdkEventPaymentWaitingFeeAcceptance struct {
+	Details Payment
+}
+
+func (e SdkEventPaymentWaitingFeeAcceptance) Destroy() {
+	FfiDestroyerTypePayment{}.Destroy(e.Details)
+}
+
 type SdkEventSynced struct {
 }
 
@@ -7104,6 +7558,10 @@ func (FfiConverterTypeSdkEvent) Read(reader io.Reader) SdkEvent {
 			FfiConverterTypePaymentINSTANCE.Read(reader),
 		}
 	case 7:
+		return SdkEventPaymentWaitingFeeAcceptance{
+			FfiConverterTypePaymentINSTANCE.Read(reader),
+		}
+	case 8:
 		return SdkEventSynced{}
 	default:
 		panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSdkEvent.Read()", id))
@@ -7130,8 +7588,11 @@ func (FfiConverterTypeSdkEvent) Write(writer io.Writer, value SdkEvent) {
 	case SdkEventPaymentWaitingConfirmation:
 		writeInt32(writer, 6)
 		FfiConverterTypePaymentINSTANCE.Write(writer, variant_value.Details)
-	case SdkEventSynced:
+	case SdkEventPaymentWaitingFeeAcceptance:
 		writeInt32(writer, 7)
+		FfiConverterTypePaymentINSTANCE.Write(writer, variant_value.Details)
+	case SdkEventSynced:
+		writeInt32(writer, 8)
 	default:
 		_ = variant_value
 		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSdkEvent.Write", value))
@@ -7691,6 +8152,10 @@ type Signer interface {
 	Slip77MasterBlindingKey() ([]uint8, *SignerError)
 
 	HmacSha256(msg []uint8, derivationPath string) ([]uint8, *SignerError)
+
+	EciesEncrypt(msg []uint8) ([]uint8, *SignerError)
+
+	EciesDecrypt(msg []uint8) ([]uint8, *SignerError)
 }
 
 // foreignCallbackCallbackInterfaceSigner cannot be callable be a compiled function at a same time
@@ -7736,6 +8201,16 @@ func breez_sdk_liquid_bindings_cgo_Signer(handle C.uint64_t, method C.int32_t, a
 		var result uniffiCallbackResult
 		args := unsafe.Slice((*byte)(argsPtr), argsLen)
 		result = foreignCallbackCallbackInterfaceSigner{}.InvokeHmacSha256(cb, args, outBuf)
+		return C.int32_t(result)
+	case 7:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeEciesEncrypt(cb, args, outBuf)
+		return C.int32_t(result)
+	case 8:
+		var result uniffiCallbackResult
+		args := unsafe.Slice((*byte)(argsPtr), argsLen)
+		result = foreignCallbackCallbackInterfaceSigner{}.InvokeEciesDecrypt(cb, args, outBuf)
 		return C.int32_t(result)
 
 	default:
@@ -7827,6 +8302,38 @@ func (foreignCallbackCallbackInterfaceSigner) InvokeSlip77MasterBlindingKey(call
 func (foreignCallbackCallbackInterfaceSigner) InvokeHmacSha256(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
 	reader := bytes.NewReader(args)
 	result, err := callback.HmacSha256(FfiConverterSequenceUint8INSTANCE.Read(reader), FfiConverterStringINSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeEciesEncrypt(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.EciesEncrypt(FfiConverterSequenceUint8INSTANCE.Read(reader))
+
+	if err != nil {
+		// The only way to bypass an unexpected error is to bypass pointer to an empty
+		// instance of the error
+		if err.err == nil {
+			return uniffiCallbackUnexpectedResultError
+		}
+		*outBuf = LowerIntoRustBuffer[*SignerError](FfiConverterTypeSignerErrorINSTANCE, err)
+		return uniffiCallbackResultError
+	}
+	*outBuf = LowerIntoRustBuffer[[]uint8](FfiConverterSequenceUint8INSTANCE, result)
+	return uniffiCallbackResultSuccess
+}
+func (foreignCallbackCallbackInterfaceSigner) InvokeEciesDecrypt(callback Signer, args []byte, outBuf *C.RustBuffer) uniffiCallbackResult {
+	reader := bytes.NewReader(args)
+	result, err := callback.EciesDecrypt(FfiConverterSequenceUint8INSTANCE.Read(reader))
 
 	if err != nil {
 		// The only way to bypass an unexpected error is to bypass pointer to an empty
@@ -7975,6 +8482,43 @@ func (_ FfiDestroyerOptionalInt64) Destroy(value *int64) {
 	}
 }
 
+type FfiConverterOptionalFloat64 struct{}
+
+var FfiConverterOptionalFloat64INSTANCE = FfiConverterOptionalFloat64{}
+
+func (c FfiConverterOptionalFloat64) Lift(rb RustBufferI) *float64 {
+	return LiftFromRustBuffer[*float64](c, rb)
+}
+
+func (_ FfiConverterOptionalFloat64) Read(reader io.Reader) *float64 {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterFloat64INSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalFloat64) Lower(value *float64) RustBuffer {
+	return LowerIntoRustBuffer[*float64](c, value)
+}
+
+func (_ FfiConverterOptionalFloat64) Write(writer io.Writer, value *float64) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterFloat64INSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalFloat64 struct{}
+
+func (_ FfiDestroyerOptionalFloat64) Destroy(value *float64) {
+	if value != nil {
+		FfiDestroyerFloat64{}.Destroy(*value)
+	}
+}
+
 type FfiConverterOptionalBool struct{}
 
 var FfiConverterOptionalBoolINSTANCE = FfiConverterOptionalBool{}
@@ -8046,6 +8590,43 @@ type FfiDestroyerOptionalString struct{}
 func (_ FfiDestroyerOptionalString) Destroy(value *string) {
 	if value != nil {
 		FfiDestroyerString{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalTypeLnUrlInfo struct{}
+
+var FfiConverterOptionalTypeLnUrlInfoINSTANCE = FfiConverterOptionalTypeLnUrlInfo{}
+
+func (c FfiConverterOptionalTypeLnUrlInfo) Lift(rb RustBufferI) *LnUrlInfo {
+	return LiftFromRustBuffer[*LnUrlInfo](c, rb)
+}
+
+func (_ FfiConverterOptionalTypeLnUrlInfo) Read(reader io.Reader) *LnUrlInfo {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterTypeLnUrlInfoINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalTypeLnUrlInfo) Lower(value *LnUrlInfo) RustBuffer {
+	return LowerIntoRustBuffer[*LnUrlInfo](c, value)
+}
+
+func (_ FfiConverterOptionalTypeLnUrlInfo) Write(writer io.Writer, value *LnUrlInfo) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterTypeLnUrlInfoINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalTypeLnUrlInfo struct{}
+
+func (_ FfiDestroyerOptionalTypeLnUrlInfo) Destroy(value *LnUrlInfo) {
+	if value != nil {
+		FfiDestroyerTypeLnUrlInfo{}.Destroy(*value)
 	}
 }
 
@@ -8308,6 +8889,80 @@ func (_ FfiDestroyerOptionalTypeSuccessActionProcessed) Destroy(value *SuccessAc
 	}
 }
 
+type FfiConverterOptionalSequenceTypeExternalInputParser struct{}
+
+var FfiConverterOptionalSequenceTypeExternalInputParserINSTANCE = FfiConverterOptionalSequenceTypeExternalInputParser{}
+
+func (c FfiConverterOptionalSequenceTypeExternalInputParser) Lift(rb RustBufferI) *[]ExternalInputParser {
+	return LiftFromRustBuffer[*[]ExternalInputParser](c, rb)
+}
+
+func (_ FfiConverterOptionalSequenceTypeExternalInputParser) Read(reader io.Reader) *[]ExternalInputParser {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterSequenceTypeExternalInputParserINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalSequenceTypeExternalInputParser) Lower(value *[]ExternalInputParser) RustBuffer {
+	return LowerIntoRustBuffer[*[]ExternalInputParser](c, value)
+}
+
+func (_ FfiConverterOptionalSequenceTypeExternalInputParser) Write(writer io.Writer, value *[]ExternalInputParser) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterSequenceTypeExternalInputParserINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalSequenceTypeExternalInputParser struct{}
+
+func (_ FfiDestroyerOptionalSequenceTypeExternalInputParser) Destroy(value *[]ExternalInputParser) {
+	if value != nil {
+		FfiDestroyerSequenceTypeExternalInputParser{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalSequenceTypePaymentState struct{}
+
+var FfiConverterOptionalSequenceTypePaymentStateINSTANCE = FfiConverterOptionalSequenceTypePaymentState{}
+
+func (c FfiConverterOptionalSequenceTypePaymentState) Lift(rb RustBufferI) *[]PaymentState {
+	return LiftFromRustBuffer[*[]PaymentState](c, rb)
+}
+
+func (_ FfiConverterOptionalSequenceTypePaymentState) Read(reader io.Reader) *[]PaymentState {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterSequenceTypePaymentStateINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalSequenceTypePaymentState) Lower(value *[]PaymentState) RustBuffer {
+	return LowerIntoRustBuffer[*[]PaymentState](c, value)
+}
+
+func (_ FfiConverterOptionalSequenceTypePaymentState) Write(writer io.Writer, value *[]PaymentState) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterSequenceTypePaymentStateINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalSequenceTypePaymentState struct{}
+
+func (_ FfiDestroyerOptionalSequenceTypePaymentState) Destroy(value *[]PaymentState) {
+	if value != nil {
+		FfiDestroyerSequenceTypePaymentState{}.Destroy(*value)
+	}
+}
+
 type FfiConverterOptionalSequenceTypePaymentType struct{}
 
 var FfiConverterOptionalSequenceTypePaymentTypeINSTANCE = FfiConverterOptionalSequenceTypePaymentType{}
@@ -8428,6 +9083,49 @@ type FfiDestroyerSequenceString struct{}
 func (FfiDestroyerSequenceString) Destroy(sequence []string) {
 	for _, value := range sequence {
 		FfiDestroyerString{}.Destroy(value)
+	}
+}
+
+type FfiConverterSequenceTypeExternalInputParser struct{}
+
+var FfiConverterSequenceTypeExternalInputParserINSTANCE = FfiConverterSequenceTypeExternalInputParser{}
+
+func (c FfiConverterSequenceTypeExternalInputParser) Lift(rb RustBufferI) []ExternalInputParser {
+	return LiftFromRustBuffer[[]ExternalInputParser](c, rb)
+}
+
+func (c FfiConverterSequenceTypeExternalInputParser) Read(reader io.Reader) []ExternalInputParser {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]ExternalInputParser, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypeExternalInputParserINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypeExternalInputParser) Lower(value []ExternalInputParser) RustBuffer {
+	return LowerIntoRustBuffer[[]ExternalInputParser](c, value)
+}
+
+func (c FfiConverterSequenceTypeExternalInputParser) Write(writer io.Writer, value []ExternalInputParser) {
+	if len(value) > math.MaxInt32 {
+		panic("[]ExternalInputParser is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypeExternalInputParserINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypeExternalInputParser struct{}
+
+func (FfiDestroyerSequenceTypeExternalInputParser) Destroy(sequence []ExternalInputParser) {
+	for _, value := range sequence {
+		FfiDestroyerTypeExternalInputParser{}.Destroy(value)
 	}
 }
 
@@ -8818,6 +9516,49 @@ func (FfiDestroyerSequenceTypeRouteHintHop) Destroy(sequence []RouteHintHop) {
 	}
 }
 
+type FfiConverterSequenceTypePaymentState struct{}
+
+var FfiConverterSequenceTypePaymentStateINSTANCE = FfiConverterSequenceTypePaymentState{}
+
+func (c FfiConverterSequenceTypePaymentState) Lift(rb RustBufferI) []PaymentState {
+	return LiftFromRustBuffer[[]PaymentState](c, rb)
+}
+
+func (c FfiConverterSequenceTypePaymentState) Read(reader io.Reader) []PaymentState {
+	length := readInt32(reader)
+	if length == 0 {
+		return nil
+	}
+	result := make([]PaymentState, 0, length)
+	for i := int32(0); i < length; i++ {
+		result = append(result, FfiConverterTypePaymentStateINSTANCE.Read(reader))
+	}
+	return result
+}
+
+func (c FfiConverterSequenceTypePaymentState) Lower(value []PaymentState) RustBuffer {
+	return LowerIntoRustBuffer[[]PaymentState](c, value)
+}
+
+func (c FfiConverterSequenceTypePaymentState) Write(writer io.Writer, value []PaymentState) {
+	if len(value) > math.MaxInt32 {
+		panic("[]PaymentState is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(value)))
+	for _, item := range value {
+		FfiConverterTypePaymentStateINSTANCE.Write(writer, item)
+	}
+}
+
+type FfiDestroyerSequenceTypePaymentState struct{}
+
+func (FfiDestroyerSequenceTypePaymentState) Destroy(sequence []PaymentState) {
+	for _, value := range sequence {
+		FfiDestroyerTypePaymentState{}.Destroy(value)
+	}
+}
+
 type FfiConverterSequenceTypePaymentType struct{}
 
 var FfiConverterSequenceTypePaymentTypeINSTANCE = FfiConverterSequenceTypePaymentType{}
@@ -8894,18 +9635,6 @@ func DefaultConfig(network LiquidNetwork, breezApiKey *string) (Config, error) {
 		return _uniffiDefaultValue, _uniffiErr
 	} else {
 		return FfiConverterTypeConfigINSTANCE.Lift(_uniffiRV), _uniffiErr
-	}
-}
-
-func Parse(input string) (InputType, error) {
-	_uniffiRV, _uniffiErr := rustCallWithError(FfiConverterTypePaymentError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
-		return C.uniffi_breez_sdk_liquid_bindings_fn_func_parse(FfiConverterStringINSTANCE.Lower(input), _uniffiStatus)
-	})
-	if _uniffiErr != nil {
-		var _uniffiDefaultValue InputType
-		return _uniffiDefaultValue, _uniffiErr
-	} else {
-		return FfiConverterTypeInputTypeINSTANCE.Lift(_uniffiRV), _uniffiErr
 	}
 }
 
