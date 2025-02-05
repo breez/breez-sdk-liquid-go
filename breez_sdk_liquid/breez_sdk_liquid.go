@@ -5200,12 +5200,20 @@ func (_ FfiDestroyerTypeBuyBitcoinProvider) Destroy(value BuyBitcoinProvider) {
 type GetPaymentRequest interface {
 	Destroy()
 }
-type GetPaymentRequestLightning struct {
+type GetPaymentRequestPaymentHash struct {
 	PaymentHash string
 }
 
-func (e GetPaymentRequestLightning) Destroy() {
+func (e GetPaymentRequestPaymentHash) Destroy() {
 	FfiDestroyerString{}.Destroy(e.PaymentHash)
+}
+
+type GetPaymentRequestSwapId struct {
+	SwapId string
+}
+
+func (e GetPaymentRequestSwapId) Destroy() {
+	FfiDestroyerString{}.Destroy(e.SwapId)
 }
 
 type FfiConverterTypeGetPaymentRequest struct{}
@@ -5223,7 +5231,11 @@ func (FfiConverterTypeGetPaymentRequest) Read(reader io.Reader) GetPaymentReques
 	id := readInt32(reader)
 	switch id {
 	case 1:
-		return GetPaymentRequestLightning{
+		return GetPaymentRequestPaymentHash{
+			FfiConverterStringINSTANCE.Read(reader),
+		}
+	case 2:
+		return GetPaymentRequestSwapId{
 			FfiConverterStringINSTANCE.Read(reader),
 		}
 	default:
@@ -5233,9 +5245,12 @@ func (FfiConverterTypeGetPaymentRequest) Read(reader io.Reader) GetPaymentReques
 
 func (FfiConverterTypeGetPaymentRequest) Write(writer io.Writer, value GetPaymentRequest) {
 	switch variant_value := value.(type) {
-	case GetPaymentRequestLightning:
+	case GetPaymentRequestPaymentHash:
 		writeInt32(writer, 1)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.PaymentHash)
+	case GetPaymentRequestSwapId:
+		writeInt32(writer, 2)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.SwapId)
 	default:
 		_ = variant_value
 		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeGetPaymentRequest.Write", value))
@@ -6742,6 +6757,7 @@ type PaymentDetailsLightning struct {
 	PaymentHash                 *string
 	DestinationPubkey           *string
 	LnurlInfo                   *LnUrlInfo
+	ClaimTxId                   *string
 	RefundTxId                  *string
 	RefundTxAmountSat           *uint64
 }
@@ -6756,6 +6772,7 @@ func (e PaymentDetailsLightning) Destroy() {
 	FfiDestroyerOptionalString{}.Destroy(e.PaymentHash)
 	FfiDestroyerOptionalString{}.Destroy(e.DestinationPubkey)
 	FfiDestroyerOptionalTypeLnUrlInfo{}.Destroy(e.LnurlInfo)
+	FfiDestroyerOptionalString{}.Destroy(e.ClaimTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
 }
@@ -6780,6 +6797,7 @@ type PaymentDetailsBitcoin struct {
 	AutoAcceptedFees             bool
 	BitcoinExpirationBlockheight *uint32
 	LiquidExpirationBlockheight  *uint32
+	ClaimTxId                    *string
 	RefundTxId                   *string
 	RefundTxAmountSat            *uint64
 }
@@ -6790,6 +6808,7 @@ func (e PaymentDetailsBitcoin) Destroy() {
 	FfiDestroyerBool{}.Destroy(e.AutoAcceptedFees)
 	FfiDestroyerOptionalUint32{}.Destroy(e.BitcoinExpirationBlockheight)
 	FfiDestroyerOptionalUint32{}.Destroy(e.LiquidExpirationBlockheight)
+	FfiDestroyerOptionalString{}.Destroy(e.ClaimTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
 }
@@ -6820,6 +6839,7 @@ func (FfiConverterTypePaymentDetails) Read(reader io.Reader) PaymentDetails {
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalTypeLnUrlInfoINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
 		}
 	case 2:
@@ -6836,6 +6856,7 @@ func (FfiConverterTypePaymentDetails) Read(reader io.Reader) PaymentDetails {
 			FfiConverterBoolINSTANCE.Read(reader),
 			FfiConverterOptionalUint32INSTANCE.Read(reader),
 			FfiConverterOptionalUint32INSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
 		}
@@ -6857,6 +6878,7 @@ func (FfiConverterTypePaymentDetails) Write(writer io.Writer, value PaymentDetai
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.PaymentHash)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.DestinationPubkey)
 		FfiConverterOptionalTypeLnUrlInfoINSTANCE.Write(writer, variant_value.LnurlInfo)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.ClaimTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
 	case PaymentDetailsLiquid:
@@ -6872,6 +6894,7 @@ func (FfiConverterTypePaymentDetails) Write(writer io.Writer, value PaymentDetai
 		FfiConverterBoolINSTANCE.Write(writer, variant_value.AutoAcceptedFees)
 		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.BitcoinExpirationBlockheight)
 		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.LiquidExpirationBlockheight)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.ClaimTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
 	default:
