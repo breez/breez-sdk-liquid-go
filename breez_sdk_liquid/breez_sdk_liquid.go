@@ -2270,13 +2270,15 @@ func (_ FfiDestroyerTypeConfig) Destroy(value Config) {
 }
 
 type ConnectRequest struct {
-	Config   Config
-	Mnemonic string
+	Config     Config
+	Mnemonic   string
+	Passphrase *string
 }
 
 func (r *ConnectRequest) Destroy() {
 	FfiDestroyerTypeConfig{}.Destroy(r.Config)
 	FfiDestroyerString{}.Destroy(r.Mnemonic)
+	FfiDestroyerOptionalString{}.Destroy(r.Passphrase)
 }
 
 type FfiConverterTypeConnectRequest struct{}
@@ -2291,6 +2293,7 @@ func (c FfiConverterTypeConnectRequest) Read(reader io.Reader) ConnectRequest {
 	return ConnectRequest{
 		FfiConverterTypeConfigINSTANCE.Read(reader),
 		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 	}
 }
 
@@ -2301,6 +2304,7 @@ func (c FfiConverterTypeConnectRequest) Lower(value ConnectRequest) RustBuffer {
 func (c FfiConverterTypeConnectRequest) Write(writer io.Writer, value ConnectRequest) {
 	FfiConverterTypeConfigINSTANCE.Write(writer, value.Config)
 	FfiConverterStringINSTANCE.Write(writer, value.Mnemonic)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Passphrase)
 }
 
 type FfiDestroyerTypeConnectRequest struct{}
