@@ -2184,7 +2184,6 @@ type Config struct {
 	WorkingDir                      string
 	Network                         LiquidNetwork
 	PaymentTimeoutSec               uint64
-	ZeroConfMinFeeRateMsat          uint32
 	SyncServiceUrl                  *string
 	BreezApiKey                     *string
 	CacheDir                        *string
@@ -2202,7 +2201,6 @@ func (r *Config) Destroy() {
 	FfiDestroyerString{}.Destroy(r.WorkingDir)
 	FfiDestroyerTypeLiquidNetwork{}.Destroy(r.Network)
 	FfiDestroyerUint64{}.Destroy(r.PaymentTimeoutSec)
-	FfiDestroyerUint32{}.Destroy(r.ZeroConfMinFeeRateMsat)
 	FfiDestroyerOptionalString{}.Destroy(r.SyncServiceUrl)
 	FfiDestroyerOptionalString{}.Destroy(r.BreezApiKey)
 	FfiDestroyerOptionalString{}.Destroy(r.CacheDir)
@@ -2229,7 +2227,6 @@ func (c FfiConverterTypeConfig) Read(reader io.Reader) Config {
 		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterTypeLiquidNetworkINSTANCE.Read(reader),
 		FfiConverterUint64INSTANCE.Read(reader),
-		FfiConverterUint32INSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
@@ -2252,7 +2249,6 @@ func (c FfiConverterTypeConfig) Write(writer io.Writer, value Config) {
 	FfiConverterStringINSTANCE.Write(writer, value.WorkingDir)
 	FfiConverterTypeLiquidNetworkINSTANCE.Write(writer, value.Network)
 	FfiConverterUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
-	FfiConverterUint32INSTANCE.Write(writer, value.ZeroConfMinFeeRateMsat)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.SyncServiceUrl)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.BreezApiKey)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.CacheDir)
@@ -3865,6 +3861,7 @@ func (_ FfiDestroyerTypePrepareBuyBitcoinResponse) Destroy(value PrepareBuyBitco
 type PrepareLnUrlPayRequest struct {
 	Data                     LnUrlPayRequestData
 	Amount                   PayAmount
+	Bip353Address            *string
 	Comment                  *string
 	ValidateSuccessActionUrl *bool
 }
@@ -3872,6 +3869,7 @@ type PrepareLnUrlPayRequest struct {
 func (r *PrepareLnUrlPayRequest) Destroy() {
 	FfiDestroyerTypeLnUrlPayRequestData{}.Destroy(r.Data)
 	FfiDestroyerTypePayAmount{}.Destroy(r.Amount)
+	FfiDestroyerOptionalString{}.Destroy(r.Bip353Address)
 	FfiDestroyerOptionalString{}.Destroy(r.Comment)
 	FfiDestroyerOptionalBool{}.Destroy(r.ValidateSuccessActionUrl)
 }
@@ -3889,6 +3887,7 @@ func (c FfiConverterTypePrepareLnUrlPayRequest) Read(reader io.Reader) PrepareLn
 		FfiConverterTypeLnUrlPayRequestDataINSTANCE.Read(reader),
 		FfiConverterTypePayAmountINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalBoolINSTANCE.Read(reader),
 	}
 }
@@ -3900,6 +3899,7 @@ func (c FfiConverterTypePrepareLnUrlPayRequest) Lower(value PrepareLnUrlPayReque
 func (c FfiConverterTypePrepareLnUrlPayRequest) Write(writer io.Writer, value PrepareLnUrlPayRequest) {
 	FfiConverterTypeLnUrlPayRequestDataINSTANCE.Write(writer, value.Data)
 	FfiConverterTypePayAmountINSTANCE.Write(writer, value.Amount)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Bip353Address)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Comment)
 	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ValidateSuccessActionUrl)
 }
@@ -5295,11 +5295,13 @@ func (e InputTypeBolt11) Destroy() {
 }
 
 type InputTypeBolt12Offer struct {
-	Offer LnOffer
+	Offer         LnOffer
+	Bip353Address *string
 }
 
 func (e InputTypeBolt12Offer) Destroy() {
 	FfiDestroyerTypeLnOffer{}.Destroy(e.Offer)
+	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
 }
 
 type InputTypeNodeId struct {
@@ -5319,11 +5321,13 @@ func (e InputTypeUrl) Destroy() {
 }
 
 type InputTypeLnUrlPay struct {
-	Data LnUrlPayRequestData
+	Data          LnUrlPayRequestData
+	Bip353Address *string
 }
 
 func (e InputTypeLnUrlPay) Destroy() {
 	FfiDestroyerTypeLnUrlPayRequestData{}.Destroy(e.Data)
+	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
 }
 
 type InputTypeLnUrlWithdraw struct {
@@ -5379,6 +5383,7 @@ func (FfiConverterTypeInputType) Read(reader io.Reader) InputType {
 	case 4:
 		return InputTypeBolt12Offer{
 			FfiConverterTypeLNOfferINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	case 5:
 		return InputTypeNodeId{
@@ -5391,6 +5396,7 @@ func (FfiConverterTypeInputType) Read(reader io.Reader) InputType {
 	case 7:
 		return InputTypeLnUrlPay{
 			FfiConverterTypeLnUrlPayRequestDataINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	case 8:
 		return InputTypeLnUrlWithdraw{
@@ -5423,6 +5429,7 @@ func (FfiConverterTypeInputType) Write(writer io.Writer, value InputType) {
 	case InputTypeBolt12Offer:
 		writeInt32(writer, 4)
 		FfiConverterTypeLNOfferINSTANCE.Write(writer, variant_value.Offer)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
 	case InputTypeNodeId:
 		writeInt32(writer, 5)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.NodeId)
@@ -5432,6 +5439,7 @@ func (FfiConverterTypeInputType) Write(writer io.Writer, value InputType) {
 	case InputTypeLnUrlPay:
 		writeInt32(writer, 7)
 		FfiConverterTypeLnUrlPayRequestDataINSTANCE.Write(writer, variant_value.Data)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
 	case InputTypeLnUrlWithdraw:
 		writeInt32(writer, 8)
 		FfiConverterTypeLnUrlWithdrawRequestDataINSTANCE.Write(writer, variant_value.Data)
@@ -5458,6 +5466,7 @@ type LiquidNetwork uint
 const (
 	LiquidNetworkMainnet LiquidNetwork = 1
 	LiquidNetworkTestnet LiquidNetwork = 2
+	LiquidNetworkRegtest LiquidNetwork = 3
 )
 
 type FfiConverterTypeLiquidNetwork struct{}
@@ -6761,6 +6770,7 @@ type PaymentDetailsLightning struct {
 	PaymentHash                 *string
 	DestinationPubkey           *string
 	LnurlInfo                   *LnUrlInfo
+	Bip353Address               *string
 	ClaimTxId                   *string
 	RefundTxId                  *string
 	RefundTxAmountSat           *uint64
@@ -6776,6 +6786,7 @@ func (e PaymentDetailsLightning) Destroy() {
 	FfiDestroyerOptionalString{}.Destroy(e.PaymentHash)
 	FfiDestroyerOptionalString{}.Destroy(e.DestinationPubkey)
 	FfiDestroyerOptionalTypeLnUrlInfo{}.Destroy(e.LnurlInfo)
+	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
 	FfiDestroyerOptionalString{}.Destroy(e.ClaimTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
@@ -6844,6 +6855,7 @@ func (FfiConverterTypePaymentDetails) Read(reader io.Reader) PaymentDetails {
 			FfiConverterOptionalTypeLnUrlInfoINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
 		}
 	case 2:
@@ -6882,6 +6894,7 @@ func (FfiConverterTypePaymentDetails) Write(writer io.Writer, value PaymentDetai
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.PaymentHash)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.DestinationPubkey)
 		FfiConverterOptionalTypeLnUrlInfoINSTANCE.Write(writer, variant_value.LnurlInfo)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.ClaimTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
@@ -7955,21 +7968,25 @@ func (e SendDestinationLiquidAddress) Destroy() {
 }
 
 type SendDestinationBolt11 struct {
-	Invoice LnInvoice
+	Invoice       LnInvoice
+	Bip353Address *string
 }
 
 func (e SendDestinationBolt11) Destroy() {
 	FfiDestroyerTypeLnInvoice{}.Destroy(e.Invoice)
+	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
 }
 
 type SendDestinationBolt12 struct {
 	Offer             LnOffer
 	ReceiverAmountSat uint64
+	Bip353Address     *string
 }
 
 func (e SendDestinationBolt12) Destroy() {
 	FfiDestroyerTypeLnOffer{}.Destroy(e.Offer)
 	FfiDestroyerUint64{}.Destroy(e.ReceiverAmountSat)
+	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
 }
 
 type FfiConverterTypeSendDestination struct{}
@@ -7993,11 +8010,13 @@ func (FfiConverterTypeSendDestination) Read(reader io.Reader) SendDestination {
 	case 2:
 		return SendDestinationBolt11{
 			FfiConverterTypeLNInvoiceINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	case 3:
 		return SendDestinationBolt12{
 			FfiConverterTypeLNOfferINSTANCE.Read(reader),
 			FfiConverterUint64INSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	default:
 		panic(fmt.Sprintf("invalid enum value %v in FfiConverterTypeSendDestination.Read()", id))
@@ -8012,10 +8031,12 @@ func (FfiConverterTypeSendDestination) Write(writer io.Writer, value SendDestina
 	case SendDestinationBolt11:
 		writeInt32(writer, 2)
 		FfiConverterTypeLNInvoiceINSTANCE.Write(writer, variant_value.Invoice)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
 	case SendDestinationBolt12:
 		writeInt32(writer, 3)
 		FfiConverterTypeLNOfferINSTANCE.Write(writer, variant_value.Offer)
 		FfiConverterUint64INSTANCE.Write(writer, variant_value.ReceiverAmountSat)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
 	default:
 		_ = variant_value
 		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterTypeSendDestination.Write", value))
