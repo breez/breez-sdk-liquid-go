@@ -2267,14 +2267,16 @@ func (_ FfiDestroyerTypeConfig) Destroy(value Config) {
 
 type ConnectRequest struct {
 	Config     Config
-	Mnemonic   string
+	Mnemonic   *string
 	Passphrase *string
+	Seed       *[]uint8
 }
 
 func (r *ConnectRequest) Destroy() {
 	FfiDestroyerTypeConfig{}.Destroy(r.Config)
-	FfiDestroyerString{}.Destroy(r.Mnemonic)
+	FfiDestroyerOptionalString{}.Destroy(r.Mnemonic)
 	FfiDestroyerOptionalString{}.Destroy(r.Passphrase)
+	FfiDestroyerOptionalSequenceUint8{}.Destroy(r.Seed)
 }
 
 type FfiConverterTypeConnectRequest struct{}
@@ -2288,8 +2290,9 @@ func (c FfiConverterTypeConnectRequest) Lift(rb RustBufferI) ConnectRequest {
 func (c FfiConverterTypeConnectRequest) Read(reader io.Reader) ConnectRequest {
 	return ConnectRequest{
 		FfiConverterTypeConfigINSTANCE.Read(reader),
-		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalSequenceUint8INSTANCE.Read(reader),
 	}
 }
 
@@ -2299,8 +2302,9 @@ func (c FfiConverterTypeConnectRequest) Lower(value ConnectRequest) RustBuffer {
 
 func (c FfiConverterTypeConnectRequest) Write(writer io.Writer, value ConnectRequest) {
 	FfiConverterTypeConfigINSTANCE.Write(writer, value.Config)
-	FfiConverterStringINSTANCE.Write(writer, value.Mnemonic)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Mnemonic)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Passphrase)
+	FfiConverterOptionalSequenceUint8INSTANCE.Write(writer, value.Seed)
 }
 
 type FfiDestroyerTypeConnectRequest struct{}
@@ -9319,6 +9323,43 @@ type FfiDestroyerOptionalTypeSuccessActionProcessed struct{}
 func (_ FfiDestroyerOptionalTypeSuccessActionProcessed) Destroy(value *SuccessActionProcessed) {
 	if value != nil {
 		FfiDestroyerTypeSuccessActionProcessed{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalSequenceUint8 struct{}
+
+var FfiConverterOptionalSequenceUint8INSTANCE = FfiConverterOptionalSequenceUint8{}
+
+func (c FfiConverterOptionalSequenceUint8) Lift(rb RustBufferI) *[]uint8 {
+	return LiftFromRustBuffer[*[]uint8](c, rb)
+}
+
+func (_ FfiConverterOptionalSequenceUint8) Read(reader io.Reader) *[]uint8 {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterSequenceUint8INSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalSequenceUint8) Lower(value *[]uint8) RustBuffer {
+	return LowerIntoRustBuffer[*[]uint8](c, value)
+}
+
+func (_ FfiConverterOptionalSequenceUint8) Write(writer io.Writer, value *[]uint8) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterSequenceUint8INSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalSequenceUint8 struct{}
+
+func (_ FfiDestroyerOptionalSequenceUint8) Destroy(value *[]uint8) {
+	if value != nil {
+		FfiDestroyerSequenceUint8{}.Destroy(*value)
 	}
 }
 
