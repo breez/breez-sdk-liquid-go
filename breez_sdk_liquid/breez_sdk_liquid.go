@@ -6956,7 +6956,6 @@ var ErrPaymentErrorInvalidDescription = fmt.Errorf("PaymentErrorInvalidDescripti
 var ErrPaymentErrorInvalidInvoice = fmt.Errorf("PaymentErrorInvalidInvoice")
 var ErrPaymentErrorInvalidNetwork = fmt.Errorf("PaymentErrorInvalidNetwork")
 var ErrPaymentErrorInvalidPreimage = fmt.Errorf("PaymentErrorInvalidPreimage")
-var ErrPaymentErrorLwkError = fmt.Errorf("PaymentErrorLwkError")
 var ErrPaymentErrorPairsNotFound = fmt.Errorf("PaymentErrorPairsNotFound")
 var ErrPaymentErrorPaymentTimeout = fmt.Errorf("PaymentErrorPaymentTimeout")
 var ErrPaymentErrorPersistError = fmt.Errorf("PaymentErrorPersistError")
@@ -7201,24 +7200,6 @@ func (self PaymentErrorInvalidPreimage) Is(target error) bool {
 	return target == ErrPaymentErrorInvalidPreimage
 }
 
-type PaymentErrorLwkError struct {
-	message string
-}
-
-func NewPaymentErrorLwkError() *PaymentError {
-	return &PaymentError{
-		err: &PaymentErrorLwkError{},
-	}
-}
-
-func (err PaymentErrorLwkError) Error() string {
-	return fmt.Sprintf("LwkError: %s", err.message)
-}
-
-func (self PaymentErrorLwkError) Is(target error) bool {
-	return target == ErrPaymentErrorLwkError
-}
-
 type PaymentErrorPairsNotFound struct {
 	message string
 }
@@ -7407,22 +7388,20 @@ func (c FfiConverterTypePaymentError) Read(reader io.Reader) error {
 	case 13:
 		return &PaymentError{&PaymentErrorInvalidPreimage{message}}
 	case 14:
-		return &PaymentError{&PaymentErrorLwkError{message}}
-	case 15:
 		return &PaymentError{&PaymentErrorPairsNotFound{message}}
-	case 16:
+	case 15:
 		return &PaymentError{&PaymentErrorPaymentTimeout{message}}
-	case 17:
+	case 16:
 		return &PaymentError{&PaymentErrorPersistError{message}}
-	case 18:
+	case 17:
 		return &PaymentError{&PaymentErrorReceiveError{message}}
-	case 19:
+	case 18:
 		return &PaymentError{&PaymentErrorRefunded{message}}
-	case 20:
+	case 19:
 		return &PaymentError{&PaymentErrorSelfTransferNotSupported{message}}
-	case 21:
+	case 20:
 		return &PaymentError{&PaymentErrorSendError{message}}
-	case 22:
+	case 21:
 		return &PaymentError{&PaymentErrorSignerError{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterTypePaymentError.Read()", errorID))
@@ -7458,24 +7437,22 @@ func (c FfiConverterTypePaymentError) Write(writer io.Writer, value *PaymentErro
 		writeInt32(writer, 12)
 	case *PaymentErrorInvalidPreimage:
 		writeInt32(writer, 13)
-	case *PaymentErrorLwkError:
-		writeInt32(writer, 14)
 	case *PaymentErrorPairsNotFound:
-		writeInt32(writer, 15)
+		writeInt32(writer, 14)
 	case *PaymentErrorPaymentTimeout:
-		writeInt32(writer, 16)
+		writeInt32(writer, 15)
 	case *PaymentErrorPersistError:
-		writeInt32(writer, 17)
+		writeInt32(writer, 16)
 	case *PaymentErrorReceiveError:
-		writeInt32(writer, 18)
+		writeInt32(writer, 17)
 	case *PaymentErrorRefunded:
-		writeInt32(writer, 19)
+		writeInt32(writer, 18)
 	case *PaymentErrorSelfTransferNotSupported:
-		writeInt32(writer, 20)
+		writeInt32(writer, 19)
 	case *PaymentErrorSendError:
-		writeInt32(writer, 21)
+		writeInt32(writer, 20)
 	case *PaymentErrorSignerError:
-		writeInt32(writer, 22)
+		writeInt32(writer, 21)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterTypePaymentError.Write", value))
