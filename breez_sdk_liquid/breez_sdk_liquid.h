@@ -103,6 +103,12 @@ RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_check_mes
 	RustCallStatus* out_status
 );
 
+RustBuffer uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_create_bolt12_invoice(
+	void* ptr,
+	RustBuffer req,
+	RustCallStatus* out_status
+);
+
 void uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_disconnect(
 	void* ptr,
 	RustCallStatus* out_status
@@ -662,6 +668,10 @@ uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_buy_b
 );
 
 uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_check_message(
+	RustCallStatus* out_status
+);
+
+uint16_t uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_create_bolt12_invoice(
 	RustCallStatus* out_status
 );
 
