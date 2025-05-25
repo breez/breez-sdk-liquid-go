@@ -2329,7 +2329,6 @@ type Config struct {
 	PaymentTimeoutSec               uint64
 	SyncServiceUrl                  *string
 	BreezApiKey                     *string
-	CacheDir                        *string
 	ZeroConfMaxAmountSat            *uint64
 	UseDefaultExternalInputParsers  bool
 	ExternalInputParsers            *[]ExternalInputParser
@@ -2346,7 +2345,6 @@ func (r *Config) Destroy() {
 	FfiDestroyerUint64{}.Destroy(r.PaymentTimeoutSec)
 	FfiDestroyerOptionalString{}.Destroy(r.SyncServiceUrl)
 	FfiDestroyerOptionalString{}.Destroy(r.BreezApiKey)
-	FfiDestroyerOptionalString{}.Destroy(r.CacheDir)
 	FfiDestroyerOptionalUint64{}.Destroy(r.ZeroConfMaxAmountSat)
 	FfiDestroyerBool{}.Destroy(r.UseDefaultExternalInputParsers)
 	FfiDestroyerOptionalSequenceExternalInputParser{}.Destroy(r.ExternalInputParsers)
@@ -2372,7 +2370,6 @@ func (c FfiConverterConfig) Read(reader io.Reader) Config {
 		FfiConverterUint64INSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
-		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterBoolINSTANCE.Read(reader),
 		FfiConverterOptionalSequenceExternalInputParserINSTANCE.Read(reader),
@@ -2394,7 +2391,6 @@ func (c FfiConverterConfig) Write(writer io.Writer, value Config) {
 	FfiConverterUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.SyncServiceUrl)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.BreezApiKey)
-	FfiConverterOptionalStringINSTANCE.Write(writer, value.CacheDir)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ZeroConfMaxAmountSat)
 	FfiConverterBoolINSTANCE.Write(writer, value.UseDefaultExternalInputParsers)
 	FfiConverterOptionalSequenceExternalInputParserINSTANCE.Write(writer, value.ExternalInputParsers)
@@ -4461,11 +4457,13 @@ func (_ FfiDestroyerPrepareRefundResponse) Destroy(value PrepareRefundResponse) 
 type PrepareSendRequest struct {
 	Destination string
 	Amount      *PayAmount
+	Comment     *string
 }
 
 func (r *PrepareSendRequest) Destroy() {
 	FfiDestroyerString{}.Destroy(r.Destination)
 	FfiDestroyerOptionalPayAmount{}.Destroy(r.Amount)
+	FfiDestroyerOptionalString{}.Destroy(r.Comment)
 }
 
 type FfiConverterPrepareSendRequest struct{}
@@ -4480,6 +4478,7 @@ func (c FfiConverterPrepareSendRequest) Read(reader io.Reader) PrepareSendReques
 	return PrepareSendRequest{
 		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterOptionalPayAmountINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
 	}
 }
 
@@ -4490,6 +4489,7 @@ func (c FfiConverterPrepareSendRequest) Lower(value PrepareSendRequest) C.RustBu
 func (c FfiConverterPrepareSendRequest) Write(writer io.Writer, value PrepareSendRequest) {
 	FfiConverterStringINSTANCE.Write(writer, value.Destination)
 	FfiConverterOptionalPayAmountINSTANCE.Write(writer, value.Amount)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Comment)
 }
 
 type FfiDestroyerPrepareSendRequest struct{}
@@ -7287,6 +7287,7 @@ func (e PaymentDetailsLiquid) Destroy() {
 
 type PaymentDetailsBitcoin struct {
 	SwapId                       string
+	BitcoinAddress               string
 	Description                  string
 	AutoAcceptedFees             bool
 	BitcoinExpirationBlockheight *uint32
@@ -7299,6 +7300,7 @@ type PaymentDetailsBitcoin struct {
 
 func (e PaymentDetailsBitcoin) Destroy() {
 	FfiDestroyerString{}.Destroy(e.SwapId)
+	FfiDestroyerString{}.Destroy(e.BitcoinAddress)
 	FfiDestroyerString{}.Destroy(e.Description)
 	FfiDestroyerBool{}.Destroy(e.AutoAcceptedFees)
 	FfiDestroyerOptionalUint32{}.Destroy(e.BitcoinExpirationBlockheight)
@@ -7352,6 +7354,7 @@ func (FfiConverterPaymentDetails) Read(reader io.Reader) PaymentDetails {
 		return PaymentDetailsBitcoin{
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterStringINSTANCE.Read(reader),
+			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterBoolINSTANCE.Read(reader),
 			FfiConverterOptionalUint32INSTANCE.Read(reader),
 			FfiConverterOptionalUint32INSTANCE.Read(reader),
@@ -7393,6 +7396,7 @@ func (FfiConverterPaymentDetails) Write(writer io.Writer, value PaymentDetails) 
 	case PaymentDetailsBitcoin:
 		writeInt32(writer, 3)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.SwapId)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.BitcoinAddress)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.Description)
 		FfiConverterBoolINSTANCE.Write(writer, variant_value.AutoAcceptedFees)
 		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.BitcoinExpirationBlockheight)
@@ -8579,12 +8583,14 @@ type SendDestinationBolt12 struct {
 	Offer             LnOffer
 	ReceiverAmountSat uint64
 	Bip353Address     *string
+	PayerNote         *string
 }
 
 func (e SendDestinationBolt12) Destroy() {
 	FfiDestroyerLnOffer{}.Destroy(e.Offer)
 	FfiDestroyerUint64{}.Destroy(e.ReceiverAmountSat)
 	FfiDestroyerOptionalString{}.Destroy(e.Bip353Address)
+	FfiDestroyerOptionalString{}.Destroy(e.PayerNote)
 }
 
 type FfiConverterSendDestination struct{}
@@ -8616,6 +8622,7 @@ func (FfiConverterSendDestination) Read(reader io.Reader) SendDestination {
 			FfiConverterLnOfferINSTANCE.Read(reader),
 			FfiConverterUint64INSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	default:
 		panic(fmt.Sprintf("invalid enum value %v in FfiConverterSendDestination.Read()", id))
@@ -8637,6 +8644,7 @@ func (FfiConverterSendDestination) Write(writer io.Writer, value SendDestination
 		FfiConverterLnOfferINSTANCE.Write(writer, variant_value.Offer)
 		FfiConverterUint64INSTANCE.Write(writer, variant_value.ReceiverAmountSat)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Bip353Address)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.PayerNote)
 	default:
 		_ = variant_value
 		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterSendDestination.Write", value))
