@@ -2331,6 +2331,7 @@ type Config struct {
 	BreezApiKey                    *string
 	ZeroConfMaxAmountSat           *uint64
 	UseDefaultExternalInputParsers bool
+	UseMagicRoutingHints           bool
 	ExternalInputParsers           *[]ExternalInputParser
 	OnchainFeeRateLeewaySat        *uint64
 	AssetMetadata                  *[]AssetMetadata
@@ -2347,6 +2348,7 @@ func (r *Config) Destroy() {
 	FfiDestroyerOptionalString{}.Destroy(r.BreezApiKey)
 	FfiDestroyerOptionalUint64{}.Destroy(r.ZeroConfMaxAmountSat)
 	FfiDestroyerBool{}.Destroy(r.UseDefaultExternalInputParsers)
+	FfiDestroyerBool{}.Destroy(r.UseMagicRoutingHints)
 	FfiDestroyerOptionalSequenceExternalInputParser{}.Destroy(r.ExternalInputParsers)
 	FfiDestroyerOptionalUint64{}.Destroy(r.OnchainFeeRateLeewaySat)
 	FfiDestroyerOptionalSequenceAssetMetadata{}.Destroy(r.AssetMetadata)
@@ -2372,6 +2374,7 @@ func (c FfiConverterConfig) Read(reader io.Reader) Config {
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterBoolINSTANCE.Read(reader),
+		FfiConverterBoolINSTANCE.Read(reader),
 		FfiConverterOptionalSequenceExternalInputParserINSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterOptionalSequenceAssetMetadataINSTANCE.Read(reader),
@@ -2393,6 +2396,7 @@ func (c FfiConverterConfig) Write(writer io.Writer, value Config) {
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.BreezApiKey)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ZeroConfMaxAmountSat)
 	FfiConverterBoolINSTANCE.Write(writer, value.UseDefaultExternalInputParsers)
+	FfiConverterBoolINSTANCE.Write(writer, value.UseMagicRoutingHints)
 	FfiConverterOptionalSequenceExternalInputParserINSTANCE.Write(writer, value.ExternalInputParsers)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.OnchainFeeRateLeewaySat)
 	FfiConverterOptionalSequenceAssetMetadataINSTANCE.Write(writer, value.AssetMetadata)
@@ -4499,6 +4503,7 @@ type PrepareSendResponse struct {
 	Amount             *PayAmount
 	FeesSat            *uint64
 	EstimatedAssetFees *float64
+	ExchangeAmountSat  *uint64
 }
 
 func (r *PrepareSendResponse) Destroy() {
@@ -4506,6 +4511,7 @@ func (r *PrepareSendResponse) Destroy() {
 	FfiDestroyerOptionalPayAmount{}.Destroy(r.Amount)
 	FfiDestroyerOptionalUint64{}.Destroy(r.FeesSat)
 	FfiDestroyerOptionalFloat64{}.Destroy(r.EstimatedAssetFees)
+	FfiDestroyerOptionalUint64{}.Destroy(r.ExchangeAmountSat)
 }
 
 type FfiConverterPrepareSendResponse struct{}
@@ -4522,6 +4528,7 @@ func (c FfiConverterPrepareSendResponse) Read(reader io.Reader) PrepareSendRespo
 		FfiConverterOptionalPayAmountINSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterOptionalFloat64INSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
 	}
 }
 
@@ -4534,6 +4541,7 @@ func (c FfiConverterPrepareSendResponse) Write(writer io.Writer, value PrepareSe
 	FfiConverterOptionalPayAmountINSTANCE.Write(writer, value.Amount)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.FeesSat)
 	FfiConverterOptionalFloat64INSTANCE.Write(writer, value.EstimatedAssetFees)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ExchangeAmountSat)
 }
 
 type FfiDestroyerPrepareSendResponse struct{}
@@ -7167,12 +7175,14 @@ type PayAmountAsset struct {
 	AssetId           string
 	ReceiverAmount    float64
 	EstimateAssetFees *bool
+	PayWithBitcoin    *bool
 }
 
 func (e PayAmountAsset) Destroy() {
 	FfiDestroyerString{}.Destroy(e.AssetId)
 	FfiDestroyerFloat64{}.Destroy(e.ReceiverAmount)
 	FfiDestroyerOptionalBool{}.Destroy(e.EstimateAssetFees)
+	FfiDestroyerOptionalBool{}.Destroy(e.PayWithBitcoin)
 }
 
 type PayAmountDrain struct {
@@ -7204,6 +7214,7 @@ func (FfiConverterPayAmount) Read(reader io.Reader) PayAmount {
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterFloat64INSTANCE.Read(reader),
 			FfiConverterOptionalBoolINSTANCE.Read(reader),
+			FfiConverterOptionalBoolINSTANCE.Read(reader),
 		}
 	case 3:
 		return PayAmountDrain{}
@@ -7222,6 +7233,7 @@ func (FfiConverterPayAmount) Write(writer io.Writer, value PayAmount) {
 		FfiConverterStringINSTANCE.Write(writer, variant_value.AssetId)
 		FfiConverterFloat64INSTANCE.Write(writer, variant_value.ReceiverAmount)
 		FfiConverterOptionalBoolINSTANCE.Write(writer, variant_value.EstimateAssetFees)
+		FfiConverterOptionalBoolINSTANCE.Write(writer, variant_value.PayWithBitcoin)
 	case PayAmountDrain:
 		writeInt32(writer, 3)
 	default:
