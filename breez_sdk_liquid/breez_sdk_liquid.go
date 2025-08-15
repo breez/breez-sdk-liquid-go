@@ -7172,17 +7172,17 @@ func (e PayAmountBitcoin) Destroy() {
 }
 
 type PayAmountAsset struct {
-	AssetId           string
+	ToAsset           string
 	ReceiverAmount    float64
 	EstimateAssetFees *bool
-	PayWithBitcoin    *bool
+	FromAsset         *string
 }
 
 func (e PayAmountAsset) Destroy() {
-	FfiDestroyerString{}.Destroy(e.AssetId)
+	FfiDestroyerString{}.Destroy(e.ToAsset)
 	FfiDestroyerFloat64{}.Destroy(e.ReceiverAmount)
 	FfiDestroyerOptionalBool{}.Destroy(e.EstimateAssetFees)
-	FfiDestroyerOptionalBool{}.Destroy(e.PayWithBitcoin)
+	FfiDestroyerOptionalString{}.Destroy(e.FromAsset)
 }
 
 type PayAmountDrain struct {
@@ -7214,7 +7214,7 @@ func (FfiConverterPayAmount) Read(reader io.Reader) PayAmount {
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterFloat64INSTANCE.Read(reader),
 			FfiConverterOptionalBoolINSTANCE.Read(reader),
-			FfiConverterOptionalBoolINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
 		}
 	case 3:
 		return PayAmountDrain{}
@@ -7230,10 +7230,10 @@ func (FfiConverterPayAmount) Write(writer io.Writer, value PayAmount) {
 		FfiConverterUint64INSTANCE.Write(writer, variant_value.ReceiverAmountSat)
 	case PayAmountAsset:
 		writeInt32(writer, 2)
-		FfiConverterStringINSTANCE.Write(writer, variant_value.AssetId)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.ToAsset)
 		FfiConverterFloat64INSTANCE.Write(writer, variant_value.ReceiverAmount)
 		FfiConverterOptionalBoolINSTANCE.Write(writer, variant_value.EstimateAssetFees)
-		FfiConverterOptionalBoolINSTANCE.Write(writer, variant_value.PayWithBitcoin)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.FromAsset)
 	case PayAmountDrain:
 		writeInt32(writer, 3)
 	default:
