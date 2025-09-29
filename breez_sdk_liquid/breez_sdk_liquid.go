@@ -4639,11 +4639,15 @@ func (_ FfiDestroyerReceivePaymentRequest) Destroy(value ReceivePaymentRequest) 
 }
 
 type ReceivePaymentResponse struct {
-	Destination string
+	Destination                  string
+	LiquidExpirationBlockheight  *uint32
+	BitcoinExpirationBlockheight *uint32
 }
 
 func (r *ReceivePaymentResponse) Destroy() {
 	FfiDestroyerString{}.Destroy(r.Destination)
+	FfiDestroyerOptionalUint32{}.Destroy(r.LiquidExpirationBlockheight)
+	FfiDestroyerOptionalUint32{}.Destroy(r.BitcoinExpirationBlockheight)
 }
 
 type FfiConverterReceivePaymentResponse struct{}
@@ -4657,6 +4661,8 @@ func (c FfiConverterReceivePaymentResponse) Lift(rb RustBufferI) ReceivePaymentR
 func (c FfiConverterReceivePaymentResponse) Read(reader io.Reader) ReceivePaymentResponse {
 	return ReceivePaymentResponse{
 		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
 	}
 }
 
@@ -4666,6 +4672,8 @@ func (c FfiConverterReceivePaymentResponse) Lower(value ReceivePaymentResponse) 
 
 func (c FfiConverterReceivePaymentResponse) Write(writer io.Writer, value ReceivePaymentResponse) {
 	FfiConverterStringINSTANCE.Write(writer, value.Destination)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.LiquidExpirationBlockheight)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.BitcoinExpirationBlockheight)
 }
 
 type FfiDestroyerReceivePaymentResponse struct{}
@@ -7310,8 +7318,8 @@ type PaymentDetailsBitcoin struct {
 	BitcoinAddress               string
 	Description                  string
 	AutoAcceptedFees             bool
-	BitcoinExpirationBlockheight *uint32
-	LiquidExpirationBlockheight  *uint32
+	BitcoinExpirationBlockheight uint32
+	LiquidExpirationBlockheight  uint32
 	LockupTxId                   *string
 	ClaimTxId                    *string
 	RefundTxId                   *string
@@ -7323,8 +7331,8 @@ func (e PaymentDetailsBitcoin) Destroy() {
 	FfiDestroyerString{}.Destroy(e.BitcoinAddress)
 	FfiDestroyerString{}.Destroy(e.Description)
 	FfiDestroyerBool{}.Destroy(e.AutoAcceptedFees)
-	FfiDestroyerOptionalUint32{}.Destroy(e.BitcoinExpirationBlockheight)
-	FfiDestroyerOptionalUint32{}.Destroy(e.LiquidExpirationBlockheight)
+	FfiDestroyerUint32{}.Destroy(e.BitcoinExpirationBlockheight)
+	FfiDestroyerUint32{}.Destroy(e.LiquidExpirationBlockheight)
 	FfiDestroyerOptionalString{}.Destroy(e.LockupTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.ClaimTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
@@ -7378,8 +7386,8 @@ func (FfiConverterPaymentDetails) Read(reader io.Reader) PaymentDetails {
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterStringINSTANCE.Read(reader),
 			FfiConverterBoolINSTANCE.Read(reader),
-			FfiConverterOptionalUint32INSTANCE.Read(reader),
-			FfiConverterOptionalUint32INSTANCE.Read(reader),
+			FfiConverterUint32INSTANCE.Read(reader),
+			FfiConverterUint32INSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
@@ -7423,8 +7431,8 @@ func (FfiConverterPaymentDetails) Write(writer io.Writer, value PaymentDetails) 
 		FfiConverterStringINSTANCE.Write(writer, variant_value.BitcoinAddress)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.Description)
 		FfiConverterBoolINSTANCE.Write(writer, variant_value.AutoAcceptedFees)
-		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.BitcoinExpirationBlockheight)
-		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.LiquidExpirationBlockheight)
+		FfiConverterUint32INSTANCE.Write(writer, variant_value.BitcoinExpirationBlockheight)
+		FfiConverterUint32INSTANCE.Write(writer, variant_value.LiquidExpirationBlockheight)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.LockupTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.ClaimTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
