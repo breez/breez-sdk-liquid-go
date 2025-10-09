@@ -8480,6 +8480,14 @@ type SdkEventSynced struct {
 func (e SdkEventSynced) Destroy() {
 }
 
+type SdkEventSyncFailed struct {
+	Error string
+}
+
+func (e SdkEventSyncFailed) Destroy() {
+	FfiDestroyerString{}.Destroy(e.Error)
+}
+
 type SdkEventDataSynced struct {
 	DidPullNewRecords bool
 }
@@ -8537,6 +8545,10 @@ func (FfiConverterSdkEvent) Read(reader io.Reader) SdkEvent {
 	case 9:
 		return SdkEventSynced{}
 	case 10:
+		return SdkEventSyncFailed{
+			FfiConverterStringINSTANCE.Read(reader),
+		}
+	case 11:
 		return SdkEventDataSynced{
 			FfiConverterBoolINSTANCE.Read(reader),
 		}
@@ -8573,8 +8585,11 @@ func (FfiConverterSdkEvent) Write(writer io.Writer, value SdkEvent) {
 		FfiConverterPaymentINSTANCE.Write(writer, variant_value.Details)
 	case SdkEventSynced:
 		writeInt32(writer, 9)
-	case SdkEventDataSynced:
+	case SdkEventSyncFailed:
 		writeInt32(writer, 10)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.Error)
+	case SdkEventDataSynced:
+		writeInt32(writer, 11)
 		FfiConverterBoolINSTANCE.Write(writer, variant_value.DidPullNewRecords)
 	default:
 		_ = variant_value
