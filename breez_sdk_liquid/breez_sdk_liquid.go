@@ -2336,6 +2336,8 @@ type Config struct {
 	OnchainFeeRateLeewaySat        *uint64
 	AssetMetadata                  *[]AssetMetadata
 	SideswapApiKey                 *string
+	OnchainSyncPeriodSec           uint32
+	OnchainSyncRequestTimeoutSec   uint32
 }
 
 func (r *Config) Destroy() {
@@ -2353,6 +2355,8 @@ func (r *Config) Destroy() {
 	FfiDestroyerOptionalUint64{}.Destroy(r.OnchainFeeRateLeewaySat)
 	FfiDestroyerOptionalSequenceAssetMetadata{}.Destroy(r.AssetMetadata)
 	FfiDestroyerOptionalString{}.Destroy(r.SideswapApiKey)
+	FfiDestroyerUint32{}.Destroy(r.OnchainSyncPeriodSec)
+	FfiDestroyerUint32{}.Destroy(r.OnchainSyncRequestTimeoutSec)
 }
 
 type FfiConverterConfig struct{}
@@ -2379,6 +2383,8 @@ func (c FfiConverterConfig) Read(reader io.Reader) Config {
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterOptionalSequenceAssetMetadataINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterUint32INSTANCE.Read(reader),
+		FfiConverterUint32INSTANCE.Read(reader),
 	}
 }
 
@@ -2401,6 +2407,8 @@ func (c FfiConverterConfig) Write(writer io.Writer, value Config) {
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.OnchainFeeRateLeewaySat)
 	FfiConverterOptionalSequenceAssetMetadataINSTANCE.Write(writer, value.AssetMetadata)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.SideswapApiKey)
+	FfiConverterUint32INSTANCE.Write(writer, value.OnchainSyncPeriodSec)
+	FfiConverterUint32INSTANCE.Write(writer, value.OnchainSyncRequestTimeoutSec)
 }
 
 type FfiDestroyerConfig struct{}
