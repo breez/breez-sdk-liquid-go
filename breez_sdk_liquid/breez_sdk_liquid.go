@@ -335,6 +335,7 @@ func init() {
 
 	FfiConverterCallbackInterfaceEventListenerINSTANCE.register()
 	FfiConverterCallbackInterfaceLoggerINSTANCE.register()
+	FfiConverterCallbackInterfaceNwcEventListenerINSTANCE.register()
 	FfiConverterCallbackInterfaceSignerINSTANCE.register()
 	uniffiCheckChecksums()
 }
@@ -739,6 +740,132 @@ func uniffiCheckChecksums() {
 	}
 	{
 		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_use_nwc_plugin()
+		})
+		if checksum != 56481 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingliquidsdk_use_nwc_plugin: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_add_connection()
+		})
+		if checksum != 61453 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_add_connection: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_add_event_listener()
+		})
+		if checksum != 63270 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_add_event_listener: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_edit_connection()
+		})
+		if checksum != 28615 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_edit_connection: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_get_info()
+		})
+		if checksum != 18212 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_get_info: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_handle_event()
+		})
+		if checksum != 15207 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_handle_event: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_is_zap()
+		})
+		if checksum != 18084 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_is_zap: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_list_connection_payments()
+		})
+		if checksum != 37753 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_list_connection_payments: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_list_connections()
+		})
+		if checksum != 3926 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_list_connections: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_remove_connection()
+		})
+		if checksum != 32431 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_remove_connection: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_remove_event_listener()
+		})
+		if checksum != 4695 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_remove_event_listener: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_stop()
+		})
+		if checksum != 54964 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_stop: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_track_zap()
+		})
+		if checksum != 53740 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_bindingnwcservice_track_zap: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_constructor_bindingnwcservice_new()
+		})
+		if checksum != 13527 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_constructor_bindingnwcservice_new: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
 			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_eventlistener_on_event()
 		})
 		if checksum != 22441 {
@@ -753,6 +880,15 @@ func uniffiCheckChecksums() {
 		if checksum != 36218 {
 			// If this happens try cleaning and rebuilding your project
 			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_logger_log: UniFFI API checksum mismatch")
+		}
+	}
+	{
+		checksum := rustCall(func(_uniffiStatus *C.RustCallStatus) C.uint16_t {
+			return C.uniffi_breez_sdk_liquid_bindings_checksum_method_nwceventlistener_on_event()
+		})
+		if checksum != 64381 {
+			// If this happens try cleaning and rebuilding your project
+			panic("breez_sdk_liquid: uniffi_breez_sdk_liquid_bindings_checksum_method_nwceventlistener_on_event: UniFFI API checksum mismatch")
 		}
 	}
 	{
@@ -1156,6 +1292,7 @@ type BindingLiquidSdkInterface interface {
 	SignMessage(req SignMessageRequest) (SignMessageResponse, *SdkError)
 	Sync() *SdkError
 	UnregisterWebhook() *SdkError
+	UseNwcPlugin(config NwcConfig) (*BindingNwcService, *SdkError)
 }
 type BindingLiquidSdk struct {
 	ffiObject FfiObject
@@ -1752,6 +1889,21 @@ func (_self *BindingLiquidSdk) UnregisterWebhook() *SdkError {
 	})
 	return _uniffiErr
 }
+
+func (_self *BindingLiquidSdk) UseNwcPlugin(config NwcConfig) (*BindingNwcService, *SdkError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingLiquidSdk")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[SdkError](FfiConverterSdkError{}, func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingliquidsdk_use_nwc_plugin(
+			_pointer, FfiConverterNwcConfigINSTANCE.Lower(config), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue *BindingNwcService
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterBindingNwcServiceINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
 func (object *BindingLiquidSdk) Destroy() {
 	runtime.SetFinalizer(object, nil)
 	object.ffiObject.destroy()
@@ -1801,6 +1953,236 @@ func (_ FfiDestroyerBindingLiquidSdk) Destroy(value *BindingLiquidSdk) {
 	value.Destroy()
 }
 
+type BindingNwcServiceInterface interface {
+	AddConnection(req AddConnectionRequest) (AddConnectionResponse, *NwcError)
+	AddEventListener(listener NwcEventListener) string
+	EditConnection(req EditConnectionRequest) (EditConnectionResponse, *NwcError)
+	GetInfo() *NostrServiceInfo
+	HandleEvent(rawEvent string) *NwcError
+	IsZap(invoice string) (bool, *NwcError)
+	ListConnectionPayments(name string) ([]Payment, *NwcError)
+	ListConnections() (map[string]NwcConnection, *NwcError)
+	RemoveConnection(name string) *NwcError
+	RemoveEventListener(listenerId string)
+	Stop()
+	TrackZap(invoice string, zapRequest string) *NwcError
+}
+type BindingNwcService struct {
+	ffiObject FfiObject
+}
+
+func NewBindingNwcService(config NwcConfig) *BindingNwcService {
+	return FfiConverterBindingNwcServiceINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) unsafe.Pointer {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_constructor_bindingnwcservice_new(FfiConverterNwcConfigINSTANCE.Lower(config), _uniffiStatus)
+	}))
+}
+
+func (_self *BindingNwcService) AddConnection(req AddConnectionRequest) (AddConnectionResponse, *NwcError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_add_connection(
+				_pointer, FfiConverterAddConnectionRequestINSTANCE.Lower(req), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue AddConnectionResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterAddConnectionResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingNwcService) AddEventListener(listener NwcEventListener) string {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterStringINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_add_event_listener(
+				_pointer, FfiConverterCallbackInterfaceNwcEventListenerINSTANCE.Lower(listener), _uniffiStatus),
+		}
+	}))
+}
+
+func (_self *BindingNwcService) EditConnection(req EditConnectionRequest) (EditConnectionResponse, *NwcError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_edit_connection(
+				_pointer, FfiConverterEditConnectionRequestINSTANCE.Lower(req), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue EditConnectionResponse
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterEditConnectionResponseINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingNwcService) GetInfo() *NostrServiceInfo {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	return FfiConverterOptionalNostrServiceInfoINSTANCE.Lift(rustCall(func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_get_info(
+				_pointer, _uniffiStatus),
+		}
+	}))
+}
+
+func (_self *BindingNwcService) HandleEvent(rawEvent string) *NwcError {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_handle_event(
+			_pointer, FfiConverterStringINSTANCE.Lower(rawEvent), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+
+func (_self *BindingNwcService) IsZap(invoice string) (bool, *NwcError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) C.int8_t {
+		return C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_is_zap(
+			_pointer, FfiConverterStringINSTANCE.Lower(invoice), _uniffiStatus)
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue bool
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterBoolINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingNwcService) ListConnectionPayments(name string) ([]Payment, *NwcError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_list_connection_payments(
+				_pointer, FfiConverterStringINSTANCE.Lower(name), _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue []Payment
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterSequencePaymentINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingNwcService) ListConnections() (map[string]NwcConnection, *NwcError) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_uniffiRV, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) RustBufferI {
+		return GoRustBuffer{
+			inner: C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_list_connections(
+				_pointer, _uniffiStatus),
+		}
+	})
+	if _uniffiErr != nil {
+		var _uniffiDefaultValue map[string]NwcConnection
+		return _uniffiDefaultValue, _uniffiErr
+	} else {
+		return FfiConverterMapStringNwcConnectionINSTANCE.Lift(_uniffiRV), _uniffiErr
+	}
+}
+
+func (_self *BindingNwcService) RemoveConnection(name string) *NwcError {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_remove_connection(
+			_pointer, FfiConverterStringINSTANCE.Lower(name), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+
+func (_self *BindingNwcService) RemoveEventListener(listenerId string) {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_remove_event_listener(
+			_pointer, FfiConverterStringINSTANCE.Lower(listenerId), _uniffiStatus)
+		return false
+	})
+}
+
+func (_self *BindingNwcService) Stop() {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	rustCall(func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_stop(
+			_pointer, _uniffiStatus)
+		return false
+	})
+}
+
+func (_self *BindingNwcService) TrackZap(invoice string, zapRequest string) *NwcError {
+	_pointer := _self.ffiObject.incrementPointer("*BindingNwcService")
+	defer _self.ffiObject.decrementPointer()
+	_, _uniffiErr := rustCallWithError[NwcError](FfiConverterNwcError{}, func(_uniffiStatus *C.RustCallStatus) bool {
+		C.uniffi_breez_sdk_liquid_bindings_fn_method_bindingnwcservice_track_zap(
+			_pointer, FfiConverterStringINSTANCE.Lower(invoice), FfiConverterStringINSTANCE.Lower(zapRequest), _uniffiStatus)
+		return false
+	})
+	return _uniffiErr
+}
+func (object *BindingNwcService) Destroy() {
+	runtime.SetFinalizer(object, nil)
+	object.ffiObject.destroy()
+}
+
+type FfiConverterBindingNwcService struct{}
+
+var FfiConverterBindingNwcServiceINSTANCE = FfiConverterBindingNwcService{}
+
+func (c FfiConverterBindingNwcService) Lift(pointer unsafe.Pointer) *BindingNwcService {
+	result := &BindingNwcService{
+		newFfiObject(
+			pointer,
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) unsafe.Pointer {
+				return C.uniffi_breez_sdk_liquid_bindings_fn_clone_bindingnwcservice(pointer, status)
+			},
+			func(pointer unsafe.Pointer, status *C.RustCallStatus) {
+				C.uniffi_breez_sdk_liquid_bindings_fn_free_bindingnwcservice(pointer, status)
+			},
+		),
+	}
+	runtime.SetFinalizer(result, (*BindingNwcService).Destroy)
+	return result
+}
+
+func (c FfiConverterBindingNwcService) Read(reader io.Reader) *BindingNwcService {
+	return c.Lift(unsafe.Pointer(uintptr(readUint64(reader))))
+}
+
+func (c FfiConverterBindingNwcService) Lower(value *BindingNwcService) unsafe.Pointer {
+	// TODO: this is bad - all synchronization from ObjectRuntime.go is discarded here,
+	// because the pointer will be decremented immediately after this function returns,
+	// and someone will be left holding onto a non-locked pointer.
+	pointer := value.ffiObject.incrementPointer("*BindingNwcService")
+	defer value.ffiObject.decrementPointer()
+	return pointer
+
+}
+
+func (c FfiConverterBindingNwcService) Write(writer io.Writer, value *BindingNwcService) {
+	writeUint64(writer, uint64(uintptr(c.Lower(value))))
+}
+
+type FfiDestroyerBindingNwcService struct{}
+
+func (_ FfiDestroyerBindingNwcService) Destroy(value *BindingNwcService) {
+	value.Destroy()
+}
+
 type AcceptPaymentProposedFeesRequest struct {
 	Response FetchPaymentProposedFeesResponse
 }
@@ -1834,6 +2216,90 @@ func (c FfiConverterAcceptPaymentProposedFeesRequest) Write(writer io.Writer, va
 type FfiDestroyerAcceptPaymentProposedFeesRequest struct{}
 
 func (_ FfiDestroyerAcceptPaymentProposedFeesRequest) Destroy(value AcceptPaymentProposedFeesRequest) {
+	value.Destroy()
+}
+
+type AddConnectionRequest struct {
+	Name              string
+	ReceiveOnly       *bool
+	ExpiryTimeMins    *uint32
+	PeriodicBudgetReq *PeriodicBudgetRequest
+}
+
+func (r *AddConnectionRequest) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Name)
+	FfiDestroyerOptionalBool{}.Destroy(r.ReceiveOnly)
+	FfiDestroyerOptionalUint32{}.Destroy(r.ExpiryTimeMins)
+	FfiDestroyerOptionalPeriodicBudgetRequest{}.Destroy(r.PeriodicBudgetReq)
+}
+
+type FfiConverterAddConnectionRequest struct{}
+
+var FfiConverterAddConnectionRequestINSTANCE = FfiConverterAddConnectionRequest{}
+
+func (c FfiConverterAddConnectionRequest) Lift(rb RustBufferI) AddConnectionRequest {
+	return LiftFromRustBuffer[AddConnectionRequest](c, rb)
+}
+
+func (c FfiConverterAddConnectionRequest) Read(reader io.Reader) AddConnectionRequest {
+	return AddConnectionRequest{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+		FfiConverterOptionalPeriodicBudgetRequestINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterAddConnectionRequest) Lower(value AddConnectionRequest) C.RustBuffer {
+	return LowerIntoRustBuffer[AddConnectionRequest](c, value)
+}
+
+func (c FfiConverterAddConnectionRequest) Write(writer io.Writer, value AddConnectionRequest) {
+	FfiConverterStringINSTANCE.Write(writer, value.Name)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ReceiveOnly)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.ExpiryTimeMins)
+	FfiConverterOptionalPeriodicBudgetRequestINSTANCE.Write(writer, value.PeriodicBudgetReq)
+}
+
+type FfiDestroyerAddConnectionRequest struct{}
+
+func (_ FfiDestroyerAddConnectionRequest) Destroy(value AddConnectionRequest) {
+	value.Destroy()
+}
+
+type AddConnectionResponse struct {
+	Connection NwcConnection
+}
+
+func (r *AddConnectionResponse) Destroy() {
+	FfiDestroyerNwcConnection{}.Destroy(r.Connection)
+}
+
+type FfiConverterAddConnectionResponse struct{}
+
+var FfiConverterAddConnectionResponseINSTANCE = FfiConverterAddConnectionResponse{}
+
+func (c FfiConverterAddConnectionResponse) Lift(rb RustBufferI) AddConnectionResponse {
+	return LiftFromRustBuffer[AddConnectionResponse](c, rb)
+}
+
+func (c FfiConverterAddConnectionResponse) Read(reader io.Reader) AddConnectionResponse {
+	return AddConnectionResponse{
+		FfiConverterNwcConnectionINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterAddConnectionResponse) Lower(value AddConnectionResponse) C.RustBuffer {
+	return LowerIntoRustBuffer[AddConnectionResponse](c, value)
+}
+
+func (c FfiConverterAddConnectionResponse) Write(writer io.Writer, value AddConnectionResponse) {
+	FfiConverterNwcConnectionINSTANCE.Write(writer, value.Connection)
+}
+
+type FfiDestroyerAddConnectionResponse struct{}
+
+func (_ FfiDestroyerAddConnectionResponse) Destroy(value AddConnectionResponse) {
 	value.Destroy()
 }
 
@@ -2634,6 +3100,98 @@ func (c FfiConverterCurrencyInfo) Write(writer io.Writer, value CurrencyInfo) {
 type FfiDestroyerCurrencyInfo struct{}
 
 func (_ FfiDestroyerCurrencyInfo) Destroy(value CurrencyInfo) {
+	value.Destroy()
+}
+
+type EditConnectionRequest struct {
+	Name                 string
+	ReceiveOnly          *bool
+	ExpiryTimeMins       *uint32
+	RemoveExpiry         *bool
+	PeriodicBudgetReq    *PeriodicBudgetRequest
+	RemovePeriodicBudget *bool
+}
+
+func (r *EditConnectionRequest) Destroy() {
+	FfiDestroyerString{}.Destroy(r.Name)
+	FfiDestroyerOptionalBool{}.Destroy(r.ReceiveOnly)
+	FfiDestroyerOptionalUint32{}.Destroy(r.ExpiryTimeMins)
+	FfiDestroyerOptionalBool{}.Destroy(r.RemoveExpiry)
+	FfiDestroyerOptionalPeriodicBudgetRequest{}.Destroy(r.PeriodicBudgetReq)
+	FfiDestroyerOptionalBool{}.Destroy(r.RemovePeriodicBudget)
+}
+
+type FfiConverterEditConnectionRequest struct{}
+
+var FfiConverterEditConnectionRequestINSTANCE = FfiConverterEditConnectionRequest{}
+
+func (c FfiConverterEditConnectionRequest) Lift(rb RustBufferI) EditConnectionRequest {
+	return LiftFromRustBuffer[EditConnectionRequest](c, rb)
+}
+
+func (c FfiConverterEditConnectionRequest) Read(reader io.Reader) EditConnectionRequest {
+	return EditConnectionRequest{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalPeriodicBudgetRequestINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterEditConnectionRequest) Lower(value EditConnectionRequest) C.RustBuffer {
+	return LowerIntoRustBuffer[EditConnectionRequest](c, value)
+}
+
+func (c FfiConverterEditConnectionRequest) Write(writer io.Writer, value EditConnectionRequest) {
+	FfiConverterStringINSTANCE.Write(writer, value.Name)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ReceiveOnly)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.ExpiryTimeMins)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.RemoveExpiry)
+	FfiConverterOptionalPeriodicBudgetRequestINSTANCE.Write(writer, value.PeriodicBudgetReq)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.RemovePeriodicBudget)
+}
+
+type FfiDestroyerEditConnectionRequest struct{}
+
+func (_ FfiDestroyerEditConnectionRequest) Destroy(value EditConnectionRequest) {
+	value.Destroy()
+}
+
+type EditConnectionResponse struct {
+	Connection NwcConnection
+}
+
+func (r *EditConnectionResponse) Destroy() {
+	FfiDestroyerNwcConnection{}.Destroy(r.Connection)
+}
+
+type FfiConverterEditConnectionResponse struct{}
+
+var FfiConverterEditConnectionResponseINSTANCE = FfiConverterEditConnectionResponse{}
+
+func (c FfiConverterEditConnectionResponse) Lift(rb RustBufferI) EditConnectionResponse {
+	return LiftFromRustBuffer[EditConnectionResponse](c, rb)
+}
+
+func (c FfiConverterEditConnectionResponse) Read(reader io.Reader) EditConnectionResponse {
+	return EditConnectionResponse{
+		FfiConverterNwcConnectionINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterEditConnectionResponse) Lower(value EditConnectionResponse) C.RustBuffer {
+	return LowerIntoRustBuffer[EditConnectionResponse](c, value)
+}
+
+func (c FfiConverterEditConnectionResponse) Write(writer io.Writer, value EditConnectionResponse) {
+	FfiConverterNwcConnectionINSTANCE.Write(writer, value.Connection)
+}
+
+type FfiDestroyerEditConnectionResponse struct{}
+
+func (_ FfiDestroyerEditConnectionResponse) Destroy(value EditConnectionResponse) {
 	value.Destroy()
 }
 
@@ -3854,6 +4412,242 @@ func (_ FfiDestroyerMessageSuccessActionData) Destroy(value MessageSuccessAction
 	value.Destroy()
 }
 
+type NostrConnectionUri struct {
+	WalletServicePublicKey string
+	AppPublicKey           string
+	AppSecret              string
+	Relays                 []string
+	Lud16                  *string
+}
+
+func (r *NostrConnectionUri) Destroy() {
+	FfiDestroyerString{}.Destroy(r.WalletServicePublicKey)
+	FfiDestroyerString{}.Destroy(r.AppPublicKey)
+	FfiDestroyerString{}.Destroy(r.AppSecret)
+	FfiDestroyerSequenceString{}.Destroy(r.Relays)
+	FfiDestroyerOptionalString{}.Destroy(r.Lud16)
+}
+
+type FfiConverterNostrConnectionUri struct{}
+
+var FfiConverterNostrConnectionUriINSTANCE = FfiConverterNostrConnectionUri{}
+
+func (c FfiConverterNostrConnectionUri) Lift(rb RustBufferI) NostrConnectionUri {
+	return LiftFromRustBuffer[NostrConnectionUri](c, rb)
+}
+
+func (c FfiConverterNostrConnectionUri) Read(reader io.Reader) NostrConnectionUri {
+	return NostrConnectionUri{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterSequenceStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterNostrConnectionUri) Lower(value NostrConnectionUri) C.RustBuffer {
+	return LowerIntoRustBuffer[NostrConnectionUri](c, value)
+}
+
+func (c FfiConverterNostrConnectionUri) Write(writer io.Writer, value NostrConnectionUri) {
+	FfiConverterStringINSTANCE.Write(writer, value.WalletServicePublicKey)
+	FfiConverterStringINSTANCE.Write(writer, value.AppPublicKey)
+	FfiConverterStringINSTANCE.Write(writer, value.AppSecret)
+	FfiConverterSequenceStringINSTANCE.Write(writer, value.Relays)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.Lud16)
+}
+
+type FfiDestroyerNostrConnectionUri struct{}
+
+func (_ FfiDestroyerNostrConnectionUri) Destroy(value NostrConnectionUri) {
+	value.Destroy()
+}
+
+type NostrServiceInfo struct {
+	WalletPubkey    string
+	ConnectedRelays []string
+}
+
+func (r *NostrServiceInfo) Destroy() {
+	FfiDestroyerString{}.Destroy(r.WalletPubkey)
+	FfiDestroyerSequenceString{}.Destroy(r.ConnectedRelays)
+}
+
+type FfiConverterNostrServiceInfo struct{}
+
+var FfiConverterNostrServiceInfoINSTANCE = FfiConverterNostrServiceInfo{}
+
+func (c FfiConverterNostrServiceInfo) Lift(rb RustBufferI) NostrServiceInfo {
+	return LiftFromRustBuffer[NostrServiceInfo](c, rb)
+}
+
+func (c FfiConverterNostrServiceInfo) Read(reader io.Reader) NostrServiceInfo {
+	return NostrServiceInfo{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterSequenceStringINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterNostrServiceInfo) Lower(value NostrServiceInfo) C.RustBuffer {
+	return LowerIntoRustBuffer[NostrServiceInfo](c, value)
+}
+
+func (c FfiConverterNostrServiceInfo) Write(writer io.Writer, value NostrServiceInfo) {
+	FfiConverterStringINSTANCE.Write(writer, value.WalletPubkey)
+	FfiConverterSequenceStringINSTANCE.Write(writer, value.ConnectedRelays)
+}
+
+type FfiDestroyerNostrServiceInfo struct{}
+
+func (_ FfiDestroyerNostrServiceInfo) Destroy(value NostrServiceInfo) {
+	value.Destroy()
+}
+
+type NwcConfig struct {
+	RelayUrls      *[]string
+	SecretKeyHex   *string
+	ListenToEvents *bool
+}
+
+func (r *NwcConfig) Destroy() {
+	FfiDestroyerOptionalSequenceString{}.Destroy(r.RelayUrls)
+	FfiDestroyerOptionalString{}.Destroy(r.SecretKeyHex)
+	FfiDestroyerOptionalBool{}.Destroy(r.ListenToEvents)
+}
+
+type FfiConverterNwcConfig struct{}
+
+var FfiConverterNwcConfigINSTANCE = FfiConverterNwcConfig{}
+
+func (c FfiConverterNwcConfig) Lift(rb RustBufferI) NwcConfig {
+	return LiftFromRustBuffer[NwcConfig](c, rb)
+}
+
+func (c FfiConverterNwcConfig) Read(reader io.Reader) NwcConfig {
+	return NwcConfig{
+		FfiConverterOptionalSequenceStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterNwcConfig) Lower(value NwcConfig) C.RustBuffer {
+	return LowerIntoRustBuffer[NwcConfig](c, value)
+}
+
+func (c FfiConverterNwcConfig) Write(writer io.Writer, value NwcConfig) {
+	FfiConverterOptionalSequenceStringINSTANCE.Write(writer, value.RelayUrls)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.SecretKeyHex)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.ListenToEvents)
+}
+
+type FfiDestroyerNwcConfig struct{}
+
+func (_ FfiDestroyerNwcConfig) Destroy(value NwcConfig) {
+	value.Destroy()
+}
+
+type NwcConnection struct {
+	ConnectionString string
+	CreatedAt        uint32
+	ReceiveOnly      bool
+	PaidAmountSat    uint64
+	ExpiresAt        *uint32
+	PeriodicBudget   *PeriodicBudget
+}
+
+func (r *NwcConnection) Destroy() {
+	FfiDestroyerString{}.Destroy(r.ConnectionString)
+	FfiDestroyerUint32{}.Destroy(r.CreatedAt)
+	FfiDestroyerBool{}.Destroy(r.ReceiveOnly)
+	FfiDestroyerUint64{}.Destroy(r.PaidAmountSat)
+	FfiDestroyerOptionalUint32{}.Destroy(r.ExpiresAt)
+	FfiDestroyerOptionalPeriodicBudget{}.Destroy(r.PeriodicBudget)
+}
+
+type FfiConverterNwcConnection struct{}
+
+var FfiConverterNwcConnectionINSTANCE = FfiConverterNwcConnection{}
+
+func (c FfiConverterNwcConnection) Lift(rb RustBufferI) NwcConnection {
+	return LiftFromRustBuffer[NwcConnection](c, rb)
+}
+
+func (c FfiConverterNwcConnection) Read(reader io.Reader) NwcConnection {
+	return NwcConnection{
+		FfiConverterStringINSTANCE.Read(reader),
+		FfiConverterUint32INSTANCE.Read(reader),
+		FfiConverterBoolINSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+		FfiConverterOptionalPeriodicBudgetINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterNwcConnection) Lower(value NwcConnection) C.RustBuffer {
+	return LowerIntoRustBuffer[NwcConnection](c, value)
+}
+
+func (c FfiConverterNwcConnection) Write(writer io.Writer, value NwcConnection) {
+	FfiConverterStringINSTANCE.Write(writer, value.ConnectionString)
+	FfiConverterUint32INSTANCE.Write(writer, value.CreatedAt)
+	FfiConverterBoolINSTANCE.Write(writer, value.ReceiveOnly)
+	FfiConverterUint64INSTANCE.Write(writer, value.PaidAmountSat)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.ExpiresAt)
+	FfiConverterOptionalPeriodicBudgetINSTANCE.Write(writer, value.PeriodicBudget)
+}
+
+type FfiDestroyerNwcConnection struct{}
+
+func (_ FfiDestroyerNwcConnection) Destroy(value NwcConnection) {
+	value.Destroy()
+}
+
+type NwcEvent struct {
+	EventId        *string
+	ConnectionName *string
+	Details        NwcEventDetails
+}
+
+func (r *NwcEvent) Destroy() {
+	FfiDestroyerOptionalString{}.Destroy(r.EventId)
+	FfiDestroyerOptionalString{}.Destroy(r.ConnectionName)
+	FfiDestroyerNwcEventDetails{}.Destroy(r.Details)
+}
+
+type FfiConverterNwcEvent struct{}
+
+var FfiConverterNwcEventINSTANCE = FfiConverterNwcEvent{}
+
+func (c FfiConverterNwcEvent) Lift(rb RustBufferI) NwcEvent {
+	return LiftFromRustBuffer[NwcEvent](c, rb)
+}
+
+func (c FfiConverterNwcEvent) Read(reader io.Reader) NwcEvent {
+	return NwcEvent{
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterOptionalStringINSTANCE.Read(reader),
+		FfiConverterNwcEventDetailsINSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterNwcEvent) Lower(value NwcEvent) C.RustBuffer {
+	return LowerIntoRustBuffer[NwcEvent](c, value)
+}
+
+func (c FfiConverterNwcEvent) Write(writer io.Writer, value NwcEvent) {
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.EventId)
+	FfiConverterOptionalStringINSTANCE.Write(writer, value.ConnectionName)
+	FfiConverterNwcEventDetailsINSTANCE.Write(writer, value.Details)
+}
+
+type FfiDestroyerNwcEvent struct{}
+
+func (_ FfiDestroyerNwcEvent) Destroy(value NwcEvent) {
+	value.Destroy()
+}
+
 type OnchainPaymentLimitsResponse struct {
 	Send    Limits
 	Receive Limits
@@ -4003,6 +4797,94 @@ func (c FfiConverterPayment) Write(writer io.Writer, value Payment) {
 type FfiDestroyerPayment struct{}
 
 func (_ FfiDestroyerPayment) Destroy(value Payment) {
+	value.Destroy()
+}
+
+type PeriodicBudget struct {
+	UsedBudgetSat uint64
+	MaxBudgetSat  uint64
+	RenewsAt      *uint32
+	UpdatedAt     uint32
+}
+
+func (r *PeriodicBudget) Destroy() {
+	FfiDestroyerUint64{}.Destroy(r.UsedBudgetSat)
+	FfiDestroyerUint64{}.Destroy(r.MaxBudgetSat)
+	FfiDestroyerOptionalUint32{}.Destroy(r.RenewsAt)
+	FfiDestroyerUint32{}.Destroy(r.UpdatedAt)
+}
+
+type FfiConverterPeriodicBudget struct{}
+
+var FfiConverterPeriodicBudgetINSTANCE = FfiConverterPeriodicBudget{}
+
+func (c FfiConverterPeriodicBudget) Lift(rb RustBufferI) PeriodicBudget {
+	return LiftFromRustBuffer[PeriodicBudget](c, rb)
+}
+
+func (c FfiConverterPeriodicBudget) Read(reader io.Reader) PeriodicBudget {
+	return PeriodicBudget{
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+		FfiConverterUint32INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterPeriodicBudget) Lower(value PeriodicBudget) C.RustBuffer {
+	return LowerIntoRustBuffer[PeriodicBudget](c, value)
+}
+
+func (c FfiConverterPeriodicBudget) Write(writer io.Writer, value PeriodicBudget) {
+	FfiConverterUint64INSTANCE.Write(writer, value.UsedBudgetSat)
+	FfiConverterUint64INSTANCE.Write(writer, value.MaxBudgetSat)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.RenewsAt)
+	FfiConverterUint32INSTANCE.Write(writer, value.UpdatedAt)
+}
+
+type FfiDestroyerPeriodicBudget struct{}
+
+func (_ FfiDestroyerPeriodicBudget) Destroy(value PeriodicBudget) {
+	value.Destroy()
+}
+
+type PeriodicBudgetRequest struct {
+	MaxBudgetSat    uint64
+	RenewalTimeMins *uint32
+}
+
+func (r *PeriodicBudgetRequest) Destroy() {
+	FfiDestroyerUint64{}.Destroy(r.MaxBudgetSat)
+	FfiDestroyerOptionalUint32{}.Destroy(r.RenewalTimeMins)
+}
+
+type FfiConverterPeriodicBudgetRequest struct{}
+
+var FfiConverterPeriodicBudgetRequestINSTANCE = FfiConverterPeriodicBudgetRequest{}
+
+func (c FfiConverterPeriodicBudgetRequest) Lift(rb RustBufferI) PeriodicBudgetRequest {
+	return LiftFromRustBuffer[PeriodicBudgetRequest](c, rb)
+}
+
+func (c FfiConverterPeriodicBudgetRequest) Read(reader io.Reader) PeriodicBudgetRequest {
+	return PeriodicBudgetRequest{
+		FfiConverterUint64INSTANCE.Read(reader),
+		FfiConverterOptionalUint32INSTANCE.Read(reader),
+	}
+}
+
+func (c FfiConverterPeriodicBudgetRequest) Lower(value PeriodicBudgetRequest) C.RustBuffer {
+	return LowerIntoRustBuffer[PeriodicBudgetRequest](c, value)
+}
+
+func (c FfiConverterPeriodicBudgetRequest) Write(writer io.Writer, value PeriodicBudgetRequest) {
+	FfiConverterUint64INSTANCE.Write(writer, value.MaxBudgetSat)
+	FfiConverterOptionalUint32INSTANCE.Write(writer, value.RenewalTimeMins)
+}
+
+type FfiDestroyerPeriodicBudgetRequest struct{}
+
+func (_ FfiDestroyerPeriodicBudgetRequest) Destroy(value PeriodicBudgetRequest) {
 	value.Destroy()
 }
 
@@ -4467,13 +5349,17 @@ func (_ FfiDestroyerPrepareRefundResponse) Destroy(value PrepareRefundResponse) 
 }
 
 type PrepareSendRequest struct {
-	Destination string
-	Amount      *PayAmount
+	Destination       string
+	Amount            *PayAmount
+	DisableMrh        *bool
+	PaymentTimeoutSec *uint64
 }
 
 func (r *PrepareSendRequest) Destroy() {
 	FfiDestroyerString{}.Destroy(r.Destination)
 	FfiDestroyerOptionalPayAmount{}.Destroy(r.Amount)
+	FfiDestroyerOptionalBool{}.Destroy(r.DisableMrh)
+	FfiDestroyerOptionalUint64{}.Destroy(r.PaymentTimeoutSec)
 }
 
 type FfiConverterPrepareSendRequest struct{}
@@ -4488,6 +5374,8 @@ func (c FfiConverterPrepareSendRequest) Read(reader io.Reader) PrepareSendReques
 	return PrepareSendRequest{
 		FfiConverterStringINSTANCE.Read(reader),
 		FfiConverterOptionalPayAmountINSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
 	}
 }
 
@@ -4498,6 +5386,8 @@ func (c FfiConverterPrepareSendRequest) Lower(value PrepareSendRequest) C.RustBu
 func (c FfiConverterPrepareSendRequest) Write(writer io.Writer, value PrepareSendRequest) {
 	FfiConverterStringINSTANCE.Write(writer, value.Destination)
 	FfiConverterOptionalPayAmountINSTANCE.Write(writer, value.Amount)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.DisableMrh)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
 }
 
 type FfiDestroyerPrepareSendRequest struct{}
@@ -4512,6 +5402,8 @@ type PrepareSendResponse struct {
 	FeesSat            *uint64
 	EstimatedAssetFees *float64
 	ExchangeAmountSat  *uint64
+	DisableMrh         *bool
+	PaymentTimeoutSec  *uint64
 }
 
 func (r *PrepareSendResponse) Destroy() {
@@ -4520,6 +5412,8 @@ func (r *PrepareSendResponse) Destroy() {
 	FfiDestroyerOptionalUint64{}.Destroy(r.FeesSat)
 	FfiDestroyerOptionalFloat64{}.Destroy(r.EstimatedAssetFees)
 	FfiDestroyerOptionalUint64{}.Destroy(r.ExchangeAmountSat)
+	FfiDestroyerOptionalBool{}.Destroy(r.DisableMrh)
+	FfiDestroyerOptionalUint64{}.Destroy(r.PaymentTimeoutSec)
 }
 
 type FfiConverterPrepareSendResponse struct{}
@@ -4537,6 +5431,8 @@ func (c FfiConverterPrepareSendResponse) Read(reader io.Reader) PrepareSendRespo
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
 		FfiConverterOptionalFloat64INSTANCE.Read(reader),
 		FfiConverterOptionalUint64INSTANCE.Read(reader),
+		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalUint64INSTANCE.Read(reader),
 	}
 }
 
@@ -4550,6 +5446,8 @@ func (c FfiConverterPrepareSendResponse) Write(writer io.Writer, value PrepareSe
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.FeesSat)
 	FfiConverterOptionalFloat64INSTANCE.Write(writer, value.EstimatedAssetFees)
 	FfiConverterOptionalUint64INSTANCE.Write(writer, value.ExchangeAmountSat)
+	FfiConverterOptionalBoolINSTANCE.Write(writer, value.DisableMrh)
+	FfiConverterOptionalUint64INSTANCE.Write(writer, value.PaymentTimeoutSec)
 }
 
 type FfiDestroyerPrepareSendResponse struct{}
@@ -4599,16 +5497,16 @@ func (_ FfiDestroyerRate) Destroy(value Rate) {
 }
 
 type ReceivePaymentRequest struct {
-	PrepareResponse    PrepareReceiveResponse
-	Description        *string
-	UseDescriptionHash *bool
-	PayerNote          *string
+	PrepareResponse PrepareReceiveResponse
+	Description     *string
+	DescriptionHash *DescriptionHash
+	PayerNote       *string
 }
 
 func (r *ReceivePaymentRequest) Destroy() {
 	FfiDestroyerPrepareReceiveResponse{}.Destroy(r.PrepareResponse)
 	FfiDestroyerOptionalString{}.Destroy(r.Description)
-	FfiDestroyerOptionalBool{}.Destroy(r.UseDescriptionHash)
+	FfiDestroyerOptionalDescriptionHash{}.Destroy(r.DescriptionHash)
 	FfiDestroyerOptionalString{}.Destroy(r.PayerNote)
 }
 
@@ -4624,7 +5522,7 @@ func (c FfiConverterReceivePaymentRequest) Read(reader io.Reader) ReceivePayment
 	return ReceivePaymentRequest{
 		FfiConverterPrepareReceiveResponseINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
-		FfiConverterOptionalBoolINSTANCE.Read(reader),
+		FfiConverterOptionalDescriptionHashINSTANCE.Read(reader),
 		FfiConverterOptionalStringINSTANCE.Read(reader),
 	}
 }
@@ -4636,7 +5534,7 @@ func (c FfiConverterReceivePaymentRequest) Lower(value ReceivePaymentRequest) C.
 func (c FfiConverterReceivePaymentRequest) Write(writer io.Writer, value ReceivePaymentRequest) {
 	FfiConverterPrepareReceiveResponseINSTANCE.Write(writer, value.PrepareResponse)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.Description)
-	FfiConverterOptionalBoolINSTANCE.Write(writer, value.UseDescriptionHash)
+	FfiConverterOptionalDescriptionHashINSTANCE.Write(writer, value.DescriptionHash)
 	FfiConverterOptionalStringINSTANCE.Write(writer, value.PayerNote)
 }
 
@@ -5539,6 +6437,67 @@ type FfiDestroyerBuyBitcoinProvider struct{}
 func (_ FfiDestroyerBuyBitcoinProvider) Destroy(value BuyBitcoinProvider) {
 }
 
+type DescriptionHash interface {
+	Destroy()
+}
+type DescriptionHashUseDescription struct {
+}
+
+func (e DescriptionHashUseDescription) Destroy() {
+}
+
+type DescriptionHashCustom struct {
+	Hash string
+}
+
+func (e DescriptionHashCustom) Destroy() {
+	FfiDestroyerString{}.Destroy(e.Hash)
+}
+
+type FfiConverterDescriptionHash struct{}
+
+var FfiConverterDescriptionHashINSTANCE = FfiConverterDescriptionHash{}
+
+func (c FfiConverterDescriptionHash) Lift(rb RustBufferI) DescriptionHash {
+	return LiftFromRustBuffer[DescriptionHash](c, rb)
+}
+
+func (c FfiConverterDescriptionHash) Lower(value DescriptionHash) C.RustBuffer {
+	return LowerIntoRustBuffer[DescriptionHash](c, value)
+}
+func (FfiConverterDescriptionHash) Read(reader io.Reader) DescriptionHash {
+	id := readInt32(reader)
+	switch id {
+	case 1:
+		return DescriptionHashUseDescription{}
+	case 2:
+		return DescriptionHashCustom{
+			FfiConverterStringINSTANCE.Read(reader),
+		}
+	default:
+		panic(fmt.Sprintf("invalid enum value %v in FfiConverterDescriptionHash.Read()", id))
+	}
+}
+
+func (FfiConverterDescriptionHash) Write(writer io.Writer, value DescriptionHash) {
+	switch variant_value := value.(type) {
+	case DescriptionHashUseDescription:
+		writeInt32(writer, 1)
+	case DescriptionHashCustom:
+		writeInt32(writer, 2)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.Hash)
+	default:
+		_ = variant_value
+		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterDescriptionHash.Write", value))
+	}
+}
+
+type FfiDestroyerDescriptionHash struct{}
+
+func (_ FfiDestroyerDescriptionHash) Destroy(value DescriptionHash) {
+	value.Destroy()
+}
+
 type GetPaymentRequest interface {
 	Destroy()
 }
@@ -5692,6 +6651,14 @@ func (e InputTypeLnUrlError) Destroy() {
 	FfiDestroyerLnUrlErrorData{}.Destroy(e.Data)
 }
 
+type InputTypeNostrWalletConnectUri struct {
+	Data NostrConnectionUri
+}
+
+func (e InputTypeNostrWalletConnectUri) Destroy() {
+	FfiDestroyerNostrConnectionUri{}.Destroy(e.Data)
+}
+
 type FfiConverterInputType struct{}
 
 var FfiConverterInputTypeINSTANCE = FfiConverterInputType{}
@@ -5748,6 +6715,10 @@ func (FfiConverterInputType) Read(reader io.Reader) InputType {
 		return InputTypeLnUrlError{
 			FfiConverterLnUrlErrorDataINSTANCE.Read(reader),
 		}
+	case 11:
+		return InputTypeNostrWalletConnectUri{
+			FfiConverterNostrConnectionUriINSTANCE.Read(reader),
+		}
 	default:
 		panic(fmt.Sprintf("invalid enum value %v in FfiConverterInputType.Read()", id))
 	}
@@ -5787,6 +6758,9 @@ func (FfiConverterInputType) Write(writer io.Writer, value InputType) {
 	case InputTypeLnUrlError:
 		writeInt32(writer, 10)
 		FfiConverterLnUrlErrorDataINSTANCE.Write(writer, variant_value.Data)
+	case InputTypeNostrWalletConnectUri:
+		writeInt32(writer, 11)
+		FfiConverterNostrConnectionUriINSTANCE.Write(writer, variant_value.Data)
 	default:
 		_ = variant_value
 		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterInputType.Write", value))
@@ -7176,6 +8150,633 @@ type FfiDestroyerNetwork struct{}
 func (_ FfiDestroyerNetwork) Destroy(value Network) {
 }
 
+// /////////////////////////////
+// ///////////////////////////////
+type NwcError struct {
+	err error
+}
+
+// Convience method to turn *NwcError into error
+// Avoiding treating nil pointer as non nil error interface
+func (err *NwcError) AsError() error {
+	if err == nil {
+		return nil
+	} else {
+		return err
+	}
+}
+
+func (err NwcError) Error() string {
+	return fmt.Sprintf("NwcError: %s", err.err.Error())
+}
+
+func (err NwcError) Unwrap() error {
+	return err.err
+}
+
+// Err* are used for checking error type with `errors.Is`
+var ErrNwcErrorGeneric = fmt.Errorf("NwcErrorGeneric")
+var ErrNwcErrorPersist = fmt.Errorf("NwcErrorPersist")
+var ErrNwcErrorNetwork = fmt.Errorf("NwcErrorNetwork")
+var ErrNwcErrorPubkeyNotFound = fmt.Errorf("NwcErrorPubkeyNotFound")
+var ErrNwcErrorInvalidSignature = fmt.Errorf("NwcErrorInvalidSignature")
+var ErrNwcErrorEncryption = fmt.Errorf("NwcErrorEncryption")
+var ErrNwcErrorEventExpired = fmt.Errorf("NwcErrorEventExpired")
+var ErrNwcErrorAlreadyReplied = fmt.Errorf("NwcErrorAlreadyReplied")
+var ErrNwcErrorInvoiceExpired = fmt.Errorf("NwcErrorInvoiceExpired")
+var ErrNwcErrorInvoiceWithoutAmount = fmt.Errorf("NwcErrorInvoiceWithoutAmount")
+var ErrNwcErrorMaxBudgetExceeded = fmt.Errorf("NwcErrorMaxBudgetExceeded")
+var ErrNwcErrorConnectionNotFound = fmt.Errorf("NwcErrorConnectionNotFound")
+var ErrNwcErrorConnectionExists = fmt.Errorf("NwcErrorConnectionExists")
+
+// Variant structs
+type NwcErrorGeneric struct {
+	Err string
+}
+
+func NewNwcErrorGeneric(
+	err string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorGeneric{
+		Err: err}}
+}
+
+func (e NwcErrorGeneric) destroy() {
+	FfiDestroyerString{}.Destroy(e.Err)
+}
+
+func (err NwcErrorGeneric) Error() string {
+	return fmt.Sprint("Generic",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self NwcErrorGeneric) Is(target error) bool {
+	return target == ErrNwcErrorGeneric
+}
+
+type NwcErrorPersist struct {
+	Err string
+}
+
+func NewNwcErrorPersist(
+	err string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorPersist{
+		Err: err}}
+}
+
+func (e NwcErrorPersist) destroy() {
+	FfiDestroyerString{}.Destroy(e.Err)
+}
+
+func (err NwcErrorPersist) Error() string {
+	return fmt.Sprint("Persist",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self NwcErrorPersist) Is(target error) bool {
+	return target == ErrNwcErrorPersist
+}
+
+type NwcErrorNetwork struct {
+	Err string
+}
+
+func NewNwcErrorNetwork(
+	err string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorNetwork{
+		Err: err}}
+}
+
+func (e NwcErrorNetwork) destroy() {
+	FfiDestroyerString{}.Destroy(e.Err)
+}
+
+func (err NwcErrorNetwork) Error() string {
+	return fmt.Sprint("Network",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self NwcErrorNetwork) Is(target error) bool {
+	return target == ErrNwcErrorNetwork
+}
+
+type NwcErrorPubkeyNotFound struct {
+	Pubkey string
+}
+
+func NewNwcErrorPubkeyNotFound(
+	pubkey string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorPubkeyNotFound{
+		Pubkey: pubkey}}
+}
+
+func (e NwcErrorPubkeyNotFound) destroy() {
+	FfiDestroyerString{}.Destroy(e.Pubkey)
+}
+
+func (err NwcErrorPubkeyNotFound) Error() string {
+	return fmt.Sprint("PubkeyNotFound",
+		": ",
+
+		"Pubkey=",
+		err.Pubkey,
+	)
+}
+
+func (self NwcErrorPubkeyNotFound) Is(target error) bool {
+	return target == ErrNwcErrorPubkeyNotFound
+}
+
+type NwcErrorInvalidSignature struct {
+	Err string
+}
+
+func NewNwcErrorInvalidSignature(
+	err string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorInvalidSignature{
+		Err: err}}
+}
+
+func (e NwcErrorInvalidSignature) destroy() {
+	FfiDestroyerString{}.Destroy(e.Err)
+}
+
+func (err NwcErrorInvalidSignature) Error() string {
+	return fmt.Sprint("InvalidSignature",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self NwcErrorInvalidSignature) Is(target error) bool {
+	return target == ErrNwcErrorInvalidSignature
+}
+
+type NwcErrorEncryption struct {
+	Err string
+}
+
+func NewNwcErrorEncryption(
+	err string,
+) *NwcError {
+	return &NwcError{err: &NwcErrorEncryption{
+		Err: err}}
+}
+
+func (e NwcErrorEncryption) destroy() {
+	FfiDestroyerString{}.Destroy(e.Err)
+}
+
+func (err NwcErrorEncryption) Error() string {
+	return fmt.Sprint("Encryption",
+		": ",
+
+		"Err=",
+		err.Err,
+	)
+}
+
+func (self NwcErrorEncryption) Is(target error) bool {
+	return target == ErrNwcErrorEncryption
+}
+
+type NwcErrorEventExpired struct {
+}
+
+func NewNwcErrorEventExpired() *NwcError {
+	return &NwcError{err: &NwcErrorEventExpired{}}
+}
+
+func (e NwcErrorEventExpired) destroy() {
+}
+
+func (err NwcErrorEventExpired) Error() string {
+	return fmt.Sprint("EventExpired")
+}
+
+func (self NwcErrorEventExpired) Is(target error) bool {
+	return target == ErrNwcErrorEventExpired
+}
+
+type NwcErrorAlreadyReplied struct {
+}
+
+func NewNwcErrorAlreadyReplied() *NwcError {
+	return &NwcError{err: &NwcErrorAlreadyReplied{}}
+}
+
+func (e NwcErrorAlreadyReplied) destroy() {
+}
+
+func (err NwcErrorAlreadyReplied) Error() string {
+	return fmt.Sprint("AlreadyReplied")
+}
+
+func (self NwcErrorAlreadyReplied) Is(target error) bool {
+	return target == ErrNwcErrorAlreadyReplied
+}
+
+type NwcErrorInvoiceExpired struct {
+}
+
+func NewNwcErrorInvoiceExpired() *NwcError {
+	return &NwcError{err: &NwcErrorInvoiceExpired{}}
+}
+
+func (e NwcErrorInvoiceExpired) destroy() {
+}
+
+func (err NwcErrorInvoiceExpired) Error() string {
+	return fmt.Sprint("InvoiceExpired")
+}
+
+func (self NwcErrorInvoiceExpired) Is(target error) bool {
+	return target == ErrNwcErrorInvoiceExpired
+}
+
+type NwcErrorInvoiceWithoutAmount struct {
+}
+
+func NewNwcErrorInvoiceWithoutAmount() *NwcError {
+	return &NwcError{err: &NwcErrorInvoiceWithoutAmount{}}
+}
+
+func (e NwcErrorInvoiceWithoutAmount) destroy() {
+}
+
+func (err NwcErrorInvoiceWithoutAmount) Error() string {
+	return fmt.Sprint("InvoiceWithoutAmount")
+}
+
+func (self NwcErrorInvoiceWithoutAmount) Is(target error) bool {
+	return target == ErrNwcErrorInvoiceWithoutAmount
+}
+
+type NwcErrorMaxBudgetExceeded struct {
+}
+
+func NewNwcErrorMaxBudgetExceeded() *NwcError {
+	return &NwcError{err: &NwcErrorMaxBudgetExceeded{}}
+}
+
+func (e NwcErrorMaxBudgetExceeded) destroy() {
+}
+
+func (err NwcErrorMaxBudgetExceeded) Error() string {
+	return fmt.Sprint("MaxBudgetExceeded")
+}
+
+func (self NwcErrorMaxBudgetExceeded) Is(target error) bool {
+	return target == ErrNwcErrorMaxBudgetExceeded
+}
+
+type NwcErrorConnectionNotFound struct {
+}
+
+func NewNwcErrorConnectionNotFound() *NwcError {
+	return &NwcError{err: &NwcErrorConnectionNotFound{}}
+}
+
+func (e NwcErrorConnectionNotFound) destroy() {
+}
+
+func (err NwcErrorConnectionNotFound) Error() string {
+	return fmt.Sprint("ConnectionNotFound")
+}
+
+func (self NwcErrorConnectionNotFound) Is(target error) bool {
+	return target == ErrNwcErrorConnectionNotFound
+}
+
+type NwcErrorConnectionExists struct {
+}
+
+func NewNwcErrorConnectionExists() *NwcError {
+	return &NwcError{err: &NwcErrorConnectionExists{}}
+}
+
+func (e NwcErrorConnectionExists) destroy() {
+}
+
+func (err NwcErrorConnectionExists) Error() string {
+	return fmt.Sprint("ConnectionExists")
+}
+
+func (self NwcErrorConnectionExists) Is(target error) bool {
+	return target == ErrNwcErrorConnectionExists
+}
+
+type FfiConverterNwcError struct{}
+
+var FfiConverterNwcErrorINSTANCE = FfiConverterNwcError{}
+
+func (c FfiConverterNwcError) Lift(eb RustBufferI) *NwcError {
+	return LiftFromRustBuffer[*NwcError](c, eb)
+}
+
+func (c FfiConverterNwcError) Lower(value *NwcError) C.RustBuffer {
+	return LowerIntoRustBuffer[*NwcError](c, value)
+}
+
+func (c FfiConverterNwcError) Read(reader io.Reader) *NwcError {
+	errorID := readUint32(reader)
+
+	switch errorID {
+	case 1:
+		return &NwcError{&NwcErrorGeneric{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 2:
+		return &NwcError{&NwcErrorPersist{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 3:
+		return &NwcError{&NwcErrorNetwork{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 4:
+		return &NwcError{&NwcErrorPubkeyNotFound{
+			Pubkey: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 5:
+		return &NwcError{&NwcErrorInvalidSignature{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 6:
+		return &NwcError{&NwcErrorEncryption{
+			Err: FfiConverterStringINSTANCE.Read(reader),
+		}}
+	case 7:
+		return &NwcError{&NwcErrorEventExpired{}}
+	case 8:
+		return &NwcError{&NwcErrorAlreadyReplied{}}
+	case 9:
+		return &NwcError{&NwcErrorInvoiceExpired{}}
+	case 10:
+		return &NwcError{&NwcErrorInvoiceWithoutAmount{}}
+	case 11:
+		return &NwcError{&NwcErrorMaxBudgetExceeded{}}
+	case 12:
+		return &NwcError{&NwcErrorConnectionNotFound{}}
+	case 13:
+		return &NwcError{&NwcErrorConnectionExists{}}
+	default:
+		panic(fmt.Sprintf("Unknown error code %d in FfiConverterNwcError.Read()", errorID))
+	}
+}
+
+func (c FfiConverterNwcError) Write(writer io.Writer, value *NwcError) {
+	switch variantValue := value.err.(type) {
+	case *NwcErrorGeneric:
+		writeInt32(writer, 1)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	case *NwcErrorPersist:
+		writeInt32(writer, 2)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	case *NwcErrorNetwork:
+		writeInt32(writer, 3)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	case *NwcErrorPubkeyNotFound:
+		writeInt32(writer, 4)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Pubkey)
+	case *NwcErrorInvalidSignature:
+		writeInt32(writer, 5)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	case *NwcErrorEncryption:
+		writeInt32(writer, 6)
+		FfiConverterStringINSTANCE.Write(writer, variantValue.Err)
+	case *NwcErrorEventExpired:
+		writeInt32(writer, 7)
+	case *NwcErrorAlreadyReplied:
+		writeInt32(writer, 8)
+	case *NwcErrorInvoiceExpired:
+		writeInt32(writer, 9)
+	case *NwcErrorInvoiceWithoutAmount:
+		writeInt32(writer, 10)
+	case *NwcErrorMaxBudgetExceeded:
+		writeInt32(writer, 11)
+	case *NwcErrorConnectionNotFound:
+		writeInt32(writer, 12)
+	case *NwcErrorConnectionExists:
+		writeInt32(writer, 13)
+	default:
+		_ = variantValue
+		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterNwcError.Write", value))
+	}
+}
+
+type FfiDestroyerNwcError struct{}
+
+func (_ FfiDestroyerNwcError) Destroy(value *NwcError) {
+	switch variantValue := value.err.(type) {
+	case NwcErrorGeneric:
+		variantValue.destroy()
+	case NwcErrorPersist:
+		variantValue.destroy()
+	case NwcErrorNetwork:
+		variantValue.destroy()
+	case NwcErrorPubkeyNotFound:
+		variantValue.destroy()
+	case NwcErrorInvalidSignature:
+		variantValue.destroy()
+	case NwcErrorEncryption:
+		variantValue.destroy()
+	case NwcErrorEventExpired:
+		variantValue.destroy()
+	case NwcErrorAlreadyReplied:
+		variantValue.destroy()
+	case NwcErrorInvoiceExpired:
+		variantValue.destroy()
+	case NwcErrorInvoiceWithoutAmount:
+		variantValue.destroy()
+	case NwcErrorMaxBudgetExceeded:
+		variantValue.destroy()
+	case NwcErrorConnectionNotFound:
+		variantValue.destroy()
+	case NwcErrorConnectionExists:
+		variantValue.destroy()
+	default:
+		_ = variantValue
+		panic(fmt.Sprintf("invalid error value `%v` in FfiDestroyerNwcError.Destroy", value))
+	}
+}
+
+type NwcEventDetails interface {
+	Destroy()
+}
+type NwcEventDetailsConnected struct {
+}
+
+func (e NwcEventDetailsConnected) Destroy() {
+}
+
+type NwcEventDetailsDisconnected struct {
+}
+
+func (e NwcEventDetailsDisconnected) Destroy() {
+}
+
+type NwcEventDetailsPayInvoice struct {
+	Success  bool
+	Preimage *string
+	FeesSat  *uint64
+	Error    *string
+}
+
+func (e NwcEventDetailsPayInvoice) Destroy() {
+	FfiDestroyerBool{}.Destroy(e.Success)
+	FfiDestroyerOptionalString{}.Destroy(e.Preimage)
+	FfiDestroyerOptionalUint64{}.Destroy(e.FeesSat)
+	FfiDestroyerOptionalString{}.Destroy(e.Error)
+}
+
+type NwcEventDetailsMakeInvoice struct {
+}
+
+func (e NwcEventDetailsMakeInvoice) Destroy() {
+}
+
+type NwcEventDetailsListTransactions struct {
+}
+
+func (e NwcEventDetailsListTransactions) Destroy() {
+}
+
+type NwcEventDetailsGetBalance struct {
+}
+
+func (e NwcEventDetailsGetBalance) Destroy() {
+}
+
+type NwcEventDetailsGetInfo struct {
+}
+
+func (e NwcEventDetailsGetInfo) Destroy() {
+}
+
+type NwcEventDetailsConnectionExpired struct {
+}
+
+func (e NwcEventDetailsConnectionExpired) Destroy() {
+}
+
+type NwcEventDetailsConnectionRefreshed struct {
+}
+
+func (e NwcEventDetailsConnectionRefreshed) Destroy() {
+}
+
+type NwcEventDetailsZapReceived struct {
+	Invoice string
+}
+
+func (e NwcEventDetailsZapReceived) Destroy() {
+	FfiDestroyerString{}.Destroy(e.Invoice)
+}
+
+type FfiConverterNwcEventDetails struct{}
+
+var FfiConverterNwcEventDetailsINSTANCE = FfiConverterNwcEventDetails{}
+
+func (c FfiConverterNwcEventDetails) Lift(rb RustBufferI) NwcEventDetails {
+	return LiftFromRustBuffer[NwcEventDetails](c, rb)
+}
+
+func (c FfiConverterNwcEventDetails) Lower(value NwcEventDetails) C.RustBuffer {
+	return LowerIntoRustBuffer[NwcEventDetails](c, value)
+}
+func (FfiConverterNwcEventDetails) Read(reader io.Reader) NwcEventDetails {
+	id := readInt32(reader)
+	switch id {
+	case 1:
+		return NwcEventDetailsConnected{}
+	case 2:
+		return NwcEventDetailsDisconnected{}
+	case 3:
+		return NwcEventDetailsPayInvoice{
+			FfiConverterBoolINSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
+			FfiConverterOptionalUint64INSTANCE.Read(reader),
+			FfiConverterOptionalStringINSTANCE.Read(reader),
+		}
+	case 4:
+		return NwcEventDetailsMakeInvoice{}
+	case 5:
+		return NwcEventDetailsListTransactions{}
+	case 6:
+		return NwcEventDetailsGetBalance{}
+	case 7:
+		return NwcEventDetailsGetInfo{}
+	case 8:
+		return NwcEventDetailsConnectionExpired{}
+	case 9:
+		return NwcEventDetailsConnectionRefreshed{}
+	case 10:
+		return NwcEventDetailsZapReceived{
+			FfiConverterStringINSTANCE.Read(reader),
+		}
+	default:
+		panic(fmt.Sprintf("invalid enum value %v in FfiConverterNwcEventDetails.Read()", id))
+	}
+}
+
+func (FfiConverterNwcEventDetails) Write(writer io.Writer, value NwcEventDetails) {
+	switch variant_value := value.(type) {
+	case NwcEventDetailsConnected:
+		writeInt32(writer, 1)
+	case NwcEventDetailsDisconnected:
+		writeInt32(writer, 2)
+	case NwcEventDetailsPayInvoice:
+		writeInt32(writer, 3)
+		FfiConverterBoolINSTANCE.Write(writer, variant_value.Success)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Preimage)
+		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.FeesSat)
+		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.Error)
+	case NwcEventDetailsMakeInvoice:
+		writeInt32(writer, 4)
+	case NwcEventDetailsListTransactions:
+		writeInt32(writer, 5)
+	case NwcEventDetailsGetBalance:
+		writeInt32(writer, 6)
+	case NwcEventDetailsGetInfo:
+		writeInt32(writer, 7)
+	case NwcEventDetailsConnectionExpired:
+		writeInt32(writer, 8)
+	case NwcEventDetailsConnectionRefreshed:
+		writeInt32(writer, 9)
+	case NwcEventDetailsZapReceived:
+		writeInt32(writer, 10)
+		FfiConverterStringINSTANCE.Write(writer, variant_value.Invoice)
+	default:
+		_ = variant_value
+		panic(fmt.Sprintf("invalid enum value `%v` in FfiConverterNwcEventDetails.Write", value))
+	}
+}
+
+type FfiDestroyerNwcEventDetails struct{}
+
+func (_ FfiDestroyerNwcEventDetails) Destroy(value NwcEventDetails) {
+	value.Destroy()
+}
+
 type PayAmount interface {
 	Destroy()
 }
@@ -8072,11 +9673,10 @@ func (_ FfiDestroyerPaymentError) Destroy(value *PaymentError) {
 type PaymentMethod uint
 
 const (
-	PaymentMethodLightning      PaymentMethod = 1
-	PaymentMethodBolt11Invoice  PaymentMethod = 2
-	PaymentMethodBolt12Offer    PaymentMethod = 3
-	PaymentMethodBitcoinAddress PaymentMethod = 4
-	PaymentMethodLiquidAddress  PaymentMethod = 5
+	PaymentMethodBolt11Invoice  PaymentMethod = 1
+	PaymentMethodBolt12Offer    PaymentMethod = 2
+	PaymentMethodBitcoinAddress PaymentMethod = 3
+	PaymentMethodLiquidAddress  PaymentMethod = 4
 )
 
 type FfiConverterPaymentMethod struct{}
@@ -8270,6 +9870,7 @@ func (err SdkError) Unwrap() error {
 // Err* are used for checking error type with `errors.Is`
 var ErrSdkErrorAlreadyStarted = fmt.Errorf("SdkErrorAlreadyStarted")
 var ErrSdkErrorGeneric = fmt.Errorf("SdkErrorGeneric")
+var ErrSdkErrorNetworkNotSupported = fmt.Errorf("SdkErrorNetworkNotSupported")
 var ErrSdkErrorNotStarted = fmt.Errorf("SdkErrorNotStarted")
 var ErrSdkErrorServiceConnectivity = fmt.Errorf("SdkErrorServiceConnectivity")
 
@@ -8310,6 +9911,25 @@ func (err SdkErrorGeneric) Error() string {
 
 func (self SdkErrorGeneric) Is(target error) bool {
 	return target == ErrSdkErrorGeneric
+}
+
+type SdkErrorNetworkNotSupported struct {
+	message string
+}
+
+func NewSdkErrorNetworkNotSupported() *SdkError {
+	return &SdkError{err: &SdkErrorNetworkNotSupported{}}
+}
+
+func (e SdkErrorNetworkNotSupported) destroy() {
+}
+
+func (err SdkErrorNetworkNotSupported) Error() string {
+	return fmt.Sprintf("NetworkNotSupported: %s", err.message)
+}
+
+func (self SdkErrorNetworkNotSupported) Is(target error) bool {
+	return target == ErrSdkErrorNetworkNotSupported
 }
 
 type SdkErrorNotStarted struct {
@@ -8372,8 +9992,10 @@ func (c FfiConverterSdkError) Read(reader io.Reader) *SdkError {
 	case 2:
 		return &SdkError{&SdkErrorGeneric{message}}
 	case 3:
-		return &SdkError{&SdkErrorNotStarted{message}}
+		return &SdkError{&SdkErrorNetworkNotSupported{message}}
 	case 4:
+		return &SdkError{&SdkErrorNotStarted{message}}
+	case 5:
 		return &SdkError{&SdkErrorServiceConnectivity{message}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterSdkError.Read()", errorID))
@@ -8387,10 +10009,12 @@ func (c FfiConverterSdkError) Write(writer io.Writer, value *SdkError) {
 		writeInt32(writer, 1)
 	case *SdkErrorGeneric:
 		writeInt32(writer, 2)
-	case *SdkErrorNotStarted:
+	case *SdkErrorNetworkNotSupported:
 		writeInt32(writer, 3)
-	case *SdkErrorServiceConnectivity:
+	case *SdkErrorNotStarted:
 		writeInt32(writer, 4)
+	case *SdkErrorServiceConnectivity:
+		writeInt32(writer, 5)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterSdkError.Write", value))
@@ -8404,6 +10028,8 @@ func (_ FfiDestroyerSdkError) Destroy(value *SdkError) {
 	case SdkErrorAlreadyStarted:
 		variantValue.destroy()
 	case SdkErrorGeneric:
+		variantValue.destroy()
+	case SdkErrorNetworkNotSupported:
 		variantValue.destroy()
 	case SdkErrorNotStarted:
 		variantValue.destroy()
@@ -9152,6 +10778,73 @@ func (c FfiConverterCallbackInterfaceLogger) register() {
 	C.uniffi_breez_sdk_liquid_bindings_fn_init_callback_vtable_logger(&UniffiVTableCallbackInterfaceLoggerINSTANCE)
 }
 
+type NwcEventListener interface {
+	OnEvent(event NwcEvent)
+}
+
+type FfiConverterCallbackInterfaceNwcEventListener struct {
+	handleMap *concurrentHandleMap[NwcEventListener]
+}
+
+var FfiConverterCallbackInterfaceNwcEventListenerINSTANCE = FfiConverterCallbackInterfaceNwcEventListener{
+	handleMap: newConcurrentHandleMap[NwcEventListener](),
+}
+
+func (c FfiConverterCallbackInterfaceNwcEventListener) Lift(handle uint64) NwcEventListener {
+	val, ok := c.handleMap.tryGet(handle)
+	if !ok {
+		panic(fmt.Errorf("no callback in handle map: %d", handle))
+	}
+	return val
+}
+
+func (c FfiConverterCallbackInterfaceNwcEventListener) Read(reader io.Reader) NwcEventListener {
+	return c.Lift(readUint64(reader))
+}
+
+func (c FfiConverterCallbackInterfaceNwcEventListener) Lower(value NwcEventListener) C.uint64_t {
+	return C.uint64_t(c.handleMap.insert(value))
+}
+
+func (c FfiConverterCallbackInterfaceNwcEventListener) Write(writer io.Writer, value NwcEventListener) {
+	writeUint64(writer, uint64(c.Lower(value)))
+}
+
+type FfiDestroyerCallbackInterfaceNwcEventListener struct{}
+
+func (FfiDestroyerCallbackInterfaceNwcEventListener) Destroy(value NwcEventListener) {}
+
+//export breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerMethod0
+func breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerMethod0(uniffiHandle C.uint64_t, event C.RustBuffer, uniffiOutReturn *C.void, callStatus *C.RustCallStatus) {
+	handle := uint64(uniffiHandle)
+	uniffiObj, ok := FfiConverterCallbackInterfaceNwcEventListenerINSTANCE.handleMap.tryGet(handle)
+	if !ok {
+		panic(fmt.Errorf("no callback in handle map: %d", handle))
+	}
+
+	uniffiObj.OnEvent(
+		FfiConverterNwcEventINSTANCE.Lift(GoRustBuffer{
+			inner: event,
+		}),
+	)
+
+}
+
+var UniffiVTableCallbackInterfaceNwcEventListenerINSTANCE = C.UniffiVTableCallbackInterfaceNwcEventListener{
+	onEvent: (C.UniffiCallbackInterfaceNwcEventListenerMethod0)(C.breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerMethod0),
+
+	uniffiFree: (C.UniffiCallbackInterfaceFree)(C.breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerFree),
+}
+
+//export breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerFree
+func breez_sdk_liquid_bindings_cgo_dispatchCallbackInterfaceNwcEventListenerFree(handle C.uint64_t) {
+	FfiConverterCallbackInterfaceNwcEventListenerINSTANCE.handleMap.remove(uint64(handle))
+}
+
+func (c FfiConverterCallbackInterfaceNwcEventListener) register() {
+	C.uniffi_breez_sdk_liquid_bindings_fn_init_callback_vtable_nwceventlistener(&UniffiVTableCallbackInterfaceNwcEventListenerINSTANCE)
+}
+
 type Signer interface {
 	Xpub() ([]uint8, *SignerError)
 
@@ -9798,6 +11491,43 @@ func (_ FfiDestroyerOptionalLnUrlInfo) Destroy(value *LnUrlInfo) {
 	}
 }
 
+type FfiConverterOptionalNostrServiceInfo struct{}
+
+var FfiConverterOptionalNostrServiceInfoINSTANCE = FfiConverterOptionalNostrServiceInfo{}
+
+func (c FfiConverterOptionalNostrServiceInfo) Lift(rb RustBufferI) *NostrServiceInfo {
+	return LiftFromRustBuffer[*NostrServiceInfo](c, rb)
+}
+
+func (_ FfiConverterOptionalNostrServiceInfo) Read(reader io.Reader) *NostrServiceInfo {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterNostrServiceInfoINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalNostrServiceInfo) Lower(value *NostrServiceInfo) C.RustBuffer {
+	return LowerIntoRustBuffer[*NostrServiceInfo](c, value)
+}
+
+func (_ FfiConverterOptionalNostrServiceInfo) Write(writer io.Writer, value *NostrServiceInfo) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterNostrServiceInfoINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalNostrServiceInfo struct{}
+
+func (_ FfiDestroyerOptionalNostrServiceInfo) Destroy(value *NostrServiceInfo) {
+	if value != nil {
+		FfiDestroyerNostrServiceInfo{}.Destroy(*value)
+	}
+}
+
 type FfiConverterOptionalPayment struct{}
 
 var FfiConverterOptionalPaymentINSTANCE = FfiConverterOptionalPayment{}
@@ -9832,6 +11562,80 @@ type FfiDestroyerOptionalPayment struct{}
 func (_ FfiDestroyerOptionalPayment) Destroy(value *Payment) {
 	if value != nil {
 		FfiDestroyerPayment{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalPeriodicBudget struct{}
+
+var FfiConverterOptionalPeriodicBudgetINSTANCE = FfiConverterOptionalPeriodicBudget{}
+
+func (c FfiConverterOptionalPeriodicBudget) Lift(rb RustBufferI) *PeriodicBudget {
+	return LiftFromRustBuffer[*PeriodicBudget](c, rb)
+}
+
+func (_ FfiConverterOptionalPeriodicBudget) Read(reader io.Reader) *PeriodicBudget {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterPeriodicBudgetINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalPeriodicBudget) Lower(value *PeriodicBudget) C.RustBuffer {
+	return LowerIntoRustBuffer[*PeriodicBudget](c, value)
+}
+
+func (_ FfiConverterOptionalPeriodicBudget) Write(writer io.Writer, value *PeriodicBudget) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterPeriodicBudgetINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalPeriodicBudget struct{}
+
+func (_ FfiDestroyerOptionalPeriodicBudget) Destroy(value *PeriodicBudget) {
+	if value != nil {
+		FfiDestroyerPeriodicBudget{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalPeriodicBudgetRequest struct{}
+
+var FfiConverterOptionalPeriodicBudgetRequestINSTANCE = FfiConverterOptionalPeriodicBudgetRequest{}
+
+func (c FfiConverterOptionalPeriodicBudgetRequest) Lift(rb RustBufferI) *PeriodicBudgetRequest {
+	return LiftFromRustBuffer[*PeriodicBudgetRequest](c, rb)
+}
+
+func (_ FfiConverterOptionalPeriodicBudgetRequest) Read(reader io.Reader) *PeriodicBudgetRequest {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterPeriodicBudgetRequestINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalPeriodicBudgetRequest) Lower(value *PeriodicBudgetRequest) C.RustBuffer {
+	return LowerIntoRustBuffer[*PeriodicBudgetRequest](c, value)
+}
+
+func (_ FfiConverterOptionalPeriodicBudgetRequest) Write(writer io.Writer, value *PeriodicBudgetRequest) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterPeriodicBudgetRequestINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalPeriodicBudgetRequest struct{}
+
+func (_ FfiDestroyerOptionalPeriodicBudgetRequest) Destroy(value *PeriodicBudgetRequest) {
+	if value != nil {
+		FfiDestroyerPeriodicBudgetRequest{}.Destroy(*value)
 	}
 }
 
@@ -9906,6 +11710,43 @@ type FfiDestroyerOptionalAmount struct{}
 func (_ FfiDestroyerOptionalAmount) Destroy(value *Amount) {
 	if value != nil {
 		FfiDestroyerAmount{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalDescriptionHash struct{}
+
+var FfiConverterOptionalDescriptionHashINSTANCE = FfiConverterOptionalDescriptionHash{}
+
+func (c FfiConverterOptionalDescriptionHash) Lift(rb RustBufferI) *DescriptionHash {
+	return LiftFromRustBuffer[*DescriptionHash](c, rb)
+}
+
+func (_ FfiConverterOptionalDescriptionHash) Read(reader io.Reader) *DescriptionHash {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterDescriptionHashINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalDescriptionHash) Lower(value *DescriptionHash) C.RustBuffer {
+	return LowerIntoRustBuffer[*DescriptionHash](c, value)
+}
+
+func (_ FfiConverterOptionalDescriptionHash) Write(writer io.Writer, value *DescriptionHash) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterDescriptionHashINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalDescriptionHash struct{}
+
+func (_ FfiDestroyerOptionalDescriptionHash) Destroy(value *DescriptionHash) {
+	if value != nil {
+		FfiDestroyerDescriptionHash{}.Destroy(*value)
 	}
 }
 
@@ -10128,6 +11969,43 @@ type FfiDestroyerOptionalSequenceUint8 struct{}
 func (_ FfiDestroyerOptionalSequenceUint8) Destroy(value *[]uint8) {
 	if value != nil {
 		FfiDestroyerSequenceUint8{}.Destroy(*value)
+	}
+}
+
+type FfiConverterOptionalSequenceString struct{}
+
+var FfiConverterOptionalSequenceStringINSTANCE = FfiConverterOptionalSequenceString{}
+
+func (c FfiConverterOptionalSequenceString) Lift(rb RustBufferI) *[]string {
+	return LiftFromRustBuffer[*[]string](c, rb)
+}
+
+func (_ FfiConverterOptionalSequenceString) Read(reader io.Reader) *[]string {
+	if readInt8(reader) == 0 {
+		return nil
+	}
+	temp := FfiConverterSequenceStringINSTANCE.Read(reader)
+	return &temp
+}
+
+func (c FfiConverterOptionalSequenceString) Lower(value *[]string) C.RustBuffer {
+	return LowerIntoRustBuffer[*[]string](c, value)
+}
+
+func (_ FfiConverterOptionalSequenceString) Write(writer io.Writer, value *[]string) {
+	if value == nil {
+		writeInt8(writer, 0)
+	} else {
+		writeInt8(writer, 1)
+		FfiConverterSequenceStringINSTANCE.Write(writer, *value)
+	}
+}
+
+type FfiDestroyerOptionalSequenceString struct{}
+
+func (_ FfiDestroyerOptionalSequenceString) Destroy(value *[]string) {
+	if value != nil {
+		FfiDestroyerSequenceString{}.Destroy(*value)
 	}
 }
 
@@ -10964,6 +12842,50 @@ type FfiDestroyerSequencePaymentType struct{}
 func (FfiDestroyerSequencePaymentType) Destroy(sequence []PaymentType) {
 	for _, value := range sequence {
 		FfiDestroyerPaymentType{}.Destroy(value)
+	}
+}
+
+type FfiConverterMapStringNwcConnection struct{}
+
+var FfiConverterMapStringNwcConnectionINSTANCE = FfiConverterMapStringNwcConnection{}
+
+func (c FfiConverterMapStringNwcConnection) Lift(rb RustBufferI) map[string]NwcConnection {
+	return LiftFromRustBuffer[map[string]NwcConnection](c, rb)
+}
+
+func (_ FfiConverterMapStringNwcConnection) Read(reader io.Reader) map[string]NwcConnection {
+	result := make(map[string]NwcConnection)
+	length := readInt32(reader)
+	for i := int32(0); i < length; i++ {
+		key := FfiConverterStringINSTANCE.Read(reader)
+		value := FfiConverterNwcConnectionINSTANCE.Read(reader)
+		result[key] = value
+	}
+	return result
+}
+
+func (c FfiConverterMapStringNwcConnection) Lower(value map[string]NwcConnection) C.RustBuffer {
+	return LowerIntoRustBuffer[map[string]NwcConnection](c, value)
+}
+
+func (_ FfiConverterMapStringNwcConnection) Write(writer io.Writer, mapValue map[string]NwcConnection) {
+	if len(mapValue) > math.MaxInt32 {
+		panic("map[string]NwcConnection is too large to fit into Int32")
+	}
+
+	writeInt32(writer, int32(len(mapValue)))
+	for key, value := range mapValue {
+		FfiConverterStringINSTANCE.Write(writer, key)
+		FfiConverterNwcConnectionINSTANCE.Write(writer, value)
+	}
+}
+
+type FfiDestroyerMapStringNwcConnection struct{}
+
+func (_ FfiDestroyerMapStringNwcConnection) Destroy(mapValue map[string]NwcConnection) {
+	for key, value := range mapValue {
+		FfiDestroyerString{}.Destroy(key)
+		FfiDestroyerNwcConnection{}.Destroy(value)
 	}
 }
 
