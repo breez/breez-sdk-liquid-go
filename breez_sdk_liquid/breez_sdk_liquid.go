@@ -8188,6 +8188,7 @@ var ErrNwcErrorInvoiceWithoutAmount = fmt.Errorf("NwcErrorInvoiceWithoutAmount")
 var ErrNwcErrorMaxBudgetExceeded = fmt.Errorf("NwcErrorMaxBudgetExceeded")
 var ErrNwcErrorConnectionNotFound = fmt.Errorf("NwcErrorConnectionNotFound")
 var ErrNwcErrorConnectionExists = fmt.Errorf("NwcErrorConnectionExists")
+var ErrNwcErrorPaymentInProgress = fmt.Errorf("NwcErrorPaymentInProgress")
 
 // Variant structs
 type NwcErrorGeneric struct {
@@ -8484,6 +8485,24 @@ func (self NwcErrorConnectionExists) Is(target error) bool {
 	return target == ErrNwcErrorConnectionExists
 }
 
+type NwcErrorPaymentInProgress struct {
+}
+
+func NewNwcErrorPaymentInProgress() *NwcError {
+	return &NwcError{err: &NwcErrorPaymentInProgress{}}
+}
+
+func (e NwcErrorPaymentInProgress) destroy() {
+}
+
+func (err NwcErrorPaymentInProgress) Error() string {
+	return fmt.Sprint("PaymentInProgress")
+}
+
+func (self NwcErrorPaymentInProgress) Is(target error) bool {
+	return target == ErrNwcErrorPaymentInProgress
+}
+
 type FfiConverterNwcError struct{}
 
 var FfiConverterNwcErrorINSTANCE = FfiConverterNwcError{}
@@ -8538,6 +8557,8 @@ func (c FfiConverterNwcError) Read(reader io.Reader) *NwcError {
 		return &NwcError{&NwcErrorConnectionNotFound{}}
 	case 13:
 		return &NwcError{&NwcErrorConnectionExists{}}
+	case 14:
+		return &NwcError{&NwcErrorPaymentInProgress{}}
 	default:
 		panic(fmt.Sprintf("Unknown error code %d in FfiConverterNwcError.Read()", errorID))
 	}
@@ -8577,6 +8598,8 @@ func (c FfiConverterNwcError) Write(writer io.Writer, value *NwcError) {
 		writeInt32(writer, 12)
 	case *NwcErrorConnectionExists:
 		writeInt32(writer, 13)
+	case *NwcErrorPaymentInProgress:
+		writeInt32(writer, 14)
 	default:
 		_ = variantValue
 		panic(fmt.Sprintf("invalid error value `%v` in FfiConverterNwcError.Write", value))
@@ -8612,6 +8635,8 @@ func (_ FfiDestroyerNwcError) Destroy(value *NwcError) {
 	case NwcErrorConnectionNotFound:
 		variantValue.destroy()
 	case NwcErrorConnectionExists:
+		variantValue.destroy()
+	case NwcErrorPaymentInProgress:
 		variantValue.destroy()
 	default:
 		_ = variantValue
@@ -8883,6 +8908,7 @@ type PaymentDetailsLightning struct {
 	ClaimTxId                   *string
 	RefundTxId                  *string
 	RefundTxAmountSat           *uint64
+	SettledAt                   *uint32
 }
 
 func (e PaymentDetailsLightning) Destroy() {
@@ -8900,6 +8926,7 @@ func (e PaymentDetailsLightning) Destroy() {
 	FfiDestroyerOptionalString{}.Destroy(e.ClaimTxId)
 	FfiDestroyerOptionalString{}.Destroy(e.RefundTxId)
 	FfiDestroyerOptionalUint64{}.Destroy(e.RefundTxAmountSat)
+	FfiDestroyerOptionalUint32{}.Destroy(e.SettledAt)
 }
 
 type PaymentDetailsLiquid struct {
@@ -8978,6 +9005,7 @@ func (FfiConverterPaymentDetails) Read(reader io.Reader) PaymentDetails {
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalStringINSTANCE.Read(reader),
 			FfiConverterOptionalUint64INSTANCE.Read(reader),
+			FfiConverterOptionalUint32INSTANCE.Read(reader),
 		}
 	case 2:
 		return PaymentDetailsLiquid{
@@ -9025,6 +9053,7 @@ func (FfiConverterPaymentDetails) Write(writer io.Writer, value PaymentDetails) 
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.ClaimTxId)
 		FfiConverterOptionalStringINSTANCE.Write(writer, variant_value.RefundTxId)
 		FfiConverterOptionalUint64INSTANCE.Write(writer, variant_value.RefundTxAmountSat)
+		FfiConverterOptionalUint32INSTANCE.Write(writer, variant_value.SettledAt)
 	case PaymentDetailsLiquid:
 		writeInt32(writer, 2)
 		FfiConverterStringINSTANCE.Write(writer, variant_value.AssetId)
